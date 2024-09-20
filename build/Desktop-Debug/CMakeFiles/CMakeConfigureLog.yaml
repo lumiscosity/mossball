@@ -1,0 +1,1478 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The system is: Linux - 6.10.10-arch1-1 - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/g++ 
+      Build flags: -DQT_QML_DEBUG
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/3.30.3/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-xvNcrn"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-xvNcrn"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-xvNcrn'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_dce10/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_dce10.dir/build.make CMakeFiles/cmTC_dce10.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-xvNcrn'
+        Building CXX object CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/g++
+        Target: x86_64-pc-linux-gnu
+        Configured with: /build/gcc/src/gcc/configure --enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++,rust --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-linker-hash-style=gnu --with-system-zlib --enable-__cxa_atexit --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-libssp --disable-libstdcxx-pch --disable-werror
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 14.2.1 20240910 (GCC) 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-D' 'QT_QML_DEBUG' '-v' '-o' 'CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_dce10.dir/'
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/cc1plus -quiet -v -D_GNU_SOURCE -D QT_QML_DEBUG /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_dce10.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o /tmp/cc2xYc5y.s
+        GNU C++17 (GCC) version 14.2.1 20240910 (x86_64-pc-linux-gnu)
+        	compiled by GNU C version 14.2.1 20240910, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../x86_64-pc-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/x86_64-pc-linux-gnu
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/backward
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include
+         /usr/local/include
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed
+         /usr/include
+        End of search list.
+        Compiler executable checksum: fce5a105c47978e141f61a441742cadf
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-D' 'QT_QML_DEBUG' '-v' '-o' 'CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_dce10.dir/'
+         as -v --64 -o CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc2xYc5y.s
+        GNU assembler version 2.43.0 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.43.0
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-D' 'QT_QML_DEBUG' '-v' '-o' 'CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_dce10
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dce10.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG   -v -Wl,-v CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_dce10
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/g++
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper
+        Target: x86_64-pc-linux-gnu
+        Configured with: /build/gcc/src/gcc/configure --enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++,rust --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-linker-hash-style=gnu --with-system-zlib --enable-__cxa_atexit --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-libssp --disable-libstdcxx-pch --disable-werror
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 14.2.1 20240910 (GCC) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-D' 'QT_QML_DEBUG' '-v' '-o' 'cmTC_dce10' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_dce10.'
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRqySX8.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_dce10 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../.. -v CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o
+        collect2 version 14.2.1 20240910
+        /usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRqySX8.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_dce10 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../.. -v CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o
+        GNU ld (GNU Binutils) 2.43.0
+        COLLECT_GCC_OPTIONS='-D' 'QT_QML_DEBUG' '-v' '-o' 'cmTC_dce10' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_dce10.'
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-xvNcrn'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1]
+          add: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/x86_64-pc-linux-gnu]
+          add: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/backward]
+          add: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include]
+          add: [/usr/local/include]
+          add: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1] ==> [/usr/include/c++/14.2.1]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/x86_64-pc-linux-gnu] ==> [/usr/include/c++/14.2.1/x86_64-pc-linux-gnu]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/backward] ==> [/usr/include/c++/14.2.1/backward]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/include/c++/14.2.1;/usr/include/c++/14.2.1/x86_64-pc-linux-gnu;/usr/include/c++/14.2.1/backward;/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include;/usr/local/include;/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-xvNcrn']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_dce10/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_dce10.dir/build.make CMakeFiles/cmTC_dce10.dir/build]
+        ignore line: [make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-xvNcrn']
+        ignore line: [Building CXX object CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/g++   -DQT_QML_DEBUG  -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/g++]
+        ignore line: [Target: x86_64-pc-linux-gnu]
+        ignore line: [Configured with: /build/gcc/src/gcc/configure --enable-languages=ada c c++ d fortran go lto m2 objc obj-c++ rust --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-linker-hash-style=gnu --with-system-zlib --enable-__cxa_atexit --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-libssp --disable-libstdcxx-pch --disable-werror]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 14.2.1 20240910 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-D' 'QT_QML_DEBUG' '-v' '-o' 'CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_dce10.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/cc1plus -quiet -v -D_GNU_SOURCE -D QT_QML_DEBUG /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_dce10.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o /tmp/cc2xYc5y.s]
+        ignore line: [GNU C++17 (GCC) version 14.2.1 20240910 (x86_64-pc-linux-gnu)]
+        ignore line: [	compiled by GNU C version 14.2.1 20240910  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../x86_64-pc-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/x86_64-pc-linux-gnu]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: fce5a105c47978e141f61a441742cadf]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-D' 'QT_QML_DEBUG' '-v' '-o' 'CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_dce10.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc2xYc5y.s]
+        ignore line: [GNU assembler version 2.43.0 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.43.0]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-D' 'QT_QML_DEBUG' '-v' '-o' 'CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_dce10]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dce10.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/g++ -DQT_QML_DEBUG   -v -Wl -v CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_dce10]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/g++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper]
+        ignore line: [Target: x86_64-pc-linux-gnu]
+        ignore line: [Configured with: /build/gcc/src/gcc/configure --enable-languages=ada c c++ d fortran go lto m2 objc obj-c++ rust --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-linker-hash-style=gnu --with-system-zlib --enable-__cxa_atexit --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-libssp --disable-libstdcxx-pch --disable-werror]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 14.2.1 20240910 (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-D' 'QT_QML_DEBUG' '-v' '-o' 'cmTC_dce10' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_dce10.']
+        link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRqySX8.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_dce10 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../.. -v CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccRqySX8.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_dce10] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o]
+        ignore line: [collect2 version 14.2.1 20240910]
+        ignore line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRqySX8.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_dce10 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../.. -v CMakeFiles/cmTC_dce10.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o]
+        linker tool for 'CXX': /usr/bin/ld
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o] ==> [/usr/lib/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o] ==> [/usr/lib/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o] ==> [/usr/lib/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/usr/lib/Scrt1.o;/usr/lib/crti.o;/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o;/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o;/usr/lib/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1;/usr/lib;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the CXX compiler's linker: "/usr/bin/ld" "-v"
+      GNU ld (GNU Binutils) 2.43.0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:99 (CHECK_CXX_SOURCE_COMPILES)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "/usr/lib/cmake/Qt6/Qt6Dependencies.cmake:27 (_qt_internal_find_third_party_dependencies)"
+      - "/usr/lib/cmake/Qt6/Qt6Config.cmake:134 (include)"
+      - "CMakeLists.txt:12 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-RupPXN"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-RupPXN"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-RupPXN'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_b8ddc/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_b8ddc.dir/build.make CMakeFiles/cmTC_b8ddc.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-RupPXN'
+        Building CXX object CMakeFiles/cmTC_b8ddc.dir/src.cxx.o
+        /usr/bin/g++ -DCMAKE_HAVE_LIBC_PTHREAD  -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_b8ddc.dir/src.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-RupPXN/src.cxx
+        Linking CXX executable cmTC_b8ddc
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b8ddc.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG  CMakeFiles/cmTC_b8ddc.dir/src.cxx.o -o cmTC_b8ddc
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-RupPXN'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/usr/lib/cmake/Qt6/FindWrapAtomic.cmake:36 (check_cxx_source_compiles)"
+      - "/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "/usr/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake:33 (_qt_internal_find_third_party_dependencies)"
+      - "/usr/lib/cmake/Qt6Core/Qt6CoreConfig.cmake:55 (include)"
+      - "/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:111 (find_dependency)"
+      - "/usr/lib/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:42 (_qt_internal_find_qt_dependencies)"
+      - "/usr/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:53 (include)"
+      - "/usr/lib/cmake/Qt6/Qt6Config.cmake:179 (find_package)"
+      - "CMakeLists.txt:13 (find_package)"
+    checks:
+      - "Performing Test HAVE_STDATOMIC"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-m4ZlJu"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-m4ZlJu"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_STDATOMIC"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-m4ZlJu'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_70c3a/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_70c3a.dir/build.make CMakeFiles/cmTC_70c3a.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-m4ZlJu'
+        Building CXX object CMakeFiles/cmTC_70c3a.dir/src.cxx.o
+        /usr/bin/g++ -DHAVE_STDATOMIC  -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_70c3a.dir/src.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-m4ZlJu/src.cxx
+        Linking CXX executable cmTC_70c3a
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_70c3a.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG  CMakeFiles/cmTC_70c3a.dir/src.cxx.o -o cmTC_70c3a
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-m4ZlJu'
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:99 (CHECK_CXX_SOURCE_COMPILES)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "/usr/lib/cmake/Qt6/Qt6Dependencies.cmake:27 (_qt_internal_find_third_party_dependencies)"
+      - "/usr/lib/cmake/Qt6/Qt6Config.cmake:134 (include)"
+      - "CMakeLists.txt:12 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-l0TmvE"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-l0TmvE"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-l0TmvE'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_d0159/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_d0159.dir/build.make CMakeFiles/cmTC_d0159.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-l0TmvE'
+        Building CXX object CMakeFiles/cmTC_d0159.dir/src.cxx.o
+        /usr/bin/g++ -DCMAKE_HAVE_LIBC_PTHREAD  -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_d0159.dir/src.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-l0TmvE/src.cxx
+        Linking CXX executable cmTC_d0159
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d0159.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG  CMakeFiles/cmTC_d0159.dir/src.cxx.o -o cmTC_d0159
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-l0TmvE'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/usr/lib/cmake/Qt6/FindWrapAtomic.cmake:36 (check_cxx_source_compiles)"
+      - "/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "/usr/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake:33 (_qt_internal_find_third_party_dependencies)"
+      - "/usr/lib/cmake/Qt6Core/Qt6CoreConfig.cmake:55 (include)"
+      - "/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:111 (find_dependency)"
+      - "/usr/lib/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:42 (_qt_internal_find_qt_dependencies)"
+      - "/usr/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:53 (include)"
+      - "/usr/lib/cmake/Qt6/Qt6Config.cmake:179 (find_package)"
+      - "CMakeLists.txt:13 (find_package)"
+    checks:
+      - "Performing Test HAVE_STDATOMIC"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-ZqfiLM"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-ZqfiLM"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_STDATOMIC"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-ZqfiLM'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_f1cd1/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_f1cd1.dir/build.make CMakeFiles/cmTC_f1cd1.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-ZqfiLM'
+        Building CXX object CMakeFiles/cmTC_f1cd1.dir/src.cxx.o
+        /usr/bin/g++ -DHAVE_STDATOMIC  -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_f1cd1.dir/src.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-ZqfiLM/src.cxx
+        Linking CXX executable cmTC_f1cd1
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f1cd1.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG  CMakeFiles/cmTC_f1cd1.dir/src.cxx.o -o cmTC_f1cd1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-ZqfiLM'
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/usr/share/cmake/Modules/FindLibLZMA.cmake:100 (CHECK_LIBRARY_EXISTS)"
+      - "CMakeLists.txt:15 (find_package)"
+    checks:
+      - "Looking for lzma_auto_decoder in /usr/lib/liblzma.so"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-GHPHI0"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-GHPHI0"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "LIBLZMA_HAS_AUTO_DECODER"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-GHPHI0'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_259fe/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_259fe.dir/build.make CMakeFiles/cmTC_259fe.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-GHPHI0'
+        Building CXX object CMakeFiles/cmTC_259fe.dir/CheckFunctionExists.cxx.o
+        /usr/bin/g++   -DQT_QML_DEBUG -DCHECK_FUNCTION_EXISTS=lzma_auto_decoder -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_259fe.dir/CheckFunctionExists.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-GHPHI0/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_259fe
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_259fe.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG -DCHECK_FUNCTION_EXISTS=lzma_auto_decoder CMakeFiles/cmTC_259fe.dir/CheckFunctionExists.cxx.o -o cmTC_259fe  /usr/lib/liblzma.so
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-GHPHI0'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/usr/share/cmake/Modules/FindLibLZMA.cmake:101 (CHECK_LIBRARY_EXISTS)"
+      - "CMakeLists.txt:15 (find_package)"
+    checks:
+      - "Looking for lzma_easy_encoder in /usr/lib/liblzma.so"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-L5Feo6"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-L5Feo6"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "LIBLZMA_HAS_EASY_ENCODER"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-L5Feo6'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_bcfbe/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_bcfbe.dir/build.make CMakeFiles/cmTC_bcfbe.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-L5Feo6'
+        Building CXX object CMakeFiles/cmTC_bcfbe.dir/CheckFunctionExists.cxx.o
+        /usr/bin/g++   -DQT_QML_DEBUG -DCHECK_FUNCTION_EXISTS=lzma_easy_encoder -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_bcfbe.dir/CheckFunctionExists.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-L5Feo6/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_bcfbe
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bcfbe.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG -DCHECK_FUNCTION_EXISTS=lzma_easy_encoder CMakeFiles/cmTC_bcfbe.dir/CheckFunctionExists.cxx.o -o cmTC_bcfbe  /usr/lib/liblzma.so
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-L5Feo6'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/usr/share/cmake/Modules/FindLibLZMA.cmake:102 (CHECK_LIBRARY_EXISTS)"
+      - "CMakeLists.txt:15 (find_package)"
+    checks:
+      - "Looking for lzma_lzma_preset in /usr/lib/liblzma.so"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-TpVSzU"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-TpVSzU"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "LIBLZMA_HAS_LZMA_PRESET"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-TpVSzU'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_3f682/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_3f682.dir/build.make CMakeFiles/cmTC_3f682.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-TpVSzU'
+        Building CXX object CMakeFiles/cmTC_3f682.dir/CheckFunctionExists.cxx.o
+        /usr/bin/g++   -DQT_QML_DEBUG -DCHECK_FUNCTION_EXISTS=lzma_lzma_preset -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_3f682.dir/CheckFunctionExists.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-TpVSzU/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_3f682
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3f682.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG -DCHECK_FUNCTION_EXISTS=lzma_lzma_preset CMakeFiles/cmTC_3f682.dir/CheckFunctionExists.cxx.o -o cmTC_3f682  /usr/lib/liblzma.so
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-TpVSzU'
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "third_party/bit7z/CMakeLists.txt:7 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/gcc 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/3.30.3/CompilerIdC/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "third_party/bit7z/CMakeLists.txt:7 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_ab0a6/fast
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S'
+        /usr/bin/make  -f CMakeFiles/cmTC_ab0a6.dir/build.make CMakeFiles/cmTC_ab0a6.dir/build
+        make[2]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S'
+        Building C object CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o
+        /usr/bin/gcc   -v -o CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/gcc
+        Target: x86_64-pc-linux-gnu
+        Configured with: /build/gcc/src/gcc/configure --enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++,rust --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-linker-hash-style=gnu --with-system-zlib --enable-__cxa_atexit --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-libssp --disable-libstdcxx-pch --disable-werror
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 14.2.1 20240910 (GCC) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ab0a6.dir/'
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_ab0a6.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/ccDz7gMz.s
+        GNU C17 (GCC) version 14.2.1 20240910 (x86_64-pc-linux-gnu)
+        	compiled by GNU C version 14.2.1 20240910, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../x86_64-pc-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include
+         /usr/local/include
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed
+         /usr/include
+        End of search list.
+        Compiler executable checksum: 91e980a230f7d2e39f93577991713edd
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ab0a6.dir/'
+         as -v --64 -o CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o /tmp/ccDz7gMz.s
+        GNU assembler version 2.43.0 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.43.0
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_ab0a6
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ab0a6.dir/link.txt --verbose=1
+        /usr/bin/gcc  -v -Wl,-v CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o -o cmTC_ab0a6
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/gcc
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper
+        Target: x86_64-pc-linux-gnu
+        Configured with: /build/gcc/src/gcc/configure --enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++,rust --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-linker-hash-style=gnu --with-system-zlib --enable-__cxa_atexit --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-libssp --disable-libstdcxx-pch --disable-werror
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 14.2.1 20240910 (GCC) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_ab0a6' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ab0a6.'
+         /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccW2BzM8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_ab0a6 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../.. -v CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o
+        collect2 version 14.2.1 20240910
+        /usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccW2BzM8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_ab0a6 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../.. -v CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o
+        GNU ld (GNU Binutils) 2.43.0
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_ab0a6' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ab0a6.'
+        make[2]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S'
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "third_party/bit7z/CMakeLists.txt:7 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include]
+          add: [/usr/local/include]
+          add: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include;/usr/local/include;/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "third_party/bit7z/CMakeLists.txt:7 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_ab0a6/fast]
+        ignore line: [make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S']
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_ab0a6.dir/build.make CMakeFiles/cmTC_ab0a6.dir/build]
+        ignore line: [make[2]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0W837S']
+        ignore line: [Building C object CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/gcc   -v -o CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/gcc]
+        ignore line: [Target: x86_64-pc-linux-gnu]
+        ignore line: [Configured with: /build/gcc/src/gcc/configure --enable-languages=ada c c++ d fortran go lto m2 objc obj-c++ rust --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-linker-hash-style=gnu --with-system-zlib --enable-__cxa_atexit --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-libssp --disable-libstdcxx-pch --disable-werror]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 14.2.1 20240910 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ab0a6.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_ab0a6.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/ccDz7gMz.s]
+        ignore line: [GNU C17 (GCC) version 14.2.1 20240910 (x86_64-pc-linux-gnu)]
+        ignore line: [	compiled by GNU C version 14.2.1 20240910  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../x86_64-pc-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 91e980a230f7d2e39f93577991713edd]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ab0a6.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o /tmp/ccDz7gMz.s]
+        ignore line: [GNU assembler version 2.43.0 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.43.0]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_ab0a6]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ab0a6.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/gcc  -v -Wl -v CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o -o cmTC_ab0a6]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/gcc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper]
+        ignore line: [Target: x86_64-pc-linux-gnu]
+        ignore line: [Configured with: /build/gcc/src/gcc/configure --enable-languages=ada c c++ d fortran go lto m2 objc obj-c++ rust --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-linker-hash-style=gnu --with-system-zlib --enable-__cxa_atexit --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-libssp --disable-libstdcxx-pch --disable-werror]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 14.2.1 20240910 (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_ab0a6' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ab0a6.']
+        link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccW2BzM8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_ab0a6 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../.. -v CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccW2BzM8.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_ab0a6] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o]
+        ignore line: [collect2 version 14.2.1 20240910]
+        ignore line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccW2BzM8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_ab0a6 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../.. -v CMakeFiles/cmTC_ab0a6.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o]
+        linker tool for 'C': /usr/bin/ld
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/Scrt1.o] ==> [/usr/lib/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o] ==> [/usr/lib/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o] ==> [/usr/lib/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../..] ==> [/usr/lib]
+        implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/lib/Scrt1.o;/usr/lib/crti.o;/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o;/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o;/usr/lib/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1;/usr/lib;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "third_party/bit7z/CMakeLists.txt:7 (project)"
+    message: |
+      Running the C compiler's linker: "/usr/bin/ld" "-v"
+      GNU ld (GNU Binutils) 2.43.0
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_a50ab/fast
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        /usr/bin/make  -f CMakeFiles/cmTC_a50ab.dir/build.make CMakeFiles/cmTC_a50ab.dir/build
+        make[2]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_a50ab.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -o CMakeFiles/cmTC_a50ab.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13: error: #error CMAKE_TARGET_ARCH_x64
+            8 |         #   error CMAKE_TARGET_ARCH_x64
+              |             ^~~~~
+        make[2]: *** [CMakeFiles/cmTC_a50ab.dir/build.make:78: CMakeFiles/cmTC_a50ab.dir/arch_check.cpp.o] Error 1
+        make[2]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make[1]: *** [Makefile:127: cmTC_a50ab/fast] Error 2
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckIncludeFileCXX.cmake:89 (try_compile)"
+      - "third_party/bit7z/cmake/FilesystemDetect.cmake:14 (check_include_file_cxx)"
+      - "third_party/bit7z/CMakeLists.txt:168 (include)"
+    checks:
+      - "Looking for C++ include filesystem"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0nnLif"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0nnLif"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "USE_STANDARD_FILESYSTEM"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0nnLif'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c604b/fast
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0nnLif'
+        /usr/bin/make  -f CMakeFiles/cmTC_c604b.dir/build.make CMakeFiles/cmTC_c604b.dir/build
+        make[2]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0nnLif'
+        Building CXX object CMakeFiles/cmTC_c604b.dir/CheckIncludeFile.cxx.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -o CMakeFiles/cmTC_c604b.dir/CheckIncludeFile.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0nnLif/CheckIncludeFile.cxx
+        Linking CXX executable cmTC_c604b
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c604b.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG  CMakeFiles/cmTC_c604b.dir/CheckIncludeFile.cxx.o -o cmTC_c604b
+        make[2]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0nnLif'
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-0nnLif'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "third_party/bit7z/cmake/FilesystemDetect.cmake:29 (check_cxx_source_compiles)"
+      - "third_party/bit7z/CMakeLists.txt:168 (include)"
+    checks:
+      - "Performing Test STANDARD_FILESYSTEM_COMPILES"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-fuMkfz"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-fuMkfz"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "STANDARD_FILESYSTEM_COMPILES"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-fuMkfz'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_484ce/fast
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-fuMkfz'
+        /usr/bin/make  -f CMakeFiles/cmTC_484ce.dir/build.make CMakeFiles/cmTC_484ce.dir/build
+        make[2]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-fuMkfz'
+        Building CXX object CMakeFiles/cmTC_484ce.dir/src.cxx.o
+        /usr/bin/g++ -DSTANDARD_FILESYSTEM_COMPILES  -DQT_QML_DEBUG  -std=gnu++17 -o CMakeFiles/cmTC_484ce.dir/src.cxx.o -c /home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-fuMkfz/src.cxx
+        Linking CXX executable cmTC_484ce
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_484ce.dir/link.txt --verbose=1
+        /usr/bin/g++ -DQT_QML_DEBUG  CMakeFiles/cmTC_484ce.dir/src.cxx.o -o cmTC_484ce
+        make[2]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-fuMkfz'
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeScratch/TryCompile-fuMkfz'
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_99d14/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_99d14.dir/build.make CMakeFiles/cmTC_99d14.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_99d14.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_99d14.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_99d14.dir/build.make:78: CMakeFiles/cmTC_99d14.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_99d14/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_9c6e7/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_9c6e7.dir/build.make CMakeFiles/cmTC_9c6e7.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_9c6e7.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_9c6e7.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_9c6e7.dir/build.make:78: CMakeFiles/cmTC_9c6e7.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_9c6e7/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_546c1/fast
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        /usr/bin/make  -f CMakeFiles/cmTC_546c1.dir/build.make CMakeFiles/cmTC_546c1.dir/build
+        make[2]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_546c1.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -o CMakeFiles/cmTC_546c1.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13: error: #error CMAKE_TARGET_ARCH_x64
+            8 |         #   error CMAKE_TARGET_ARCH_x64
+              |             ^~~~~
+        make[2]: *** [CMakeFiles/cmTC_546c1.dir/build.make:78: CMakeFiles/cmTC_546c1.dir/arch_check.cpp.o] Error 1
+        make[2]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make[1]: *** [Makefile:127: cmTC_546c1/fast] Error 2
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_ab685/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_ab685.dir/build.make CMakeFiles/cmTC_ab685.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_ab685.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_ab685.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_ab685.dir/build.make:78: CMakeFiles/cmTC_ab685.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_ab685/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c046f/fast
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        /usr/bin/make  -f CMakeFiles/cmTC_c046f.dir/build.make CMakeFiles/cmTC_c046f.dir/build
+        make[2]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_c046f.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -o CMakeFiles/cmTC_c046f.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13: error: #error CMAKE_TARGET_ARCH_x64
+            8 |         #   error CMAKE_TARGET_ARCH_x64
+              |             ^~~~~
+        make[2]: *** [CMakeFiles/cmTC_c046f.dir/build.make:78: CMakeFiles/cmTC_c046f.dir/arch_check.cpp.o] Error 1
+        make[2]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make[1]: *** [Makefile:127: cmTC_c046f/fast] Error 2
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_9e9ac/fast
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        /usr/bin/make  -f CMakeFiles/cmTC_9e9ac.dir/build.make CMakeFiles/cmTC_9e9ac.dir/build
+        make[2]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_9e9ac.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -o CMakeFiles/cmTC_9e9ac.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13: error: #error CMAKE_TARGET_ARCH_x64
+            8 |         #   error CMAKE_TARGET_ARCH_x64
+              |             ^~~~~
+        make[2]: *** [CMakeFiles/cmTC_9e9ac.dir/build.make:78: CMakeFiles/cmTC_9e9ac.dir/arch_check.cpp.o] Error 1
+        make[2]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make[1]: *** [Makefile:127: cmTC_9e9ac/fast] Error 2
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_be542/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_be542.dir/build.make CMakeFiles/cmTC_be542.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_be542.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_be542.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_be542.dir/build.make:78: CMakeFiles/cmTC_be542.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_be542/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_f2158/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_f2158.dir/build.make CMakeFiles/cmTC_f2158.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_f2158.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_f2158.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_f2158.dir/build.make:78: CMakeFiles/cmTC_f2158.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_f2158/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_a100a/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_a100a.dir/build.make CMakeFiles/cmTC_a100a.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_a100a.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_a100a.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_a100a.dir/build.make:78: CMakeFiles/cmTC_a100a.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_a100a/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_47d2b/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_47d2b.dir/build.make CMakeFiles/cmTC_47d2b.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_47d2b.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_47d2b.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_47d2b.dir/build.make:78: CMakeFiles/cmTC_47d2b.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_47d2b/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_80ef2/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_80ef2.dir/build.make CMakeFiles/cmTC_80ef2.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_80ef2.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_80ef2.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_80ef2.dir/build.make:78: CMakeFiles/cmTC_80ef2.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_80ef2/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_8521d/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_8521d.dir/build.make CMakeFiles/cmTC_8521d.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_8521d.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_8521d.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_8521d.dir/build.make:78: CMakeFiles/cmTC_8521d.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_8521d/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_ba37d/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_ba37d.dir/build.make CMakeFiles/cmTC_ba37d.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_ba37d.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_ba37d.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_ba37d.dir/build.make:78: CMakeFiles/cmTC_ba37d.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_ba37d/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "third_party/bit7z/cmake/TargetArchDetect.cmake:26 (try_run)"
+      - "third_party/bit7z/cmake/OutputOptions.cmake:20 (include)"
+      - "third_party/bit7z/CMakeLists.txt:165 (include)"
+    directories:
+      source: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+      binary: "/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/Qt6;/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib/cmake/Qt6/3rdparty/kwin;/usr/lib/cmake/liblcf"
+    buildResult:
+      variable: "compile_result_unused"
+      cached: true
+      stdout: |
+        Change Dir: '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_48769/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_48769.dir/build.make CMakeFiles/cmTC_48769.dir/build
+        make[1]: Entering directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_48769.dir/arch_check.cpp.o
+        /usr/bin/g++   -DQT_QML_DEBUG  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_48769.dir/arch_check.cpp.o -c /home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp
+        \x1b[01m\x1b[K/home/maple/workdir/mossball/build/Desktop-Debug/arch_check.cpp:8:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K#error CMAKE_TARGET_ARCH_x64
+            8 |         #   \x1b[01;31m\x1b[Kerror\x1b[m\x1b[K CMAKE_TARGET_ARCH_x64
+              |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K
+        make[1]: *** [CMakeFiles/cmTC_48769.dir/build.make:78: CMakeFiles/cmTC_48769.dir/arch_check.cpp.o] Error 1
+        make[1]: Leaving directory '/home/maple/workdir/mossball/build/Desktop-Debug/CMakeFiles/CMakeTmp'
+        make: *** [Makefile:127: cmTC_48769/fast] Error 2
+        
+      exitCode: 2
+    runResult:
+      variable: "run_result_unused"
+      cached: true
+...

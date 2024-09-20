@@ -1,0 +1,139 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-7b090421bb61e633177e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						3,
+						4,
+						5
+					]
+				},
+				{
+					"build" : "third_party/bit7z",
+					"jsonFile" : "directory-third_party.bit7z-Debug-7c995d278aa06853c71b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "third_party/bit7z",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "mossball",
+					"targetIndexes" : 
+					[
+						3,
+						4,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "bit7z",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "bit7z64::@426fd298d0f4776d4a64",
+					"jsonFile" : "target-bit7z64-Debug-3c2bbeb87dd67abcd489.json",
+					"name" : "bit7z64",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "bit7z64_autogen::@426fd298d0f4776d4a64",
+					"jsonFile" : "target-bit7z64_autogen-Debug-997fb81569a02d60f984.json",
+					"name" : "bit7z64_autogen",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "bit7z64_autogen_timestamp_deps::@426fd298d0f4776d4a64",
+					"jsonFile" : "target-bit7z64_autogen_timestamp_deps-Debug-071222cb2a5bd6d016df.json",
+					"name" : "bit7z64_autogen_timestamp_deps",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mossball::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mossball-Debug-2ba6dcd8265dcf93cea7.json",
+					"name" : "mossball",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mossball_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mossball_autogen-Debug-e32e75be280bfd4c70e8.json",
+					"name" : "mossball_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mossball_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mossball_autogen_timestamp_deps-Debug-fbc5dfd8f0b910938198.json",
+					"name" : "mossball_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/maple/workdir/mossball/build/Desktop-Debug",
+		"source" : "/home/maple/workdir/mossball"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
