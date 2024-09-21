@@ -22,8 +22,9 @@
 
 ChangelogWidget::ChangelogWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ChangelogWidget) {
     ui->setupUi(this);
-    // checkbox, name, diff type
-    model.setColumnCount(3);
+    // checkbox + name, diff type
+    model.setColumnCount(2);
+    ui->treeView->hideColumn(1);
     ui->treeView->setModel(&model);
 }
 
@@ -32,23 +33,31 @@ ChangelogWidget::~ChangelogWidget() {
 }
 
 void ChangelogWidget::addModelItem(QString folder, QString name, QString type) {
-    // the model consists of three columns: a checkbox, a name (of either a folder or a file) and a diff type (files only)
+    // the model consists of two columns: a checkbox next to the name (of either a folder or a file) and a diff type (files only)
     // an empty diff type signifies a folder
-    for (auto i: model.findItems("", Qt::MatchExactly, 2)) {
-        QStandardItem model_checkbox;
-        QStandardItem model_name(name);
-        QStandardItem model_type(type);
-        QList<QStandardItem*> items = {&model_checkbox, &model_name, &model_type};
-        i->appendRow(items);
+    for (auto i: model.findItems("", Qt::MatchFixedString, 1)) {
+        QStandardItem *model_name = new QStandardItem(name);
+        model_name->setCheckable(true);
+        model_name->setData(Qt::CheckStateRole);
+        model_name->setFlags(Qt::ItemIsAutoTristate);
+        model_name->setFlags(Qt::ItemIsUserCheckable);
+        model_name->setEnabled(true);
+        QStandardItem *model_type = new QStandardItem(type);
+        QList<QStandardItem*> items = {model_name, model_type};
+        //i->appendRow(items);
+        i->setChild(1, model_name);
         return;
     }
     // no folder found, make a new one and try again
-    QStandardItem model_checkbox;
-    QStandardItem model_name(folder);
-    QStandardItem model_type;
-    QList<QStandardItem*> items = {&model_checkbox, &model_name, &model_type};
+    QStandardItem *model_name = new QStandardItem(folder);
+    model_name->setCheckable(true);
+    model_name->setData(Qt::CheckStateRole);
+    model_name->setFlags(Qt::ItemIsAutoTristate);
+    model_name->setFlags(Qt::ItemIsUserCheckable);
+    model_name->setEnabled(true);
+    QStandardItem *model_type = new QStandardItem("");
+    QList<QStandardItem*> items = {model_name, model_type};
     model.appendRow(items);
-    return;
     addModelItem(folder, name, type);
 }
 
@@ -83,6 +92,9 @@ void ChangelogWidget::gendiff(QString orig_path, QString work_path) {
     // the ldb changes will be added later
     shared.removeAll("RPG_RT.ldb");
     shared.removeAll("RPG_RT.lmt");
+    // why are these here. shoo
+    shared.removeAll(".");
+    shared.removeAll("..");
     for (QString i : work) {
         if (!orig.contains(i)) {
             additions.push_back(i);
