@@ -1,0 +1,3 @@
+build/*
+CMakeLists.txt.user
+third_party/bit7z/*

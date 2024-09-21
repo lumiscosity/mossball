@@ -25,8 +25,9 @@ set(PROJECT_SOURCES
 qt_add_executable(mossball
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
-    README.md
     LICENSE
+    directorydialog.h directorydialog.cpp directorydialog.ui
+
 )
 
 

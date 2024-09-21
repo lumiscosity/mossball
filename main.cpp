@@ -16,12 +16,18 @@
  */
 
 #include "changelogwidget.h"
+#include "directorydialog.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    ChangelogWidget w;
-    w.show();
-    return a.exec();
+    DirectoryDialog d;
+    if (d.exec()) {
+        ChangelogWidget w;
+        // load data into the widget
+        // show widget
+        w.show();
+        a.exec();
+    }
 }
