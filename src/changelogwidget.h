@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include <QStandardItemModel>
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -32,6 +33,9 @@ public:
     ChangelogWidget(QWidget *parent = nullptr);
     ~ChangelogWidget();
 
+    void addModelItem(QString folder, QString name, QString type);
+    void gendiff(QString orig_path, QString work_path);
 private:
     Ui::ChangelogWidget *ui;
+    QStandardItemModel model;
 };

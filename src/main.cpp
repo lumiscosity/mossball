@@ -16,12 +16,19 @@
  */
 
 #include "changelogwidget.h"
-#include "./ui_changelogwidget.h"
+#include "directorydialog.h"
 
-ChangelogWidget::ChangelogWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ChangelogWidget) {
-    ui->setupUi(this);
-}
+#include <QApplication>
 
-ChangelogWidget::~ChangelogWidget() {
-    delete ui;
+int main(int argc, char *argv[]) {
+    QApplication a(argc, argv);
+    DirectoryDialog d;
+    if (d.exec()) {
+        ChangelogWidget w;
+        w.gendiff(d.orig(), d.work());
+        // load data into the widget
+        // show widget
+        w.show();
+        a.exec();
+    }
 }

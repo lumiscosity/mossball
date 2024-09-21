@@ -15,19 +15,27 @@
  * along with Mossball. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "changelogwidget.h"
-#include "directorydialog.h"
+#pragma once
 
-#include <QApplication>
+#include <QDialog>
 
-int main(int argc, char *argv[]) {
-    QApplication a(argc, argv);
-    DirectoryDialog d;
-    if (d.exec()) {
-        ChangelogWidget w;
-        // load data into the widget
-        // show widget
-        w.show();
-        a.exec();
-    }
+namespace Ui {
+class DirectoryDialog;
 }
+
+class DirectoryDialog : public QDialog {
+    Q_OBJECT
+
+public:
+    explicit DirectoryDialog(QWidget *parent = nullptr);
+    ~DirectoryDialog();
+
+    QString orig();
+    QString work();
+private slots:
+    void on_origPushButton_clicked();
+    void on_workPushButton_clicked();
+
+private:
+    Ui::DirectoryDialog *ui;
+};

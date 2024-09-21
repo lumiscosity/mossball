@@ -16,18 +16,19 @@ find_package(liblcf REQUIRED)
 add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/bit7z)
 
 set(PROJECT_SOURCES
-        main.cpp
-        changelogwidget.cpp
-        changelogwidget.h
-        changelogwidget.ui
+        src/main.cpp
+        src/changelogwidget.cpp
+        src/changelogwidget.h
+        src/changelogwidget.ui
+        src/directorydialog.cpp
+        src/directorydialog.h
+        src/directorydialog.ui
 )
 
 qt_add_executable(mossball
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
     LICENSE
-    directorydialog.h directorydialog.cpp directorydialog.ui
-
 )
 
 
