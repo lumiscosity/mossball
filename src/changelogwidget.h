@@ -33,6 +33,7 @@ public:
     ChangelogWidget(QWidget *parent = nullptr);
     ~ChangelogWidget();
 
+    void appendChild(QStandardItem *parent, QList<QStandardItem *> items);
     void addModelItem(QString folder, QString name, QString type);
     void gendiff(QString orig_path, QString work_path);
 private:
