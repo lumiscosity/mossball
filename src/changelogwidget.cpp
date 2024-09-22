@@ -19,60 +19,39 @@
 #include "./ui_changelogwidget.h"
 
 #include <QDirIterator>
+#include <QTreeWidgetItem>
 
 ChangelogWidget::ChangelogWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ChangelogWidget) {
     ui->setupUi(this);
     // checkbox + name, diff type
-    model.setColumnCount(2);
-    ui->treeView->setModel(&model);
-    ui->treeView->hideColumn(1);
+    ui->treeWidget->hideColumn(1);
 }
 
 ChangelogWidget::~ChangelogWidget() {
     delete ui;
 }
 
-void ChangelogWidget::appendChild(QStandardItem* parent, QList<QStandardItem*> items) {
-    int row = 0;
-    while (parent->child(row) != nullptr) {
-        row++;
-    }
-    int column = 0;
-    for (auto *i : items) {
-        parent->setChild(row, column, i);
-        column++;
-    }
-}
-
 void ChangelogWidget::addModelItem(QString folder, QString name, QString type) {
     // the model consists of two columns: a checkbox next to the name (of either a folder or a file) and a diff type (files only)
     // an empty diff type signifies a folder
-    for (auto& i: model.findItems(folder, Qt::MatchExactly, 0)) {
-        if (model.itemFromIndex(model.indexFromItem(i).siblingAtColumn(1))->text() == ""){
-            QStandardItem *model_name = new QStandardItem(name);
-            model_name->setCheckable(true);
-            //model_name->setData(Qt::CheckStateRole);
-            model_name->setFlags(Qt::ItemIsUserCheckable);
-            model_name->setEnabled(true);
-            model_name->setCheckState(Qt::CheckState::Unchecked);
-            QStandardItem *model_type = new QStandardItem(type);
-            QList<QStandardItem*> items = {model_name, model_type};
-            // model.insertRow(0, items);
-            // these two do nothing!
-            appendChild(i, items);
-            qWarning()<<i->text();
+    for (auto &i: ui->treeWidget->findItems(folder, Qt::MatchExactly)) {
+        auto bogus = i->text(1);
+        if (i->text(1) == ""){
+            QTreeWidgetItem *model_name = new QTreeWidgetItem(i);
+            model_name->setText(0, name);
+            model_name->setText(1, type);
+            model_name->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+            model_name->setCheckState(0, Qt::CheckState::Checked);
             return;
         }
     }
     // no folder found, make a new one and try again
-    QStandardItem *model_name = new QStandardItem(folder);
-    model_name->setCheckable(true);
-    //model_name->setData(Qt::CheckStateRole);
-    model_name->setFlags(Qt::ItemIsAutoTristate|Qt::ItemIsUserCheckable);
-    model_name->setEnabled(true);
-    QStandardItem *model_type = new QStandardItem("");
-    QList<QStandardItem*> items = {model_name, model_type};
-    model.appendRow(items);
+    QTreeWidgetItem *model_name = new QTreeWidgetItem(static_cast<QTreeWidget *>(nullptr));
+    model_name->setText(0, folder);
+    model_name->setText(1, "");
+    model_name->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsAutoTristate | Qt::ItemIsEnabled);
+    model_name->setCheckState(0, Qt::CheckState::Unchecked);
+    ui->treeWidget->addTopLevelItem(model_name);
     addModelItem(folder, name, type);
 }
 
@@ -130,7 +109,7 @@ void ChangelogWidget::gendiff(QString orig_path, QString work_path) {
             QStringList temp = i.split("/");
             addModelItem(temp[0], temp[1], "*");
         } else {
-            // due to map files being pre-filled, we need an alternative way of checking if they've been added or removed
+            // TODO: due to map files being pre-filled, we need an alternative way of checking if they've been added or removed
             addModelItem("Maps", i, "*");
         }
     }
