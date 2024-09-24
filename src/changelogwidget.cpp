@@ -17,7 +17,11 @@
 
 #include "changelogwidget.h"
 #include "./ui_changelogwidget.h"
+#include "lcfops.h"
 
+#include <lcf/dbstring.h>
+#include <lcf/ldb/reader.h>
+#include <QCryptographicHash>
 #include <QDirIterator>
 #include <QTreeWidgetItem>
 
@@ -42,6 +46,13 @@ void ChangelogWidget::addModelItem(QString folder, QString name, QString type) {
             model_name->setText(1, type);
             model_name->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
             model_name->setCheckState(0, Qt::CheckState::Checked);
+            if (type == "+") {
+                model_name->setBackground(0, addition_brush);
+            } else if (type == "-") {
+                model_name->setBackground(0, removal_brush);
+            } else {
+                model_name->setBackground(0, modified_brush);
+            }
             return;
         }
     }
@@ -109,9 +120,34 @@ void ChangelogWidget::gendiff(QString orig_path, QString work_path) {
             QStringList temp = i.split("/");
             addModelItem(temp[0], temp[1], "*");
         } else {
-            // TODO: due to map files being pre-filled, we need an alternative way of checking if they've been added or removed
-            addModelItem("Maps", i, "*");
+            // due to map files being pre-filled, we need an alternative way of checking if they've been added or removed
+            // the md5 hash seen below is the hash for an empty map
+            QFile orig_map(orig_path + "/" + i);
+            QFile work_map(work_path + "/" + i);
+
+            QCryptographicHash orig_hash(QCryptographicHash::Md5);
+            orig_map.open(QFile::OpenMode::fromInt(1));
+            orig_hash.addData(&orig_map);
+            bool orig_empty = orig_hash.result() == QByteArray::fromHex("ad9759db24c2c26d63c86c6a75d18370");
+
+            QCryptographicHash work_hash(QCryptographicHash::Md5);
+            work_map.open(QFile::OpenMode::fromInt(1));
+            work_hash.addData(&work_map);
+            bool work_empty = work_hash.result() == QByteArray::fromHex("ad9759db24c2c26d63c86c6a75d18370");
+
+            if (orig_empty && !work_empty) {
+                addModelItem("Maps", i, "+");
+                continue;
+            } else if (!orig_empty && work_empty) {
+                addModelItem("Maps", i, "-");
+                continue;
+            } else {
+                addModelItem("Maps", i, "*");
+                continue;
+            }
         }
     }
-    // model.sort(0);
+    ui->treeWidget->sortItems(0, Qt::SortOrder::AscendingOrder);
+    // get ldb data
+    // std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::load(orig_path + "RPG_RT.ldb", "UTF-8");
 }

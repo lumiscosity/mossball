@@ -41,4 +41,8 @@ public:
 private:
     Ui::ChangelogWidget *ui;
     QStandardItemModel model;
+
+    QBrush addition_brush = QBrush(QColor(176, 237, 125, 50));
+    QBrush removal_brush = QBrush(QColor(237, 127, 125, 50));
+    QBrush modified_brush = QBrush(QColor(237, 208, 125, 50));
 };

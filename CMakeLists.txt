@@ -29,6 +29,8 @@ qt_add_executable(mossball
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
     LICENSE
+    src/lcfops.h
+    src/lcfops.cpp
 )
 
 
