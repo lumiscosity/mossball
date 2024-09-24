@@ -23,23 +23,23 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class ChangelogWidget;
+class PickerWidget;
 }
 QT_END_NAMESPACE
 
-class ChangelogWidget : public QWidget {
+class PickerWidget : public QWidget {
     Q_OBJECT
 
 public:
-    ChangelogWidget(QWidget *parent = nullptr);
-    ~ChangelogWidget();
+    PickerWidget(QWidget *parent = nullptr);
+    ~PickerWidget();
 
     void appendChild(QTreeWidgetItem *parent, QList<QTreeWidgetItem *> items);
     void addModelItem(QString folder, QString name, QString type);
     void gendiff(QString orig_path, QString work_path);
 
 private:
-    Ui::ChangelogWidget *ui;
+    Ui::PickerWidget *ui;
     QStandardItemModel model;
 
     QBrush addition_brush = QBrush(QColor(176, 237, 125, 50));

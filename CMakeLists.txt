@@ -17,9 +17,9 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/bit7z)
 
 set(PROJECT_SOURCES
         src/main.cpp
-        src/changelogwidget.cpp
-        src/changelogwidget.h
-        src/changelogwidget.ui
+        src/pickerwidget.cpp
+        src/pickerwidget.h
+        src/pickerwidget.ui
         src/directorydialog.cpp
         src/directorydialog.h
         src/directorydialog.ui

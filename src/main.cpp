@@ -15,7 +15,7 @@
  * along with Mossball. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "changelogwidget.h"
+#include "pickerwidget.h"
 #include "directorydialog.h"
 
 #include <QApplication>
@@ -24,10 +24,8 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     DirectoryDialog d;
     if (d.exec()) {
-        ChangelogWidget w;
+        PickerWidget w;
         w.gendiff(d.orig(), d.work());
-        // load data into the widget
-        // show widget
         w.show();
         a.exec();
     }

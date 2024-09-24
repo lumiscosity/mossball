@@ -15,8 +15,8 @@
  * along with Mossball. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "changelogwidget.h"
-#include "./ui_changelogwidget.h"
+#include "pickerwidget.h"
+#include "./ui_pickerwidget.h"
 #include "lcfops.h"
 
 #include <lcf/dbstring.h>
@@ -25,17 +25,17 @@
 #include <QDirIterator>
 #include <QTreeWidgetItem>
 
-ChangelogWidget::ChangelogWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ChangelogWidget) {
+PickerWidget::PickerWidget(QWidget *parent) : QWidget(parent), ui(new Ui::PickerWidget) {
     ui->setupUi(this);
     // checkbox + name, diff type
     ui->treeWidget->hideColumn(1);
 }
 
-ChangelogWidget::~ChangelogWidget() {
+PickerWidget::~PickerWidget() {
     delete ui;
 }
 
-void ChangelogWidget::addModelItem(QString folder, QString name, QString type) {
+void PickerWidget::addModelItem(QString folder, QString name, QString type) {
     // the model consists of two columns: a checkbox next to the name (of either a folder or a file) and a diff type (files only)
     // an empty diff type signifies a folder
     for (auto &i: ui->treeWidget->findItems(folder, Qt::MatchExactly)) {
@@ -66,7 +66,7 @@ void ChangelogWidget::addModelItem(QString folder, QString name, QString type) {
     addModelItem(folder, name, type);
 }
 
-void ChangelogWidget::gendiff(QString orig_path, QString work_path) {
+void PickerWidget::gendiff(QString orig_path, QString work_path) {
     // generate a list of files
     QDirIterator orig_iter(orig_path, QDirIterator::Subdirectories);
     QDirIterator work_iter(work_path, QDirIterator::Subdirectories);
@@ -107,12 +107,16 @@ void ChangelogWidget::gendiff(QString orig_path, QString work_path) {
         if (i.contains("/")){
             QStringList temp = i.split("/");
             addModelItem(temp[0], temp[1], "-");
+        } else {
+            addModelItem("Maps", i, "-");
         }
     }
     for (QString i : additions) {
         if (i.contains("/")){
             QStringList temp = i.split("/");
             addModelItem(temp[0], temp[1], "+");
+        } else {
+            addModelItem("Maps", i, "+");
         }
     }
     for (QString i : shared) {
@@ -149,5 +153,4 @@ void ChangelogWidget::gendiff(QString orig_path, QString work_path) {
     }
     ui->treeWidget->sortItems(0, Qt::SortOrder::AscendingOrder);
     // get ldb data
-    // std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::load(orig_path + "RPG_RT.ldb", "UTF-8");
 }
