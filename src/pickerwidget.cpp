@@ -17,9 +17,7 @@
 
 #include "pickerwidget.h"
 #include "./ui_pickerwidget.h"
-#include "lcfops.h"
 
-#include "../third_party/easyrpg_editor/dbstring.h"
 #include <lcf/dbstring.h>
 #include <lcf/ldb/reader.h>
 #include <QCryptographicHash>
@@ -157,23 +155,19 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
     std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load((orig_path + "/RPG_RT.ldb").toStdString());
     std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load((work_path + "/RPG_RT.ldb").toStdString());
     // actors
-    for (lcf::rpg::Actor i : orig_db->actors) {
-        if (i != work_db->actors[i.ID-1]){
-            addModelItem("Actor", ToQString(i.name), lcfops::compare_actor(i, work_db->actors[i.ID-1]));
-        }
-    }
+    dbdiff(orig_db->actors, work_db->actors, "Actor");
     // animations
-    for (lcf::rpg::Animation i : orig_db->animations) {}
+    dbdiff(orig_db->animations, work_db->animations, "Animation");
     // items
-    for (lcf::rpg::Item i : orig_db->items) {}
+    dbdiff(orig_db->items, work_db->items, "Item");
     // terrains
-    for (lcf::rpg::Terrain i : orig_db->terrains) {}
+    dbdiff(orig_db->terrains, work_db->terrains, "Terrain");
     // tilesets
-    for (lcf::rpg::Chipset i : orig_db->chipsets) {}
+    dbdiff(orig_db->chipsets, work_db->chipsets, "Tileset");
     // CEs
-    for (lcf::rpg::CommonEvent i : orig_db->commonevents) {}
+    dbdiff(orig_db->commonevents, work_db->commonevents, "CE");
     // switches
-    for (lcf::rpg::Switch i : orig_db->switches) {}
+    dbdiff(orig_db->switches, work_db->switches, "Switch");
     // variables
-    for (lcf::rpg::Variable i : orig_db->variables) {}
+    dbdiff(orig_db->variables, work_db->variables, "Variable");
 }

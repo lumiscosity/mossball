@@ -5,5 +5,16 @@
 #pragma once
 
 namespace lcfops {
-    QString compare_actor(lcf::rpg::Actor orig, lcf::rpg::Actor work);
+    inline QString id_with_name(int id, QString name) { return QString::number(id).rightJustified(4, char(48)) + " " + name; };
+
+    template <class T> QString compare(T orig, T work) {
+        T empty;
+        if (orig == empty && work != empty) {
+            return "+";
+        } else if (orig != empty && work == empty) {
+            return "-";
+        } else {
+            return "*";
+        }
+    }
 }

@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include "lcfops.h"
+#include "../third_party/easyrpg_editor/dbstring.h"
 #include <QStandardItemModel>
 #include <QTreeWidget>
 #include <QWidget>
@@ -34,13 +36,36 @@ public:
     PickerWidget(QWidget *parent = nullptr);
     ~PickerWidget();
 
-    void appendChild(QTreeWidgetItem *parent, QList<QTreeWidgetItem *> items);
     void addModelItem(QString folder, QString name, QString type);
     void gendiff(QString orig_path, QString work_path);
 
 private:
     Ui::PickerWidget *ui;
     QStandardItemModel model;
+
+    template <class T> void dbdiff(std::vector<T> orig, std::vector<T> work, QString folder) {
+        if (orig.size() < work.size()) {
+            // note non-empty additions in new chunks
+            for (int i = orig.size(); i == work.size(); i++) {
+                if (work[i-1] != T()){
+                    addModelItem(folder, lcfops::id_with_name(i-1, ToQString(work[i-1].name)), "+");
+                }
+            }
+        } else if (orig.size() > work.size()) {
+            // note non-empty removals in removed chunks
+            for (int i = work.size(); i == orig.size(); i++) {
+                if (orig[i-1] != T()){
+                    addModelItem(folder, lcfops::id_with_name(i-1, ToQString(orig[i-1].name)), "i");
+                }
+            }
+        }
+        // note additions for slots shared between both databases
+        for (int i = 0; i <= (work.size() < orig.size() ? orig.size() - 1 : work.size() - 1); i++) {
+            if (orig[i] != work[i]){
+                addModelItem(folder, lcfops::id_with_name(i, ToQString(work[i].name)), lcfops::compare<T>(orig[i], work[i]));
+            }
+        }
+    }
 
     QBrush addition_brush = QBrush(QColor(176, 237, 125, 50));
     QBrush removal_brush = QBrush(QColor(237, 127, 125, 50));
