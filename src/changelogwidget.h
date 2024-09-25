@@ -15,23 +15,22 @@
  * along with Mossball. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "pickerwidget.h"
-#include "directorydialog.h"
-#include "changelogwidget.h"
+#pragma once
 
-#include <QApplication>
+#include <QWidget>
 
-int main(int argc, char *argv[]) {
-    QApplication a(argc, argv);
-    DirectoryDialog d;
-    if (d.exec()) {
-        PickerWidget w;
-        w.gendiff(d.orig(), d.work());
-        if (w.exec()){
-            ChangelogWidget c;
-            c.set_text(w.genlog(d.work()));
-            c.show();
-            a.exec();
-        }
-    }
+namespace Ui {
+class ChangelogWidget;
 }
+
+class ChangelogWidget : public QWidget {
+    Q_OBJECT
+
+public:
+    explicit ChangelogWidget(QWidget *parent = nullptr);
+    ~ChangelogWidget();
+    void set_text(QString text);
+
+private:
+    Ui::ChangelogWidget *ui;
+};

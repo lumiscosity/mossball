@@ -17,6 +17,7 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/bit7z)
 
 set(PROJECT_SOURCES
         src/main.cpp
+        src/lcfops.h
         src/pickerwidget.cpp
         src/pickerwidget.h
         src/pickerwidget.ui
@@ -30,8 +31,7 @@ qt_add_executable(mossball
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
     LICENSE
-    src/lcfops.h
-    src/lcfops.cpp
+    src/changelogwidget.h src/changelogwidget.cpp src/changelogwidget.ui
 )
 
 
