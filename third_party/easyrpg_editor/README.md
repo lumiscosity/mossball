@@ -1,0 +1,1 @@
+These files originate from a fork of EasyRPG Editor, which can be found [here](https://github.com/lumiscosity/Editor), and are licensed under the GPLv3. More info and attribution can be found in the commit history of the attached repo.

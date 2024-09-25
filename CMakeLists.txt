@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
         src/directorydialog.cpp
         src/directorydialog.h
         src/directorydialog.ui
+        third_party/easyrpg_editor/dbstring.h
 )
 
 qt_add_executable(mossball
@@ -35,6 +36,7 @@ qt_add_executable(mossball
 
 
 target_link_libraries(mossball PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(mossball PRIVATE liblcf::liblcf)
 target_link_libraries(mossball PRIVATE bit7z)
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)

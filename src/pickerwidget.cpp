@@ -19,6 +19,7 @@
 #include "./ui_pickerwidget.h"
 #include "lcfops.h"
 
+#include "../third_party/easyrpg_editor/dbstring.h"
 #include <lcf/dbstring.h>
 #include <lcf/ldb/reader.h>
 #include <QCryptographicHash>
@@ -108,7 +109,7 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
             QStringList temp = i.split("/");
             addModelItem(temp[0], temp[1], "-");
         } else {
-            addModelItem("Maps", i, "-");
+            addModelItem("Map", i, "-");
         }
     }
     for (QString i : additions) {
@@ -116,7 +117,7 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
             QStringList temp = i.split("/");
             addModelItem(temp[0], temp[1], "+");
         } else {
-            addModelItem("Maps", i, "+");
+            addModelItem("Map", i, "+");
         }
     }
     for (QString i : shared) {
@@ -140,17 +141,39 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
             bool work_empty = work_hash.result() == QByteArray::fromHex("ad9759db24c2c26d63c86c6a75d18370");
 
             if (orig_empty && !work_empty) {
-                addModelItem("Maps", i, "+");
+                addModelItem("Map", i, "+");
                 continue;
             } else if (!orig_empty && work_empty) {
-                addModelItem("Maps", i, "-");
+                addModelItem("Map", i, "-");
                 continue;
             } else {
-                addModelItem("Maps", i, "*");
+                addModelItem("Map", i, "*");
                 continue;
             }
         }
     }
     ui->treeWidget->sortItems(0, Qt::SortOrder::AscendingOrder);
     // get ldb data
+    std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load((orig_path + "/RPG_RT.ldb").toStdString());
+    std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load((work_path + "/RPG_RT.ldb").toStdString());
+    // actors
+    for (lcf::rpg::Actor i : orig_db->actors) {
+        if (i != work_db->actors[i.ID-1]){
+            addModelItem("Actor", ToQString(i.name), lcfops::compare_actor(i, work_db->actors[i.ID-1]));
+        }
+    }
+    // animations
+    for (lcf::rpg::Animation i : orig_db->animations) {}
+    // items
+    for (lcf::rpg::Item i : orig_db->items) {}
+    // terrains
+    for (lcf::rpg::Terrain i : orig_db->terrains) {}
+    // tilesets
+    for (lcf::rpg::Chipset i : orig_db->chipsets) {}
+    // CEs
+    for (lcf::rpg::CommonEvent i : orig_db->commonevents) {}
+    // switches
+    for (lcf::rpg::Switch i : orig_db->switches) {}
+    // variables
+    for (lcf::rpg::Variable i : orig_db->variables) {}
 }
