@@ -37,12 +37,14 @@ public:
     PickerWidget(QWidget *parent = nullptr);
     ~PickerWidget();
 
-    void addModelItem(QString folder, QString name, QString type, int id);
+    void addModelItem(QString folder, QString name, QString type, int id = 0);
     void gendiff(QString orig_path, QString work_path);
     QString genlog(QString orig_path, QString work_path);
 private:
     Ui::PickerWidget *ui;
-    QStandardItemModel model;
+    QMap<int, QList<int>> map_outgoing;
+
+    bool is_oneway(int from_id, int to_id, QString to_map);
 
     template <class T> void dbdiff(std::vector<T> orig, std::vector<T> work, QString folder) {
         if (orig.size() < work.size()) {

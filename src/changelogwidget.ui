@@ -15,11 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPlainTextEdit" name="plainTextEdit">
-     <property name="styleSheet">
-      <string notr="true">font: 11pt monospace;</string>
-     </property>
-    </widget>
+    <widget class="QPlainTextEdit" name="plainTextEdit"/>
    </item>
    <item>
     <widget class="QPushButton" name="pushButton">

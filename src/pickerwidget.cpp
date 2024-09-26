@@ -21,6 +21,7 @@
 #include <lcf/dbstring.h>
 #include <lcf/ldb/reader.h>
 #include <lcf/lmt/reader.h>
+#include <lcf/lmu/reader.h>
 #include <QCryptographicHash>
 #include <QDirIterator>
 #include <QTreeWidgetItem>
@@ -36,11 +37,32 @@ PickerWidget::~PickerWidget() {
     delete ui;
 }
 
-void PickerWidget::addModelItem(QString folder, QString name, QString type, int id = 0) {
+bool PickerWidget::is_oneway(int from_id, int to_id, QString to_map) {
+    // map_outgoing is used as a cache
+    if (map_outgoing.contains(to_id)) {
+        return map_outgoing[to_id].contains(from_id);
+    } else {
+        // find and cache the destination id of every transfer in the map
+        std::unique_ptr<lcf::rpg::Map> map = lcf::LMU_Reader::Load(to_map.toStdString());
+        map_outgoing[to_id] = QList<int>();
+        for (lcf::rpg::Event i : map->events) {
+            for (lcf::rpg::EventPage j : i.pages) {
+                for (lcf::rpg::EventCommand k : j.event_commands) {
+                    if (k.code == int(lcf::rpg::EventCommand::Code::Teleport)) {
+                        map_outgoing[to_id].append(k.parameters[0]);
+                    }
+                }
+            }
+        }
+        return is_oneway(from_id, to_id, to_map);
+    }
+}
+
+void PickerWidget::addModelItem(QString folder, QString name, QString type, int id) {
     // the model consists of three columns:
     // - a checkbox next to the name (of either a folder or a file),
     // - a diff type (files only),
-    // - and whether it is file-based or id-based (maps are an outlier and a re handled separately).
+    // - and whether it is file-based or id-based (maps are an outlier and are handled separately).
     // an empty diff type signifies a folder.
     for (auto &i: ui->treeWidget->findItems(folder, Qt::MatchExactly)) {
         auto bogus = i->text(1);
@@ -76,16 +98,16 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
     // generate a list of files
     QDirIterator orig_iter(orig_path, QDirIterator::Subdirectories);
     QDirIterator work_iter(work_path, QDirIterator::Subdirectories);
-    QList<QString> orig;
+    QStringList orig;
     while (orig_iter.hasNext()) {
         orig.push_back(orig_iter.next().remove(orig_path).removeFirst());
     }
-    QList<QString> work;
+    QStringList work;
     while (work_iter.hasNext()) {
         work.push_back(work_iter.next().remove(work_path).removeFirst());
     }
     // ...and use it to create a list of differences
-    QList<QString> removals, additions, shared;
+    QStringList removals, additions, shared;
     for (QString i : orig) {
         if (!work.contains(i)) {
             removals.push_back(i);
@@ -209,17 +231,77 @@ QString PickerWidget::genlog(QString orig_path, QString work_path) {
                     // create named entry
                     int id = item->text(0).split(".")[0].replace(0, 3, "").toInt();
                     QString name = ToQString(maptree->maps[id].name).replace(0, 5, "");
-                    log.append(QStringList{item->text(1), QString("MAP[%1]").arg(QString::number(id).rightJustified(4, char(48))), (name.isEmpty() ? "" : QString("- %1").arg(name))}.join(" "));
-                    // add bgm info
-                    if (maptree->maps[id].music.name != "(OFF)" && maptree->maps[id].music_type == 0) {
-                        QString mainbgm = lcfops::bgmstring(maptree->maps[id].music);
-                    }
-                    // add other bgms and connections found in the map
-                    // this also checks for changed and removed connections
-                    QStringList miscbgm;
+                    log.append(QStringList{item->text(1), QString("MAP[%1]").arg(lcfops::paddedint(id, 4)), (name.isEmpty() ? "" : QString("- %1").arg(name))}.join(" "));
+                    // add bgm and connection info
+                    QStringList bgm;
                     QStringList connections;
-                    log.append(miscbgm.join("\n"));
-                    log.append(connections.join("\n"));
+                    if (maptree->maps[id].music.name != "(OFF)" && maptree->maps[id].music_type == 0) {
+                        bgm.append(lcfops::bgmstring(maptree->maps[id].music));
+                    }
+                    // load bgms and connections in both versions of the map
+                    QStringList orig_bgm;
+                    QStringList orig_connections;
+                    // only diff if it's not a new map (removed maps have no meta info)
+                    if (item->text(1) == "*"){
+                        std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QString(orig_path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toStdString());
+                        for (lcf::rpg::Event i : current_map->events) {
+                            for (lcf::rpg::EventPage j : i.pages) {
+                                for (lcf::rpg::EventCommand k : j.event_commands) {
+                                    if (k.code == int(lcf::rpg::EventCommand::Code::PlayBGM)) {
+                                        // add bgm
+                                        lcf::rpg::Music located;
+                                        located.name = lcf::ToString(k.string);
+                                        located.fadein = k.parameters[0];
+                                        located.volume = k.parameters[1];
+                                        located.tempo = k.parameters[2];
+                                        located.balance = k.parameters[3];
+                                        orig_bgm.append(lcfops::bgmstring(located, &i));
+                                    } else if (k.code == int(lcf::rpg::EventCommand::Code::Teleport) && k.parameters[0] != id) {
+                                        // add location
+                                        orig_connections.append(lcfops::mapstring(k.parameters[0], k.parameters[1], k.parameters[2], is_oneway(id, k.parameters[0], QString(orig_path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))))));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    QStringList work_bgm;
+                    QStringList work_connections;
+                    std::unique_ptr<lcf::rpg::Map> work_map = lcf::LMU_Reader::Load(QString(work_path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toStdString());
+                    for (lcf::rpg::Event i : work_map->events) {
+                        for (lcf::rpg::EventPage j : i.pages) {
+                            for (lcf::rpg::EventCommand k : j.event_commands) {
+                                if (k.code == int(lcf::rpg::EventCommand::Code::PlayBGM)) {
+                                    lcf::rpg::Music located;
+                                    located.name = lcf::ToString(k.string);
+                                    located.fadein = k.parameters[0];
+                                    located.volume = k.parameters[1];
+                                    located.tempo = k.parameters[2];
+                                    located.balance = k.parameters[3];
+                                    work_bgm.append(lcfops::bgmstring(located, &i));
+                                } else if (k.code == int(lcf::rpg::EventCommand::Code::Teleport) && k.parameters[0] != id) {
+                                    work_connections.append(lcfops::mapstring(k.parameters[0], k.parameters[1], k.parameters[2], is_oneway(id, k.parameters[0], QString(work_path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))))));
+                                }
+                            }
+                        }
+                    }
+                    // diff the lists
+                    if (item->text(1) == "*") {
+                        // TODO
+                    } else {
+                        // all additions
+                        for (QString j : work_bgm) {
+                            bgm.append("    | + " + j);
+                        };
+                        for (QString j : work_connections) {
+                            connections.append("    | + " + j);
+                        };
+                    }
+                    if (!bgm.isEmpty()) {
+                        log.append(bgm.join("\n"));
+                    }
+                    if (!connections.isEmpty()) {
+                        log.append(connections.join("\n"));
+                    }
                 } else if (item->text(2) == "0") {
                     // no id
                     log.append(QStringList{item->text(1), i->text(0), item->text(0)}.join(" "));

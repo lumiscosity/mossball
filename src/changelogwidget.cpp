@@ -20,6 +20,9 @@
 
 ChangelogWidget::ChangelogWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ChangelogWidget) {
     ui->setupUi(this);
+    QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    ui->plainTextEdit->setFont(font);
+
 }
 
 ChangelogWidget::~ChangelogWidget() {
