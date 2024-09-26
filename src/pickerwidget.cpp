@@ -20,6 +20,7 @@
 
 #include <lcf/dbstring.h>
 #include <lcf/ldb/reader.h>
+#include <lcf/lmt/reader.h>
 #include <QCryptographicHash>
 #include <QDirIterator>
 #include <QTreeWidgetItem>
@@ -185,9 +186,10 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
     }
 }
 
-QString PickerWidget::genlog(QString work_path) {
-    // crate log header
+QString PickerWidget::genlog(QString orig_path, QString work_path) {
+    // create log header
     QStringList log;
+    std::unique_ptr<lcf::rpg::TreeMap> maptree = lcf::LMT_Reader::Load(QString(work_path + "/RPG_RT.lmt").toStdString());
     log.append("|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|");
     log.append("");
     log.append("Developer:");
@@ -204,7 +206,20 @@ QString PickerWidget::genlog(QString work_path) {
             if (!item->isDisabled()) {
                 if (i->text(0) == "Map" && i->text(1) == "") {
                     // map
-                    log.append(QStringList{item->text(1), i->text(0), item->text(0)}.join(" "));
+                    // create named entry
+                    int id = item->text(0).split(".")[0].replace(0, 3, "").toInt();
+                    QString name = ToQString(maptree->maps[id].name).replace(0, 5, "");
+                    log.append(QStringList{item->text(1), QString("MAP[%1]").arg(QString::number(id).rightJustified(4, char(48))), (name.isEmpty() ? "" : QString("- %1").arg(name))}.join(" "));
+                    // add bgm info
+                    if (maptree->maps[id].music.name != "(OFF)" && maptree->maps[id].music_type == 0) {
+                        QString mainbgm = lcfops::bgmstring(maptree->maps[id].music);
+                    }
+                    // add other bgms and connections found in the map
+                    // this also checks for changed and removed connections
+                    QStringList miscbgm;
+                    QStringList connections;
+                    log.append(miscbgm.join("\n"));
+                    log.append(connections.join("\n"));
                 } else if (item->text(2) == "0") {
                     // no id
                     log.append(QStringList{item->text(1), i->text(0), item->text(0)}.join(" "));

@@ -25,11 +25,11 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     DirectoryDialog d;
     if (d.exec()) {
-        PickerWidget w;
-        w.gendiff(d.orig(), d.work());
-        if (w.exec()){
+        PickerWidget p;
+        p.gendiff(d.orig(), d.work());
+        if (p.exec()){
             ChangelogWidget c;
-            c.set_text(w.genlog(d.work()));
+            c.set_text(p.genlog(d.orig(), d.work()));
             c.show();
             a.exec();
         }

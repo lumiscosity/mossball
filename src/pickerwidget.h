@@ -39,7 +39,7 @@ public:
 
     void addModelItem(QString folder, QString name, QString type, int id);
     void gendiff(QString orig_path, QString work_path);
-    QString genlog(QString work_path);
+    QString genlog(QString orig_path, QString work_path);
 private:
     Ui::PickerWidget *ui;
     QStandardItemModel model;
