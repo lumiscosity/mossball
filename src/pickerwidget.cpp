@@ -40,7 +40,7 @@ PickerWidget::~PickerWidget() {
 bool PickerWidget::is_oneway(int from_id, int to_id, QString to_map) {
     // map_outgoing is used as a cache
     if (map_outgoing.contains(to_id)) {
-        return map_outgoing[to_id].contains(from_id);
+        return !map_outgoing[to_id].contains(from_id);
     } else {
         // find and cache the destination id of every transfer in the map
         std::unique_ptr<lcf::rpg::Map> map = lcf::LMU_Reader::Load(to_map.toStdString());
@@ -92,6 +92,71 @@ void PickerWidget::addModelItem(QString folder, QString name, QString type, int 
     model_name->setCheckState(0, Qt::CheckState::Unchecked);
     ui->treeWidget->insertTopLevelItem(0, model_name);
     addModelItem(folder, name, type, id);
+}
+
+void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id) {
+    QList<lcfops::connection_info> connections_raw;
+    std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QString(path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toStdString());
+    for (lcf::rpg::Event i : current_map->events) {
+        for (lcf::rpg::EventPage j : i.pages) {
+            int last_teleport = 0;
+            for (lcf::rpg::EventCommand k : j.event_commands) {
+                if (k.code == int(lcf::rpg::EventCommand::Code::PlayBGM) && k.string != "(OFF)") {
+                    // add bgm
+                    lcf::rpg::Music located;
+                    located.name = lcf::ToString(k.string);
+                    located.fadein = k.parameters[0];
+                    located.volume = k.parameters[1];
+                    located.tempo = k.parameters[2];
+                    located.balance = k.parameters[3];
+                    QString bgmstring = lcfops::bgmstring(located, &i);
+                    // strip duplicates
+                    bool dirty = false;
+                    for (QString l : bgm) {
+                        if (l.first(l.lastIndexOf("-")) == bgmstring.first(bgmstring.lastIndexOf("-"))) {
+                            dirty = true;
+                        }
+                    }
+                    if (!dirty) {
+                        // there are rare edge cases where a bgm is played after a teleport into another map
+                        // since we have no way of guaranteeing the destination map has been modified, we instead note it on the teleport source
+                        QString after_teleport;
+                        if (last_teleport) {
+                            after_teleport = QString(" (played after transfer to MAP[%1])").arg(lcfops::paddedint(last_teleport, 4));
+                        }
+                        bgm.append(bgmstring + after_teleport);
+                    }
+                } else if (k.code == int(lcf::rpg::EventCommand::Code::Teleport) && k.parameters[0] != id) {
+                    // add location
+                    //QString mapstring = lcfops::mapstring(k.parameters[0], i.x, i.y, is_oneway(id, k.parameters[0], QString(path + QString("/Map%1.lmu").arg(lcfops::paddedint(k.parameters[0], 4)))));
+                    connections_raw.append(lcfops::connection_info(k.parameters[0], i.x, i.y, id, path));
+                    last_teleport = k.parameters[0];
+                }
+            }
+        }
+    }
+    // merge adjacent warps (max 3 tiles distance) with shared destinations
+    // we can represent every connection as a qrect of width/height 5, where the center is the connecting event
+    // by getting the bounding rectangle of every intersecting rectangle and shortening all sides by 2 we get the connection cluster bounds
+    QList<lcfops::connection_info> clusters;
+    QMargins m(2, 2, 2, 2);
+    for (lcfops::connection_info i : connections_raw) {
+        QRect a = i.xy.marginsAdded(m);
+        bool found_cluster = false;
+        for (lcfops::connection_info &j : clusters) {
+            if ((j.xy & a).isValid()) {
+                j.xy = j.xy.united(a);
+                found_cluster = true;
+                break;
+            }
+        }
+        if (!found_cluster) {
+            clusters.append(lcfops::connection_info(i.dest, a, i.id, i.path));
+        }
+    }
+    for (lcfops::connection_info i : clusters) {
+        connections.append(lcfops::mapstring(i.dest, i.xy.marginsRemoved(m), is_oneway(i.id, i.dest, QString(i.path + QString("/Map%1.lmu").arg(lcfops::paddedint(i.dest, 4))))));
+    }
 }
 
 void PickerWidget::gendiff(QString orig_path, QString work_path) {
@@ -235,60 +300,49 @@ QString PickerWidget::genlog(QString orig_path, QString work_path) {
                     // add bgm and connection info
                     QStringList bgm;
                     QStringList connections;
-                    if (maptree->maps[id].music.name != "(OFF)" && maptree->maps[id].music_type == 0) {
-                        bgm.append(lcfops::bgmstring(maptree->maps[id].music));
+                    // if the map is new and has a bgm, add it
+                    if (item->text(1) == "+" && maptree->maps[id].music.name != "(OFF)" && maptree->maps[id].music_type == 2 && maptree->maps[id].music.volume != 0) {
+                        bgm.append("    | + " + lcfops::bgmstring(maptree->maps[id].music));
                     }
                     // load bgms and connections in both versions of the map
                     QStringList orig_bgm;
                     QStringList orig_connections;
                     // only diff if it's not a new map (removed maps have no meta info)
-                    if (item->text(1) == "*"){
-                        std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QString(orig_path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toStdString());
-                        for (lcf::rpg::Event i : current_map->events) {
-                            for (lcf::rpg::EventPage j : i.pages) {
-                                for (lcf::rpg::EventCommand k : j.event_commands) {
-                                    if (k.code == int(lcf::rpg::EventCommand::Code::PlayBGM)) {
-                                        // add bgm
-                                        lcf::rpg::Music located;
-                                        located.name = lcf::ToString(k.string);
-                                        located.fadein = k.parameters[0];
-                                        located.volume = k.parameters[1];
-                                        located.tempo = k.parameters[2];
-                                        located.balance = k.parameters[3];
-                                        orig_bgm.append(lcfops::bgmstring(located, &i));
-                                    } else if (k.code == int(lcf::rpg::EventCommand::Code::Teleport) && k.parameters[0] != id) {
-                                        // add location
-                                        orig_connections.append(lcfops::mapstring(k.parameters[0], k.parameters[1], k.parameters[2], is_oneway(id, k.parameters[0], QString(orig_path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))))));
-                                    }
-                                }
-                            }
-                        }
+                    if (item->text(1) == "*") {
+                        genmapmeta(orig_bgm, orig_connections, orig_path, id);
                     }
                     QStringList work_bgm;
                     QStringList work_connections;
-                    std::unique_ptr<lcf::rpg::Map> work_map = lcf::LMU_Reader::Load(QString(work_path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toStdString());
-                    for (lcf::rpg::Event i : work_map->events) {
-                        for (lcf::rpg::EventPage j : i.pages) {
-                            for (lcf::rpg::EventCommand k : j.event_commands) {
-                                if (k.code == int(lcf::rpg::EventCommand::Code::PlayBGM)) {
-                                    lcf::rpg::Music located;
-                                    located.name = lcf::ToString(k.string);
-                                    located.fadein = k.parameters[0];
-                                    located.volume = k.parameters[1];
-                                    located.tempo = k.parameters[2];
-                                    located.balance = k.parameters[3];
-                                    work_bgm.append(lcfops::bgmstring(located, &i));
-                                } else if (k.code == int(lcf::rpg::EventCommand::Code::Teleport) && k.parameters[0] != id) {
-                                    work_connections.append(lcfops::mapstring(k.parameters[0], k.parameters[1], k.parameters[2], is_oneway(id, k.parameters[0], QString(work_path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))))));
-                                }
-                            }
-                        }
-                    }
+                    genmapmeta(work_bgm, work_connections, work_path, id);
                     // diff the lists
                     if (item->text(1) == "*") {
-                        // TODO
-                    } else {
-                        // all additions
+                        // modified maps
+                        for (QString i : orig_bgm) {
+                            if (!work_bgm.contains(i)) {
+                                // removed
+                                bgm.append("    | - " + i);
+                            }
+                        }
+                        for (QString i : work_bgm) {
+                            if (!orig_bgm.contains(i)) {
+                                // added
+                                bgm.append("    | + " + i);
+                            }
+                        }
+                        for (QString i : orig_connections) {
+                            if (!work_connections.contains(i)) {
+                                // removed
+                                connections.append("    | - " + i);
+                            }
+                        }
+                        for (QString i : work_connections) {
+                            if (!orig_connections.contains(i)) {
+                                // added
+                                connections.append("    | + " + i);
+                            }
+                        }
+                    } else if (item->text(1) == "+") {
+                        // added maps
                         for (QString j : work_bgm) {
                             bgm.append("    | + " + j);
                         };

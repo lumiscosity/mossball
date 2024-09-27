@@ -40,6 +40,7 @@ public:
     void addModelItem(QString folder, QString name, QString type, int id = 0);
     void gendiff(QString orig_path, QString work_path);
     QString genlog(QString orig_path, QString work_path);
+    void genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id);
 private:
     Ui::PickerWidget *ui;
     QMap<int, QList<int>> map_outgoing;
