@@ -40,6 +40,12 @@ jobs:
         buildPreset: 'ninja-multi-vcpkg'
         buildPresetAdditionalArgs: "['--config Release']"
 
+    - name: Copy Qt DLLs to the release dir
+      run: |
+        cp D:\a\mossball\Qt\6.7.2\msvc2019_64\bin\Qt6Core.dll D:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release
+        cp D:\a\mossball\Qt\6.7.2\msvc2019_64\bin\Qt6Gui.dll D:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release
+        cp D:\a\mossball\Qt\6.7.2\msvc2019_64\bin\Qt6Widgets.dll D:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release
+
     - name: Push build artifacts
       uses: actions/upload-artifact@v4
       with:
