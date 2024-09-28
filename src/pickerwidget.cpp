@@ -146,7 +146,7 @@ void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QStrin
         QRect b = i.dest_xy.marginsAdded(m);
         bool found_cluster = false;
         for (lcfops::connection_info &j : clusters) {
-            if ((j.xy & a).isValid() && (j.dest_xy & b).isValid()) {
+            if ((j.xy & a).isValid() && (j.dest_xy & b).isValid() && (j.dest == i.dest)) {
                 j.xy = j.xy.united(a);
                 j.dest_xy = j.dest_xy.united(b);
                 found_cluster = true;
