@@ -17,14 +17,14 @@ jobs:
 
     - uses: lukka/get-cmake@latest
 
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
     - name: Restore from cache and setup vcpkg executable and data files.
       uses: lukka/run-vcpkg@v11
       with:
         vcpkgJsonGlob: 'vcpkg.json'
-
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
 
     - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
       uses: lukka/run-cmake@v10
