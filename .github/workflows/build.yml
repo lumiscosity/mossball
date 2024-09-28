@@ -15,11 +15,18 @@ jobs:
       with:
         version: '6.7.2'
         host: windows
-    - name: Get build dependencies
-      run: vcpkg install inih expat icu vcpkg-tool-ninja
+
+    - uses: lukka/get-cmake@latest
+
+    - name: Restore from cache and setup vcpkg executable and data files.
+      uses: lukka/run-vcpkg@v11
+      with:
+        vcpkgJsonGlob: 'vcpkg.json'
+
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+
     - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
       uses: lukka/run-cmake@v10
       with:
