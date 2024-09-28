@@ -10,13 +10,13 @@ jobs:
     name: 'Windows'
     runs-on: windows-latest
     steps:
-    - name: Install Ninja
-      run: choco install ninja
     - name: Install Qt 6
       uses: jurplel/install-qt-action@v4
       with:
         version: '6.7.2'
         host: windows
+    - name: Get build dependencies
+      run: vcpkg install inih expat icu vcpkg-tool-ninja 
     - uses: actions/checkout@v4
       with:
         submodules: recursive
