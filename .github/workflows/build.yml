@@ -3,8 +3,27 @@ on:
     branches: [main]
   pull_request:
 
-name: Build Linux Flatpak
+name: Build
+
 jobs:
+  windows:
+    name: 'Windows'
+    runs-on: windows-latest
+    steps:
+    - name: Install Ninja
+      run: choco install ninja
+    - name: Install Qt 6
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: '6.7.2'
+        host: windows
+    - uses: ilammy/msvc-dev-cmd@
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Build with cmake
+      run: cmake -S . -B build -G "Ninja Multi-Config" && cmake --build build --config Release
+
   flatpak:
     name: 'Linux/Flatpak'
     runs-on: ubuntu-latest
