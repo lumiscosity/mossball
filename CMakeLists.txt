@@ -12,8 +12,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+option(USE_SYSTEM_LIBLCF "Use system install of liblcf" OFF)
+if(USE_SYSTEM_LIBLCF)
+	find_package(liblcf REQUIRED)
+else(USE_SYSTEM_LIBLCF)
+	function(add_liblcf)
+		set(BUILD_SHARED_LIBS OFF)
+		set(LIBLCF_ENABLE_INSTALL OFF)
+		add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/liblcf)
+	endfunction()
+	add_liblcf()
+endif(USE_SYSTEM_LIBLCF)
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/bit7z)
-add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/liblcf)
 
 set(PROJECT_SOURCES
         src/main.cpp

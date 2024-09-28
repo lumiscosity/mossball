@@ -1,0 +1,64 @@
+id: com.github.lumiscosity.Mossball
+runtime: org.kde.Platform
+runtime-version: '6.7'
+sdk: org.kde.Sdk
+command: mossball
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+#	- --filesystem=host
+
+build-options:
+  build-args:
+    - --share=network
+
+cleanup:
+  - /include
+  - /lib.*.la
+  - /lib/*.a
+  - /lib/pkgconfig
+  - /lib/cmake
+
+modules:
+  - name: liblcf
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DLIBLCF_ENABLE_TOOLS=OFF
+      - -DLIBLCF_WITH_XML=OFF
+      - -DLIBLCF_ENABLE_TESTS=OFF
+      - -DLIBLCF_UPDATE_MIMEDB=OFF
+    sources:
+      - type: git
+        url: https://github.com/EasyRPG/liblcf.git
+        tag: '0.8'
+        commit: 9c09529e3de0a4106470082ef48a00d4c3593c33
+        x-checker-data:
+          is-main-source: true
+          type: git
+          tag-pattern: ^([\d.]+)$
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/cmake
+      - /share
+
+  - name: mossball
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DUSE_SYSTEM_LIBLCF=ON
+    build-commands:
+      - install -D -m 644 -t $FLATPAK_DEST/share/icons/hicolor/scalable/apps $FLATPAK_ID.svg
+      - install -D -m 644 -t $FLATPAK_DEST/share/applications $FLATPAK_ID.desktop
+      - install -D -m 644 -t $FLATPAK_DEST/share/metainfo $FLATPAK_ID.metainfo.xml
+    sources:
+      - type: dir
+        path: "../"
+      - type: file
+        path: com.github.lumiscosity.Mossball.desktop
+      - type: file
+        path: com.github.lumiscosity.Mossball.metainfo.xml
+      - type: file
+        path: com.github.lumiscosity.Mossball.svg
