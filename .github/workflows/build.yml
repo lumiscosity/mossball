@@ -16,13 +16,16 @@ jobs:
         version: '6.7.2'
         host: windows
     - name: Get build dependencies
-      run: vcpkg install inih expat icu vcpkg-tool-ninja 
+      run: vcpkg install inih expat icu vcpkg-tool-ninja
     - uses: actions/checkout@v4
       with:
         submodules: recursive
-    - uses: ilammy/msvc-dev-cmd@v1
-    - name: Build with cmake
-      run: cmake -S . -B build -G "Ninja Multi-Config" && cmake --build build --config Release
+    - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
+      uses: lukka/run-cmake@v10
+      with:
+        configurePreset: 'ninja-multi-vcpkg'
+        buildPreset: 'ninja-multi-vcpkg'
+        buildPresetAdditionalArgs: "['--config Release']"
 
   flatpak:
     name: 'Linux/Flatpak'
