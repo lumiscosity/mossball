@@ -1,6 +1,5 @@
 {
-  "name": "main",
-  "version-string": "latest",
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "dependencies": [
     "inih",
     "expat",

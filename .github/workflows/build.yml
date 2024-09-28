@@ -1,6 +1,5 @@
 on:
   push:
-    branches: [main]
   pull_request:
 
 name: Build
@@ -18,21 +17,39 @@ jobs:
 
     - uses: lukka/get-cmake@latest
 
-    - name: Restore from cache and setup vcpkg executable and data files.
-      uses: lukka/run-vcpkg@v11
-      with:
-        vcpkgJsonGlob: 'vcpkg.json'
-
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@v11
+      id: runvcpkg
+      with:
+        # This specifies the location of vcpkg, where it is going to be restored from cache, or create from scratch.
+        vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
+        # The Git commit id of vcpkg to be checked out. This is only needed because we are not using a submodule.
+        vcpkgGitCommitId: 'a42af01b72c28a8e1d7b48107b33e4f286a55ef6'
+        # The vcpkg.json file, which will be part of cache key computation.
+        vcpkgJsonGlob: '**vcpkg.json'
 
     - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
       uses: lukka/run-cmake@v10
       with:
         configurePreset: 'ninja-multi-vcpkg'
+        configurePresetAdditionalArgs: "['-DCMAKE_BUILD_TYPE=Release', '-DVCPKG_TARGET_TRIPLET=x64-windows-static']"
         buildPreset: 'ninja-multi-vcpkg'
         buildPresetAdditionalArgs: "['--config Release']"
+
+    - name: Copy Qt DLLs to the release dir
+      run: |
+        windeployqt6 D:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release\mossball.exe --release --no-svg --no-network --no-translations --no-opengl-sw --no-system-d3d-compiler
+
+    - name: Push build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: mossball-windows-x86_64
+        path: |
+          D:/a/mossball/mossball/builds/ninja-multi-vcpkg/Release
 
   flatpak:
     name: 'Linux/Flatpak'
@@ -46,6 +63,6 @@ jobs:
         submodules: recursive
     - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
-        bundle: mossball.flatpak
+        bundle: mossball-linux.flatpak
         manifest-path: linux/com.github.lumiscosity.Mossball.yml
         cache-key: flatpak-builder-${{ github.sha }}
