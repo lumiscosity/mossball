@@ -129,7 +129,7 @@ void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QStrin
                 } else if (k.code == int(lcf::rpg::EventCommand::Code::Teleport) && k.parameters[0] != id) {
                     // add location
                     //QString mapstring = lcfops::mapstring(k.parameters[0], i.x, i.y, is_oneway(id, k.parameters[0], QString(path + QString("/Map%1.lmu").arg(lcfops::paddedint(k.parameters[0], 4)))));
-                    connections_raw.append(lcfops::connection_info(k.parameters[0], i.x, i.y, id, path));
+                    connections_raw.append(lcfops::connection_info(k.parameters[0], k.parameters[1], k.parameters[2], i.x, i.y, id, path));
                     last_teleport = k.parameters[0];
                 }
             }
@@ -143,20 +143,22 @@ void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QStrin
     QMargins m(2, 2, 2, 2);
     for (lcfops::connection_info i : connections_raw) {
         QRect a = i.xy.marginsAdded(m);
+        QRect b = i.dest_xy.marginsAdded(m);
         bool found_cluster = false;
         for (lcfops::connection_info &j : clusters) {
-            if ((j.xy & a).isValid()) {
+            if ((j.xy & a).isValid() && (j.dest_xy & b).isValid()) {
                 j.xy = j.xy.united(a);
+                j.dest_xy = j.dest_xy.united(b);
                 found_cluster = true;
                 break;
             }
         }
         if (!found_cluster) {
-            clusters.append(lcfops::connection_info(i.dest, a, i.id, i.path));
+            clusters.append(lcfops::connection_info(i.dest, b, a, i.id, i.path));
         }
     }
     for (lcfops::connection_info i : clusters) {
-        connections.append(lcfops::mapstring(i.dest, i.xy.marginsRemoved(m), is_oneway(i.id, i.dest, QString(i.path + QString("/Map%1.lmu").arg(lcfops::paddedint(i.dest, 4))))));
+        connections.append(lcfops::mapstring(i.dest, i.dest_xy.marginsRemoved(m), i.xy.marginsRemoved(m), is_oneway(i.id, i.dest, QString(i.path + QString("/Map%1.lmu").arg(lcfops::paddedint(i.dest, 4))))));
     }
 }
 

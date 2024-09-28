@@ -9,9 +9,10 @@
 
 namespace lcfops {
     struct connection_info {
-        connection_info(int dest, int x, int y, int id, QString path) : dest(dest), xy(x, y, 1, 1), id(id), path(std::move(path)) {}
-        connection_info(int dest, QRect xy, int id, QString path) : dest(dest), xy(xy), id(id), path(std::move(path)) {}
+        connection_info(int dest, int dest_x, int dest_y, int x, int y, int id, QString path) : dest(dest), dest_xy(dest_x, dest_y, 1, 1), xy(x, y, 1, 1), id(id), path(std::move(path)) {}
+        connection_info(int dest, QRect dest_xy, QRect xy, int id, QString path) : dest(dest), dest_xy(dest_xy), xy(xy), id(id), path(std::move(path)) {}
         int dest;
+        QRect dest_xy;
         QRect xy;
         int id;
         QString path;
@@ -27,13 +28,15 @@ namespace lcfops {
             (event ? QString("- event at (%1,%2)").arg(paddedint(event->x, 3)).arg(paddedint(event->y, 3)) : "- map setting")
         }.join(" ");
     };
-    inline QString mapstring(int id, QRect xy, bool oneway = false) {
+    inline QString mapstring(int id, QRect dest_xy, QRect xy, bool oneway = false) {
         return QStringList{
-            "Connection to",
-            QString("MAP[%1]").arg(paddedint(id, 4)),
-            QString("at (%1, %2)")
+            "Connection from",
+            QString("(%1, %2) to (%3, %4)")
                 .arg((xy.width() <= 1 ? paddedint(xy.x(), 3) : QString("%1-%2").arg(paddedint(xy.x(), 3)).arg(paddedint(xy.right(), 3))))
-                .arg((xy.height() <= 1 ? paddedint(xy.y(), 3) : QString("%1-%2").arg(paddedint(xy.y(), 3)).arg(paddedint(xy.bottom(), 3)))),
+                .arg((xy.height() <= 1 ? paddedint(xy.y(), 3) : QString("%1-%2").arg(paddedint(xy.y(), 3)).arg(paddedint(xy.bottom(), 3))))
+                .arg((dest_xy.width() <= 1 ? paddedint(dest_xy.x(), 3) : QString("%1-%2").arg(paddedint(dest_xy.x(), 3)).arg(paddedint(dest_xy.right(), 3))))
+                .arg((dest_xy.height() <= 1 ? paddedint(dest_xy.y(), 3) : QString("%1-%2").arg(paddedint(dest_xy.y(), 3)).arg(paddedint(dest_xy.bottom(), 3)))),
+            QString("in MAP[%1]").arg(paddedint(id, 4)),
             (oneway ? "(one-way)" : "")
         }.join(" ");
     };
