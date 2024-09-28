@@ -17,10 +17,10 @@ jobs:
       with:
         version: '6.7.2'
         host: windows
-    - uses: ilammy/msvc-dev-cmd@
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+    - uses: ilammy/msvc-dev-cmd@v1
     - name: Build with cmake
       run: cmake -S . -B build -G "Ninja Multi-Config" && cmake --build build --config Release
 
