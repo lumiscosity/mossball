@@ -40,6 +40,13 @@ jobs:
         buildPreset: 'ninja-multi-vcpkg'
         buildPresetAdditionalArgs: "['--config Release']"
 
+    - name: Push build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: mossball-windows
+        path: |
+          Release
+
   flatpak:
     name: 'Linux/Flatpak'
     runs-on: ubuntu-latest
