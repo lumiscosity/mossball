@@ -2,17 +2,18 @@ on:
   push:
     branches: [main]
   pull_request:
+
 name: Build Linux Flatpak
 jobs:
   flatpak:
-    name: "Linux: Flatpak"
+    name: 'Linux/Flatpak'
     runs-on: ubuntu-latest
     container:
       image: bilelmoussaoui/flatpak-github-actions:kde-6.7
       options: --privileged
     steps:
     - uses: actions/checkout@v4
-    submodules: recursive
+      submodules: recursive
     - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
         bundle: mossball.flatpak
