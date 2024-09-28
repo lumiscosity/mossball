@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+	<name>Mossball</name>
+	<summary>Free C++ sprite editor</summary>
+	<id>com.github.lumiscosity.Mossball</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0-or-later</project_license>
+
+	<developer_name translatable="no">lumiscosity</developer_name>
+	<developer id="org.neocities.lumiscosity">
+		<name translatable="no">lumiscosity</name>
+	</developer>
+
+	<launchable type="desktop-id">com.github.lumiscosity.Mossball.desktop</launchable>
+
+	<content_rating type="oars-1.1"/>
+
+	<supports>
+		<control>pointing</control>
+		<control>keyboard</control>
+	</supports>
+
+	<url type="homepage">https://github.com/lumiscosity/mossball</url>
+	<url type="bugtracker">https://github.com/lumiscosity/mossball/issues</url>
+	<url type="contribute">https://github.com/lumiscosity/mossball</url>
+	<url type="vcs-browser">https://github.com/lumiscosity/mossball</url>
+
+	<description>
+		<p>RPG Maker 2000/2003 changelog generator</p>
+	</description>
+</component>

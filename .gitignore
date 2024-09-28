@@ -2,3 +2,7 @@ build/*
 CMakeLists.txt.user
 third_party/bit7z/*
 third_party/liblcf/*
+
+linux/flatpak-build
+linux/flatpak-repo
+*.flatpak
