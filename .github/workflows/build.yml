@@ -47,7 +47,7 @@ jobs:
     - name: Push build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: mossball-windows
+        name: mossball-windows-x86_64
         path: |
           D:/a/mossball/mossball/builds/ninja-multi-vcpkg/Release
 
@@ -63,6 +63,6 @@ jobs:
         submodules: recursive
     - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
-        bundle: mossball.flatpak
+        bundle: mossball-linux.flatpak
         manifest-path: linux/com.github.lumiscosity.Mossball.yml
         cache-key: flatpak-builder-${{ github.sha }}
