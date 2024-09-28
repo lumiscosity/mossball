@@ -4,7 +4,7 @@ A patch generator for RPG Maker 2000/3 projects, complete with detailed changelo
 This is a replacement for the legacy changelog generator, compliant with the latest version of the changelog and including additional features such as automatic map transfer detection and built-in file selection.
 
 ## Building
-Requires `Qt6` and `liblcf`, and uses CMake for building.
+Requires `Qt6` and uses CMake for building. `bit7z` and `liblcf` will be built as part of the process.
 
 ```
 git clone https://github.com/lumiscosity/mossball && cd mossball && git submodule update --init && cmake -B builddir && cmake --build builddir

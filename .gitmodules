@@ -1,3 +1,6 @@
 [submodule "third_party/bit7z"]
 	path = third_party/bit7z
 	url = https://github.com/rikyoz/bit7z
+[submodule "third_party/liblcf"]
+	path = third_party/liblcf
+	url = https://github.com/EasyRPG/liblcf

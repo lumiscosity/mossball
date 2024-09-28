@@ -11,9 +11,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-find_package(liblcf REQUIRED)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/bit7z)
+add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/liblcf)
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -24,6 +24,9 @@ set(PROJECT_SOURCES
         src/directorydialog.cpp
         src/directorydialog.h
         src/directorydialog.ui
+        src/changelogwidget.h
+        src/changelogwidget.cpp
+        src/changelogwidget.ui
         third_party/easyrpg_editor/dbstring.h
 )
 
@@ -31,13 +34,13 @@ qt_add_executable(mossball
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
     LICENSE
-    src/changelogwidget.h src/changelogwidget.cpp src/changelogwidget.ui
+    mossball.qrc
 )
 
-
 target_link_libraries(mossball PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(mossball PRIVATE liblcf::liblcf)
 target_link_libraries(mossball PRIVATE bit7z)
+target_link_libraries(mossball PRIVATE lcf)
+
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.mossball)

@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Mossball</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../mossball.qrc">
+    <normaloff>:/res/icon.ico</normaloff>:/res/icon.ico</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -137,7 +141,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../mossball.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
