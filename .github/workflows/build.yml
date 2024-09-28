@@ -45,7 +45,7 @@ jobs:
       with:
         name: mossball-windows
         path: |
-          Release
+          D:/a/mossball/mossball/builds/ninja-multi-vcpkg/Release
 
   flatpak:
     name: 'Linux/Flatpak'
