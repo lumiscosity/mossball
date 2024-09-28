@@ -42,7 +42,7 @@ jobs:
 
     - name: Copy Qt DLLs to the release dir
       run: |
-        windeployqt6 D:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release\mossball.exe
+        windeployqt6 D:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release\mossball.exe --release
 
     - name: Push build artifacts
       uses: actions/upload-artifact@v4
