@@ -27,10 +27,16 @@ class ChangelogWidget : public QWidget {
     Q_OBJECT
 
 public:
-    explicit ChangelogWidget(QWidget *parent = nullptr);
+    explicit ChangelogWidget(QString work_dir, QWidget *parent = nullptr);
     ~ChangelogWidget();
     void set_text(QString text);
 
+    QStringList changecsv;
+
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::ChangelogWidget *ui;
+    QString work_dir;
 };

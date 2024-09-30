@@ -138,7 +138,6 @@ void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QStrin
     // merge adjacent warps (max 3 tiles distance) with shared destinations
     // we can represent every connection as a qrect of width/height 5, where the center is the connecting event
     // by getting the bounding rectangle of every intersecting rectangle and shortening all sides by 2 we get the connection cluster bounds
-    // TODO: still needs deduplication on the opposite end to ensure we only combine warps leading to adjacent spots
     QList<lcfops::connection_info> clusters;
     QMargins m(2, 2, 2, 2);
     for (lcfops::connection_info i : connections_raw) {

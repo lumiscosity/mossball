@@ -27,8 +27,8 @@ int main(int argc, char *argv[]) {
     if (d.exec()) {
         PickerWidget p;
         p.gendiff(d.orig(), d.work());
-        if (p.exec()){
-            ChangelogWidget c;
+        if (p.exec()) {
+            ChangelogWidget c(d.work());
             c.set_text(p.genlog(d.orig(), d.work()));
             c.show();
             a.exec();
