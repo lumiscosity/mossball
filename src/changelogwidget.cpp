@@ -17,7 +17,9 @@
 
 #include "changelogwidget.h"
 #include "ui_changelogwidget.h"
-#include <bit7z/bitarchivewriter.hpp>
+
+#include "../third_party/zip/include/exceptions.hpp"
+#include "../third_party/zip/include/zip.hpp"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -27,7 +29,6 @@ ChangelogWidget::ChangelogWidget(QString work_dir, QWidget *parent) : work_dir(w
     ui->setupUi(this);
     QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
     ui->plainTextEdit->setFont(font);
-
 }
 
 ChangelogWidget::~ChangelogWidget() {
@@ -39,44 +40,50 @@ void ChangelogWidget::set_text(QString text) {
 }
 
 void ChangelogWidget::on_pushButton_clicked() {
-    QString out = QFileDialog::getSaveFileName(this, "Select save location", "", "7z Archive (*.7z)");
+    QString out = QFileDialog::getSaveFileName(this, "Select save location", "", "Archive (*.zip)");
     if (!out.isEmpty()) {
-        auto bytes = ui->plainTextEdit->toPlainText().toUtf8();
-        std::vector<unsigned char> c(bytes.constData(), bytes.constData() + bytes.size());
+        auto c = ui->plainTextEdit->toPlainText().toStdString();
         // create an archive from all the files and the changelog
         // i don't actually trust people to not remove stuff after the treeview step, so we treat the changelog as the file list instead
         // this does pose some annoyances with filenames, which can contain spaces, but we have a fallback
-        try {
-            using namespace bit7z;
 
-            #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
-            Bit7zLibrary lib("7z.dll");
-            #else
-            Bit7zLibrary lib("7z.so");
-            #endif
-            BitArchiveWriter archive{ lib, BitFormat::SevenZip };
+        try {
+            minidocx::Zip z;
+            z.open(out.toStdString(), minidocx::Zip::OpenMode::Create);
+
             QRegularExpression ex("^[^ ]* [^ ]*\[.*$");
             QRegularExpression fileex("(?:\\S+\\s+){1}(.+?)(?:\(|$)");
 
             for (QString i : ui->plainTextEdit->toPlainText().split("\n")) {
-                if (QStringList{"+", "-", "*"}.contains(i.first(1))) {
-                    if (ex.match(i).hasMatch() && i.mid(2, 3) == "MAP" && i.contains("]")) {
-                        archive.addFile(QString(work_dir + QString("/Map%1.lmu").arg(i.split("[")[0].split("]")[0])).toStdString());
-                    } else if (!ex.match(i).hasMatch() && i.split(" ").size() >= 2) {
-                        archive.addFile(QString(work_dir + QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured())).toStdString());
+                if (i.length() > 5) {
+                    if (QStringList{"+", "*"}.contains(i.first(1))) {
+                        auto temp1 = ex.match(i).hasMatch();
+                        qWarning()<<temp1;
+                        if (ex.match(i).hasMatch() && i.mid(2, 3) == "MAP" && i.contains("]")) {
+                            z.addFileFromDisk(QString("Map%1.lmu").arg(i.split("[")[1].split("]")[0]).toStdString(), QString(work_dir + QString("/Map%1.lmu").arg(i.split("[")[1].split("]")[0])).toStdString());
+                        } else if (!ex.match(i).hasMatch() && i.split(" ").size() >= 2) {
+                            z.addFileFromDisk(QString("%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured()).toStdString(), QString(work_dir + QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured())).toStdString());
+                        }
                     }
                 }
             }
-            archive.addFile(c, "changelog.txt");
-            archive.addFile(work_dir.toStdString() + "/RPG_RT.lmt");
-            archive.addFile(work_dir.toStdString() + "/RPG_RT.ldb");
 
-            archive.compressTo(out.toStdString());
+            z.addFileFromString("changelog.txt", c);
+            z.addFileFromDisk("/RPG_RT.lmt", work_dir.toStdString() + "/RPG_RT.lmt");
+            z.addFileFromDisk("/RPG_RT.ldb", work_dir.toStdString() + "/RPG_RT.ldb");
+
+            z.close();
             QMessageBox::information(this, "Success", "Patch compiled successfully.");
             this->close();
-        } catch ( const bit7z::BitException& ex ) {
-            QMessageBox::critical(this, "Error", QString("An error occured when compiling: %1 (error code %2) \nEnsure that you haven't broken the changelog formatting and the the files detected are present in the work copy, then try again. In case of continued failure, please report the issue in Mossball's repository.").arg(ex.what()).arg(ex.code().value()));
+
         }
+        catch (const minidocx::exception& ex) {
+            QMessageBox::critical(this, "Error", QString("An error occured while compiling: %1 \nEnsure that you haven't broken the changelog formatting and the the files detected are present in the work copy, then try again. In case of continued failure, please report the issue in Mossball's repository.").arg(ex.what()));
+            return;
+        }
+
+        QMessageBox::information(this, "Success", "Patch compiled successfully.");
+        this->close();
     }
 }
 

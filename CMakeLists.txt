@@ -6,7 +6,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
@@ -24,8 +24,6 @@ else(USE_SYSTEM_LIBLCF)
 	add_liblcf()
 endif(USE_SYSTEM_LIBLCF)
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/bit7z)
-
 set(PROJECT_SOURCES
         src/main.cpp
         src/lcfops.h
@@ -39,6 +37,11 @@ set(PROJECT_SOURCES
         src/changelogwidget.cpp
         src/changelogwidget.ui
         third_party/easyrpg_editor/dbstring.h
+        third_party/zip/3rdparty/miniz-3.0.2/miniz.h
+        third_party/zip/include/exceptions.hpp
+        third_party/zip/include/zip.hpp
+        third_party/zip/src/exceptions.cpp
+        third_party/zip/src/zip.cpp
 )
 
 qt_add_executable(mossball
@@ -49,7 +52,6 @@ qt_add_executable(mossball
 )
 
 target_link_libraries(mossball PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(mossball PRIVATE bit7z)
 target_link_libraries(mossball PRIVATE lcf)
 
 

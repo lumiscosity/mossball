@@ -30,12 +30,8 @@ public:
     explicit ChangelogWidget(QString work_dir, QWidget *parent = nullptr);
     ~ChangelogWidget();
     void set_text(QString text);
-
-    QStringList changecsv;
-
 private slots:
     void on_pushButton_clicked();
-
 private:
     Ui::ChangelogWidget *ui;
     QString work_dir;
