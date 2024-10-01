@@ -42,7 +42,6 @@ namespace lcfops {
     };
 
     template <class T> QString compare(T orig, T work) {
-        // if i had a nickel for every time liblcf object defaults not being the same as rm2k3 defaults tripped up what would otherwise be a simple comparison i'd have two nickels. which isn't a lot but maybe i should make a PR about this
         T empty;
         if (orig == empty && work != empty) {
             return "+";

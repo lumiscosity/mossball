@@ -62,8 +62,6 @@ void ChangelogWidget::on_pushButton_clicked() {
                             z.addFileFromDisk(QString("Map%1.lmu").arg(i.split("[")[1].split("]")[0]).toStdString(), QString(work_dir + QString("/Map%1.lmu").arg(i.split("[")[1].split("]")[0])).toStdString());
                         } else if (!ex.match(i).hasMatch() && i.split(" ").size() >= 2) {
                             // file
-                            auto temp2 = QString(work_dir + QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1)));
-                            qDebug()<<temp2;
                             z.addFileFromDisk(QString("%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1)).toStdString(), QString(work_dir + QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1))).toStdString());
                         }
                     }
