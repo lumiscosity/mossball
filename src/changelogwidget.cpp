@@ -51,18 +51,20 @@ void ChangelogWidget::on_pushButton_clicked() {
             minidocx::Zip z;
             z.open(out.toStdString(), minidocx::Zip::OpenMode::Create);
 
-            QRegularExpression ex("^[^ ]* [^ ]*\[.*$");
-            QRegularExpression fileex("(?:\\S+\\s+){1}(.+?)(?:\(|$)");
+            QRegularExpression ex("^[^ ]* [^ ]*\\[.*$");
+            QRegularExpression fileex("^(?:\\S+\\s+){2}(.*?)(?:\\s*\\(|$)");
 
             for (QString i : ui->plainTextEdit->toPlainText().split("\n")) {
                 if (i.length() > 5) {
                     if (QStringList{"+", "*"}.contains(i.first(1))) {
-                        auto temp1 = ex.match(i).hasMatch();
-                        qWarning()<<temp1;
                         if (ex.match(i).hasMatch() && i.mid(2, 3) == "MAP" && i.contains("]")) {
+                            // map
                             z.addFileFromDisk(QString("Map%1.lmu").arg(i.split("[")[1].split("]")[0]).toStdString(), QString(work_dir + QString("/Map%1.lmu").arg(i.split("[")[1].split("]")[0])).toStdString());
                         } else if (!ex.match(i).hasMatch() && i.split(" ").size() >= 2) {
-                            z.addFileFromDisk(QString("%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured()).toStdString(), QString(work_dir + QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured())).toStdString());
+                            // file
+                            auto temp2 = QString(work_dir + QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1)));
+                            qDebug()<<temp2;
+                            z.addFileFromDisk(QString("%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1)).toStdString(), QString(work_dir + QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1))).toStdString());
                         }
                     }
                 }
@@ -81,9 +83,6 @@ void ChangelogWidget::on_pushButton_clicked() {
             QMessageBox::critical(this, "Error", QString("An error occured while compiling: %1 \nEnsure that you haven't broken the changelog formatting and the the files detected are present in the work copy, then try again. In case of continued failure, please report the issue in Mossball's repository.").arg(ex.what()));
             return;
         }
-
-        QMessageBox::information(this, "Success", "Patch compiled successfully.");
-        this->close();
     }
 }
 
