@@ -292,7 +292,7 @@ QString PickerWidget::genlog(QString orig_path, QString work_path) {
     for (auto &i: ui->treeWidget->findItems("", Qt::MatchExactly, 1)) {
         for (int j = 0, total = i->childCount(); total > j; ++j) {
             auto item = i->child(j);
-            if (!item->isDisabled()) {
+            if (item->checkState(0)) {
                 if (i->text(0) == "Map" && i->text(1) == "") {
                     // map
                     // create named entry
@@ -367,7 +367,9 @@ QString PickerWidget::genlog(QString orig_path, QString work_path) {
                 }
             }
         }
-        log.append("---------------------------------------------------");
+        if (log.last() != "---------------------------------------------------"){
+            log.append("---------------------------------------------------");
+        }
     }
 
     // log footer
