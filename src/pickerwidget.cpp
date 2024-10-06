@@ -96,7 +96,7 @@ void PickerWidget::addModelItem(QString folder, QString name, QString type, int 
 
 void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id) {
     QList<lcfops::connection_info> connections_raw;
-    std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QString(path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toStdString());
+    std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QDir::toNativeSeparators(path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toStdString());
     for (lcf::rpg::Event i : current_map->events) {
         for (lcf::rpg::EventPage j : i.pages) {
             int last_teleport = 0;
@@ -163,6 +163,7 @@ void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QStrin
 
 void PickerWidget::gendiff(QString orig_path, QString work_path) {
     // generate a list of files
+    qWarning("generating file list");
     QDirIterator orig_iter(orig_path, QDirIterator::Subdirectories);
     QDirIterator work_iter(work_path, QDirIterator::Subdirectories);
     QStringList orig;
@@ -174,6 +175,7 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
         work.push_back(work_iter.next().remove(work_path).removeFirst());
     }
     // ...and use it to create a list of differences
+    qWarning("generating difference list");
     QStringList removals, additions, shared;
     for (QString i : orig) {
         if (!work.contains(i)) {
@@ -186,18 +188,20 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
                 shared.push_back(i);
             }
         }
-    }    
+    }
     for (QString i : work) {
         if (!orig.contains(i)) {
             additions.push_back(i);
         }
     }
     // clean up the lists
+    qWarning("cleaning diff lists");
     removals.removeIf( [](const auto& i) { return !(i.contains("/") || i.endsWith(".lmu")) || i.endsWith("."); } );
     additions.removeIf( [](const auto& i) { return !(i.contains("/") || i.endsWith(".lmu")) || i.endsWith("."); } );
     shared.removeIf( [](const auto& i) { return !(i.contains("/") || i.endsWith(".lmu")) || i.endsWith("."); } );
     // populate the model
     // files are split into folders. maps are placed in the maps category
+    qWarning("populating the model");
     for (QString i : removals) {
         if (i.contains("/")){
             QStringList temp = i.split("/");
@@ -248,8 +252,9 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
     }
     ui->treeWidget->sortItems(0, Qt::SortOrder::AscendingOrder);
     // get ldb data
-    std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load((orig_path + "/RPG_RT.ldb").toStdString());
-    std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load((work_path + "/RPG_RT.ldb").toStdString());
+    qWarning("populate model with database data");
+    std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load(QDir::toNativeSeparators(orig_path + QString("/RPG_RT.ldb")).toStdString());
+    std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load(QDir::toNativeSeparators(work_path + QString("/RPG_RT.ldb")).toStdString());
     // tilesets
     dbdiff(orig_db->chipsets, work_db->chipsets, "Tileset");
     // terrains
@@ -273,12 +278,13 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
             ui->treeWidget->insertTopLevelItem(0, ui->treeWidget->takeTopLevelItem(ui->treeWidget->indexFromItem(i, 0).row()));
         }
     }
+    qWarning("done! launching picker now");
 }
 
 QString PickerWidget::genlog(QString orig_path, QString work_path) {
     // create log header
     QStringList log;
-    std::unique_ptr<lcf::rpg::TreeMap> maptree = lcf::LMT_Reader::Load(QString(work_path + "/RPG_RT.lmt").toStdString());
+    std::unique_ptr<lcf::rpg::TreeMap> maptree = lcf::LMT_Reader::Load(QDir::toNativeSeparators(work_path + QString("/RPG_RT.lmt")).toStdString());
     log.append("|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|");
     log.append("");
     log.append("Developer:");
