@@ -250,20 +250,34 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
     // get ldb data
     std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load((orig_path + "/RPG_RT.ldb").toStdString());
     std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load((work_path + "/RPG_RT.ldb").toStdString());
+    // troops
+    dbdiff(orig_db->troops, work_db->troops, "Troop");
     // tilesets
     dbdiff(orig_db->chipsets, work_db->chipsets, "Tileset");
     // terrains
     dbdiff(orig_db->terrains, work_db->terrains, "Terrain");
+    // states
+    dbdiff(orig_db->states, work_db->states, "State");
+    // skills
+    dbdiff(orig_db->skills, work_db->skills, "Skill");
     // items
     dbdiff(orig_db->items, work_db->items, "Item");
+    // enemies
+    dbdiff(orig_db->classes, work_db->classes, "Enemy");
+    // elements
+    dbdiff(orig_db->attributes, work_db->attributes, "Element");
+    // classes
+    dbdiff(orig_db->classes, work_db->classes, "Class");
+    // animation2 (battler animation)
+    dbdiff(orig_db->battleranimations, work_db->battleranimations, "BattlerAnim");
     // animations
     dbdiff(orig_db->animations, work_db->animations, "Animation");
     // actors
     dbdiff(orig_db->actors, work_db->actors, "Actor");
     // variables
-    dbdiff(orig_db->variables, work_db->variables, "Variable");
+    dbdiff(orig_db->variables, work_db->variables, "V");
     // switches
-    dbdiff(orig_db->switches, work_db->switches, "Switch");
+    dbdiff(orig_db->switches, work_db->switches, "S");
     // CEs
     dbdiff(orig_db->commonevents, work_db->commonevents, "CE");
 
