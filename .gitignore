@@ -1,4 +1,5 @@
 build/*
+builds/*
 CMakeLists.txt.user
 third_party/bit7z/*
 third_party/liblcf/*

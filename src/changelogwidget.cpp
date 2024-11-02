@@ -59,10 +59,20 @@ void ChangelogWidget::on_pushButton_clicked() {
                     if (QStringList{"+", "*"}.contains(i.first(1))) {
                         if (ex.match(i).hasMatch() && i.mid(2, 3) == "MAP" && i.contains("]")) {
                             // map
-                            z.addFileFromDisk(QString("Map%1.lmu").arg(i.split("[")[1].split("]")[0]).toStdString(), QString(work_dir + QString("/Map%1.lmu").arg(i.split("[")[1].split("]")[0])).toStdString());
+                            QString map_string = QString("Map%1.lmu").arg(i.split("[")[1].split("]")[0]);
+                            try {
+                                z.addFileFromDisk(map_string.toStdString(), QString(work_dir + map_string).toStdString());
+                            } catch (const minidocx::io_error& ex) {
+                                QMessageBox::warning(this, "Warning", QString("Could not include file %1 in the zip file! It is already in the changelog. Add the file to the archive manually.").arg(map_string));
+                            }
                         } else if (!ex.match(i).hasMatch() && i.split(" ").size() >= 2) {
                             // file
-                            z.addFileFromDisk(QString("%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1)).toStdString(), QString(work_dir + QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1))).toStdString());
+                            QString file_string = QString("%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1));
+                            try {
+                                z.addFileFromDisk(file_string.toStdString(), QString(work_dir + file_string).toStdString());
+                            } catch (const minidocx::io_error& ex) {
+                                QMessageBox::warning(this, "Warning", QString("Could not include file %1 in the zip file! It is already in the changelog. Add the file to the archive manually.").arg(file_string));
+                            }
                         }
                     }
                 }
