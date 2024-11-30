@@ -42,14 +42,14 @@ void ChangelogWidget::set_text(QString text) {
 void ChangelogWidget::on_pushButton_clicked() {
     QString out = QFileDialog::getSaveFileName(this, "Select save location", "", "Archive (*.zip)");
     if (!out.isEmpty()) {
-        auto c = ui->plainTextEdit->toPlainText().toStdString();
+        auto c = ui->plainTextEdit->toPlainText().toUtf8().data();
         // create an archive from all the files and the changelog
         // i don't actually trust people to not remove stuff after the treeview step, so we treat the changelog as the file list instead
         // this does pose some annoyances with filenames, which can contain spaces, but we have a fallback
 
         try {
             minidocx::Zip z;
-            z.open(out.toStdString(), minidocx::Zip::OpenMode::Create);
+            z.open(out.toUtf8().data(), minidocx::Zip::OpenMode::Create);
 
             QRegularExpression ex("^[^ ]* [^ ]*\\[.*$");
             QRegularExpression fileex("^(?:\\S+\\s+){2}(.*?)(?:\\s*\\(|$)");
@@ -61,7 +61,7 @@ void ChangelogWidget::on_pushButton_clicked() {
                             // map
                             QString map_string = QString("Map%1.lmu").arg(i.split("[")[1].split("]")[0]);
                             try {
-                                z.addFileFromDisk(map_string.toStdString(), QString(work_dir + map_string).toStdString());
+                                z.addFileFromDisk(map_string.toUtf8().data(), QString(work_dir + map_string).toUtf8().data());
                             } catch (const minidocx::io_error& ex) {
                                 QMessageBox::warning(this, "Warning", QString("Could not include file %1 in the zip file! It is already in the changelog. Add the file to the archive manually.").arg(map_string));
                             }
@@ -69,7 +69,7 @@ void ChangelogWidget::on_pushButton_clicked() {
                             // file
                             QString file_string = QString("%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1));
                             try {
-                                z.addFileFromDisk(file_string.toStdString(), QString(work_dir + file_string).toStdString());
+                                z.addFileFromDisk(file_string.toUtf8().data(), QString(work_dir + file_string).toUtf8().data());
                             } catch (const minidocx::io_error& ex) {
                                 QMessageBox::warning(this, "Warning", QString("Could not include file %1 in the zip file! It is already in the changelog. Add the file to the archive manually.").arg(file_string));
                             }
@@ -79,8 +79,8 @@ void ChangelogWidget::on_pushButton_clicked() {
             }
 
             z.addFileFromString("changelog.txt", c);
-            z.addFileFromDisk("/RPG_RT.lmt", work_dir.toStdString() + "/RPG_RT.lmt");
-            z.addFileFromDisk("/RPG_RT.ldb", work_dir.toStdString() + "/RPG_RT.ldb");
+            z.addFileFromDisk("/RPG_RT.lmt", (work_dir + "/RPG_RT.lmt").toUtf8().data());
+            z.addFileFromDisk("/RPG_RT.ldb", (work_dir + "/RPG_RT.ldb").toUtf8().data());
 
             z.close();
             QMessageBox::information(this, "Success", "Patch compiled successfully.");

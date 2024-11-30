@@ -22,6 +22,9 @@
 #include <QApplication>
 
 int main(int argc, char *argv[]) {
+    #ifdef _WIN32
+    setlocale(LC_ALL, ".UTF8")
+    #endif
     QApplication a(argc, argv);
     DirectoryDialog d;
     if (d.exec()) {

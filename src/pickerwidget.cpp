@@ -44,7 +44,7 @@ bool PickerWidget::is_oneway(int from_id, int to_id, QString to_map) {
         return !map_outgoing[to_id].contains(from_id);
     } else {
         // find and cache the destination id of every transfer in the map
-        std::unique_ptr<lcf::rpg::Map> map = lcf::LMU_Reader::Load(to_map.toStdString());
+        std::unique_ptr<lcf::rpg::Map> map = lcf::LMU_Reader::Load(to_map.toUtf8().data());
         map_outgoing[to_id] = QList<int>();
         for (lcf::rpg::Event i : map->events) {
             for (lcf::rpg::EventPage j : i.pages) {
@@ -97,7 +97,7 @@ void PickerWidget::addModelItem(QString folder, QString name, QString type, int 
 
 void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id) {
     QList<lcfops::connection_info> connections_raw;
-    std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QString(path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toStdString());
+    std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QString(path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toUtf8().data());
     for (lcf::rpg::Event i : current_map->events) {
         for (lcf::rpg::EventPage j : i.pages) {
             int last_teleport = 0;
@@ -252,9 +252,9 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
     }
     ui->treeWidget->sortItems(0, Qt::SortOrder::AscendingOrder);
     // get ldb data
-    std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load((orig_path + "/RPG_RT.ldb").toStdString(), "UTF-8");
-    std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load((work_path + "/RPG_RT.ldb").toStdString(), "UTF-8");
-    if (orig_db == nullptr | work_db == nullptr) {
+    std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load((orig_path + "/RPG_RT.ldb").toUtf8().data(), "UTF-8");
+    std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load((work_path + "/RPG_RT.ldb").toUtf8().data(), "UTF-8");
+    if (orig_db == nullptr || work_db == nullptr) {
         QMessageBox::warning(this, "Warning", "Could not read the database files! Database info will have to be included manually.");
     } else {
         // troops
@@ -300,7 +300,7 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
 QString PickerWidget::genlog(QString orig_path, QString work_path) {
     // create log header
     QStringList log;
-    std::unique_ptr<lcf::rpg::TreeMap> maptree = lcf::LMT_Reader::Load(QString(work_path + "/RPG_RT.lmt").toStdString());
+    std::unique_ptr<lcf::rpg::TreeMap> maptree = lcf::LMT_Reader::Load(QString(work_path + "/RPG_RT.lmt").toUtf8().data());
     log.append("|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|");
     log.append("");
     log.append("Developer:");
