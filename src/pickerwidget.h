@@ -50,21 +50,21 @@ private:
     template <class T> void dbdiff(std::vector<T> orig, std::vector<T> work, QString folder) {
         if (orig.size() < work.size()) {
             // note non-empty additions in new chunks
-            for (int i = orig.size(); i == work.size(); i++) {
+            for (int i = orig.size(); i <= work.size(); i++) {
                 if (work[i-1] != T()) {
                     addModelItem(folder, lcfops::id_with_name(i-1, ToQString(work[i-1].name)), "+", 1);
                 }
             }
         } else if (orig.size() > work.size()) {
             // note non-empty removals in removed chunks
-            for (int i = work.size(); i == orig.size(); i++) {
+            for (int i = work.size(); i <= orig.size(); i++) {
                 if (orig[i-1] != T()) {
                     addModelItem(folder, lcfops::id_with_name(i-1, ToQString(orig[i-1].name)), "i", 1);
                 }
             }
         }
         // note additions for slots shared between both databases
-        for (int i = 0, total = (work.size() < orig.size() ? orig.size() - 1 : work.size() - 1); i <= total; ++i) {
+        for (int i = 0, total = (work.size() < orig.size() ? work.size() - 1 : orig.size() - 1); i <= total; ++i) {
             if (orig[i] != work[i]) {
                 QString comp = lcfops::compare<T>(orig[i], work[i]);
                 if (comp == "-") {
