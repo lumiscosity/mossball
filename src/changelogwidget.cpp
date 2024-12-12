@@ -59,19 +59,19 @@ void ChangelogWidget::on_pushButton_clicked() {
                     if (QStringList{"+", "*"}.contains(i.first(1))) {
                         if (ex.match(i).hasMatch() && i.mid(2, 3) == "MAP" && i.contains("]")) {
                             // map
-                            QString map_string = QString("Map%1.lmu").arg(i.split("[")[1].split("]")[0]);
+                            QString map_string = QString("/Map%1.lmu").arg(i.split("[")[1].split("]")[0]);
                             try {
                                 z.addFileFromDisk(map_string.toUtf8().data(), QString(work_dir + map_string).toUtf8().data());
                             } catch (const minidocx::io_error& ex) {
-                                QMessageBox::warning(this, "Warning", QString("Could not include file %1 in the zip file! It is already in the changelog. Add the file to the archive manually.").arg(map_string));
+                                QMessageBox::warning(this, "Warning", QString("Could not include file %1 in the zip file! It is already in the changelog. Add the file to the archive manually. Error code: %2").arg(map_string).arg(ex.what()));
                             }
                         } else if (!ex.match(i).hasMatch() && i.split(" ").size() >= 2) {
                             // file
-                            QString file_string = QString("%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1));
+                            QString file_string = QString("/%1/%2").arg(i.split(" ")[1]).arg(fileex.match(i).captured(1));
                             try {
                                 z.addFileFromDisk(file_string.toUtf8().data(), QString(work_dir + file_string).toUtf8().data());
                             } catch (const minidocx::io_error& ex) {
-                                QMessageBox::warning(this, "Warning", QString("Could not include file %1 in the zip file! It is already in the changelog. Add the file to the archive manually.").arg(file_string));
+                                QMessageBox::warning(this, "Warning", QString("Could not include file %1 in the zip file! It is already in the changelog. Add the file to the archive manually. Error code: %2").arg(file_string).arg(ex.what()));
                             }
                         }
                     }
