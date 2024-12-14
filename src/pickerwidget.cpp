@@ -184,9 +184,25 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
             QFileInfo a(orig_path + "/" + i);
             QFileInfo b(work_path + "/" + i);
             if (!a.isFile() || !b.isFile()) {
-                break;
+                continue;
             }
             if (a.lastModified() != b.lastModified()){
+                if (a.size() == b.size()) {
+                    QFile orig_map(orig_path + "/" + i);
+                    QFile work_map(work_path + "/" + i);
+
+                    QCryptographicHash orig_hash(QCryptographicHash::Md5);
+                    orig_map.open(QFile::OpenMode::fromInt(1));
+                    orig_hash.addData(&orig_map);
+
+                    QCryptographicHash work_hash(QCryptographicHash::Md5);
+                    work_map.open(QFile::OpenMode::fromInt(1));
+                    work_hash.addData(&work_map);
+                    if (orig_hash.result() == work_hash.result()){
+                        continue;
+                    }
+                }
+
                 shared.push_back(i);
             }
         }
