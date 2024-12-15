@@ -52,14 +52,14 @@ private:
             // note non-empty additions in new chunks
             for (int i = orig.size(); i <= work.size(); i++) {
                 if (work[i-1] != T()) {
-                    addModelItem(folder, lcfops::id_with_name(i-1, ToQString(work[i-1].name)), "+", 1);
+                    addModelItem(folder, lcfops::id_with_name(i+1, ToQString(work[i-1].name)), "+", 1);
                 }
             }
         } else if (orig.size() > work.size()) {
             // note non-empty removals in removed chunks
             for (int i = work.size(); i <= orig.size(); i++) {
                 if (orig[i-1] != T()) {
-                    addModelItem(folder, lcfops::id_with_name(i-1, ToQString(orig[i-1].name)), "i", 1);
+                    addModelItem(folder, lcfops::id_with_name(i+1, ToQString(orig[i-1].name)), "i", 1);
                 }
             }
         }
@@ -68,9 +68,9 @@ private:
             if (orig[i] != work[i]) {
                 QString comp = lcfops::compare<T>(orig[i], work[i]);
                 if (comp == "-") {
-                    addModelItem(folder, lcfops::id_with_name(i, ToQString(orig[i].name)), comp, 1);
+                    addModelItem(folder, lcfops::id_with_name(i+1, ToQString(orig[i].name)), comp, 1);
                 } else {
-                    addModelItem(folder, lcfops::id_with_name(i, ToQString(work[i].name)), comp, 1);
+                    addModelItem(folder, lcfops::id_with_name(i+1, ToQString(work[i].name)), comp, 1);
                 }
             }
         }
