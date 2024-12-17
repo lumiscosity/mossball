@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
 	<name>Mossball</name>
-	<summary>Free C++ sprite editor</summary>
+	<summary>RPG Maker 2000/2003 patch generator</summary>
 	<id>com.github.lumiscosity.Mossball</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
@@ -26,6 +26,6 @@
 	<url type="vcs-browser">https://github.com/lumiscosity/mossball</url>
 
 	<description>
-		<p>RPG Maker 2000/2003 changelog generator</p>
+		<p>RPG Maker 2000/2003 patch generator</p>
 	</description>
 </component>

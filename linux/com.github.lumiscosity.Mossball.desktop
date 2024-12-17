@@ -1,11 +1,11 @@
 [Desktop Entry]
 Name=Mossball
-GenericName=Changelog generator
-Comment=RPG Maker 2000/2003 changelog generator
+GenericName=Patch generator
+Comment=RPG Maker 2000/2003 patch generator
 Exec=mossball %U
 Icon=com.github.lumiscosity.Mossball
 Terminal=false
 Type=Application
 StartupNotify=true
 Categories=Development;Utility;
-Keywords=changelog;
+Keywords=changelog;patch;
