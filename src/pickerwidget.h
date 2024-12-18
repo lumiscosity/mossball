@@ -38,14 +38,14 @@ public:
     ~PickerWidget();
 
     void addModelItem(QString folder, QString name, QString type, int id = 0);
-    void gendiff(QString orig_path, QString work_path);
-    QString genlog(QString orig_path, QString work_path);
-    void genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id);
+    void gendiff(QString orig_path, QString work_path, std::string encoding);
+    QString genlog(QString orig_path, QString work_path, std::string encoding);
+    void genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id, std::string encoding);
 private:
     Ui::PickerWidget *ui;
     QMap<int, QList<int>> map_outgoing;
-
-    bool is_oneway(int from_id, int to_id, QString to_map);
+    
+    bool is_oneway(int from_id, int to_id, QString to_map, std::string encoding);
 
     template <class T> void dbdiff(std::vector<T> orig, std::vector<T> work, QString folder) {
         if (orig.size() < work.size()) {

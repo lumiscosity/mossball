@@ -38,13 +38,13 @@ PickerWidget::~PickerWidget() {
     delete ui;
 }
 
-bool PickerWidget::is_oneway(int from_id, int to_id, QString to_map) {
+bool PickerWidget::is_oneway(int from_id, int to_id, QString to_map, std::string encoding) {
     // map_outgoing is used as a cache
     if (map_outgoing.contains(to_id)) {
         return !map_outgoing[to_id].contains(from_id);
     } else {
         // find and cache the destination id of every transfer in the map
-        std::unique_ptr<lcf::rpg::Map> map = lcf::LMU_Reader::Load(to_map.toUtf8().data());
+        std::unique_ptr<lcf::rpg::Map> map = lcf::LMU_Reader::Load(to_map.toUtf8().data(), encoding);
         map_outgoing[to_id] = QList<int>();
         for (lcf::rpg::Event i : map->events) {
             for (lcf::rpg::EventPage j : i.pages) {
@@ -55,7 +55,7 @@ bool PickerWidget::is_oneway(int from_id, int to_id, QString to_map) {
                 }
             }
         }
-        return is_oneway(from_id, to_id, to_map);
+        return is_oneway(from_id, to_id, to_map, encoding);
     }
 }
 
@@ -95,9 +95,9 @@ void PickerWidget::addModelItem(QString folder, QString name, QString type, int 
     addModelItem(folder, name, type, id);
 }
 
-void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id) {
+void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id, std::string encoding) {
     QList<lcfops::connection_info> connections_raw;
-    std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QString(path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toUtf8().data());
+    std::unique_ptr<lcf::rpg::Map> current_map = lcf::LMU_Reader::Load(QString(path + QString("/Map%1.lmu").arg(lcfops::paddedint(id, 4))).toUtf8().data(), encoding);
     for (lcf::rpg::Event i : current_map->events) {
         for (lcf::rpg::EventPage j : i.pages) {
             int last_teleport = 0;
@@ -158,11 +158,11 @@ void PickerWidget::genmapmeta(QStringList &bgm, QStringList &connections, QStrin
         }
     }
     for (lcfops::connection_info i : clusters) {
-        connections.append(lcfops::mapstring(i.dest, i.dest_xy.marginsRemoved(m), i.xy.marginsRemoved(m), is_oneway(i.id, i.dest, QString(i.path + QString("/Map%1.lmu").arg(lcfops::paddedint(i.dest, 4))))));
+        connections.append(lcfops::mapstring(i.dest, i.dest_xy.marginsRemoved(m), i.xy.marginsRemoved(m), is_oneway(i.id, i.dest, QString(i.path + QString("/Map%1.lmu").arg(lcfops::paddedint(i.dest, 4))), encoding)));
     }
 }
 
-void PickerWidget::gendiff(QString orig_path, QString work_path) {
+void PickerWidget::gendiff(QString orig_path, QString work_path, std::string encoding) {
     // generate a list of files
     QDirIterator orig_iter(orig_path, QDirIterator::Subdirectories);
     QDirIterator work_iter(work_path, QDirIterator::Subdirectories);
@@ -268,8 +268,8 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
     }
     ui->treeWidget->sortItems(0, Qt::SortOrder::AscendingOrder);
     // get ldb data
-    std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load((orig_path + "/RPG_RT.ldb").toUtf8().data(), "UTF-8");
-    std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load((work_path + "/RPG_RT.ldb").toUtf8().data(), "UTF-8");
+    std::unique_ptr<lcf::rpg::Database> orig_db = lcf::LDB_Reader::Load((orig_path + "/RPG_RT.ldb").toUtf8().data(), encoding);
+    std::unique_ptr<lcf::rpg::Database> work_db = lcf::LDB_Reader::Load((work_path + "/RPG_RT.ldb").toUtf8().data(), encoding);
     if (orig_db == nullptr || work_db == nullptr) {
         QMessageBox::warning(this, "Warning", "Could not read the database files! Database info will have to be included manually.");
     } else {
@@ -313,10 +313,10 @@ void PickerWidget::gendiff(QString orig_path, QString work_path) {
     }
 }
 
-QString PickerWidget::genlog(QString orig_path, QString work_path) {
+QString PickerWidget::genlog(QString orig_path, QString work_path, std::string encoding) {
     // create log header
     QStringList log;
-    std::unique_ptr<lcf::rpg::TreeMap> maptree = lcf::LMT_Reader::Load(QString(work_path + "/RPG_RT.lmt").toUtf8().data());
+    std::unique_ptr<lcf::rpg::TreeMap> maptree = lcf::LMT_Reader::Load(QString(work_path + "/RPG_RT.lmt").toUtf8().data(), encoding);
     log.append("|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|");
     log.append("");
     log.append("Developer:");
@@ -349,11 +349,11 @@ QString PickerWidget::genlog(QString orig_path, QString work_path) {
                     QStringList orig_connections;
                     // only diff if it's not a new map (removed maps have no meta info)
                     if (item->text(1) == "*") {
-                        genmapmeta(orig_bgm, orig_connections, orig_path, id);
+                        genmapmeta(orig_bgm, orig_connections, orig_path, id, encoding);
                     }
                     QStringList work_bgm;
                     QStringList work_connections;
-                    genmapmeta(work_bgm, work_connections, work_path, id);
+                    genmapmeta(work_bgm, work_connections, work_path, id, encoding);
                     // diff the lists
                     if (item->text(1) == "*") {
                         // modified maps

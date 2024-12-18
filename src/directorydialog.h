@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include "lcf/saveopt.h"
 #include <QDialog>
 
 namespace Ui {
@@ -32,6 +33,8 @@ public:
 
     QString orig();
     QString work();
+    std::string encoding();
+    lcf::EngineVersion engine();
 private slots:
     void on_origPushButton_clicked();
     void on_workPushButton_clicked();

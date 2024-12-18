@@ -29,10 +29,10 @@ int main(int argc, char *argv[]) {
     DirectoryDialog d;
     if (d.exec()) {
         PickerWidget p;
-        p.gendiff(d.orig(), d.work());
+        p.gendiff(d.orig(), d.work(), d.encoding());
         if (p.exec()) {
             ChangelogWidget c(d.work());
-            c.set_text(p.genlog(d.orig(), d.work()));
+            c.set_text(p.genlog(d.orig(), d.work(), d.encoding()));
             c.show();
             a.exec();
         }

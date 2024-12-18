@@ -42,7 +42,7 @@ void ChangelogWidget::set_text(QString text) {
 void ChangelogWidget::on_pushButton_clicked() {
     QString out = QFileDialog::getSaveFileName(this, "Select save location", "", "Archive (*.zip)");
     if (!out.isEmpty()) {
-        auto c = ui->plainTextEdit->toPlainText().toUtf8().data();
+        auto c = ui->plainTextEdit->toPlainText().toStdString();
         // create an archive from all the files and the changelog
         // i don't actually trust people to not remove stuff after the treeview step, so we treat the changelog as the file list instead
         // this does pose some annoyances with filenames, which can contain spaces, but we have a fallback
@@ -78,9 +78,9 @@ void ChangelogWidget::on_pushButton_clicked() {
                 }
             }
 
-            z.addFileFromString("changelog.txt", c);
             z.addFileFromDisk("/RPG_RT.lmt", (work_dir + "/RPG_RT.lmt").toUtf8().data());
             z.addFileFromDisk("/RPG_RT.ldb", (work_dir + "/RPG_RT.ldb").toUtf8().data());
+            z.addFileFromString("/changelog.txt", c);
 
             z.close();
             QMessageBox::information(this, "Success", "Patch compiled successfully.");
