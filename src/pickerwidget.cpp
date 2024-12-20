@@ -176,6 +176,7 @@ void PickerWidget::gendiff(QString orig_path, QString work_path, std::string enc
     }
     // ...and use it to create a list of differences
     QStringList removals, additions, shared;
+    QHash<QString, QByteArray> orig_hashes, work_hashes;
     for (QString i : orig) {
         if (!work.contains(i)) {
             removals.push_back(i);
@@ -186,25 +187,24 @@ void PickerWidget::gendiff(QString orig_path, QString work_path, std::string enc
             if (!a.isFile() || !b.isFile()) {
                 continue;
             }
-            if (a.lastModified() != b.lastModified()){
-                if (a.size() == b.size()) {
-                    QFile orig_map(orig_path + "/" + i);
-                    QFile work_map(work_path + "/" + i);
+            if (a.size() == b.size()) {
+                QFile orig_map(orig_path + "/" + i);
+                QFile work_map(work_path + "/" + i);
 
-                    QCryptographicHash orig_hash(QCryptographicHash::Md5);
-                    orig_map.open(QFile::OpenMode::fromInt(1));
-                    orig_hash.addData(&orig_map);
+                QCryptographicHash orig_hash(QCryptographicHash::Md5);
+                orig_map.open(QFile::OpenMode::fromInt(1));
+                orig_hash.addData(&orig_map);
+                orig_hashes[i] = orig_hash.result();
 
-                    QCryptographicHash work_hash(QCryptographicHash::Md5);
-                    work_map.open(QFile::OpenMode::fromInt(1));
-                    work_hash.addData(&work_map);
-                    if (orig_hash.result() == work_hash.result()){
-                        continue;
-                    }
+                QCryptographicHash work_hash(QCryptographicHash::Md5);
+                work_map.open(QFile::OpenMode::fromInt(1));
+                work_hash.addData(&work_map);
+                work_hashes[i] = work_hash.result();
+                if (orig_hashes[i] == work_hashes[i]){
+                    continue;
                 }
-
-                shared.push_back(i);
             }
+            shared.push_back(i);
         }
     }    
     for (QString i : work) {
@@ -241,18 +241,22 @@ void PickerWidget::gendiff(QString orig_path, QString work_path, std::string enc
         } else {
             // due to map files being pre-filled, we need an alternative way of checking if they've been added or removed
             // the md5 hash seen below is the hash for an empty map
-            QFile orig_map(orig_path + "/" + i);
-            QFile work_map(work_path + "/" + i);
-
-            QCryptographicHash orig_hash(QCryptographicHash::Md5);
-            orig_map.open(QFile::OpenMode::fromInt(1));
-            orig_hash.addData(&orig_map);
-            bool orig_empty = orig_hash.result() == QByteArray::fromHex("ad9759db24c2c26d63c86c6a75d18370");
-
-            QCryptographicHash work_hash(QCryptographicHash::Md5);
-            work_map.open(QFile::OpenMode::fromInt(1));
-            work_hash.addData(&work_map);
-            bool work_empty = work_hash.result() == QByteArray::fromHex("ad9759db24c2c26d63c86c6a75d18370");
+            if (orig_hashes[i] == nullptr) {
+                QFile orig_map(orig_path + "/" + i);
+                QCryptographicHash orig_hash(QCryptographicHash::Md5);
+                orig_map.open(QFile::OpenMode::fromInt(1));
+                orig_hash.addData(&orig_map);
+                orig_hashes[i] = orig_hash.result();
+            }
+            bool orig_empty = orig_empty = orig_hashes[i] == QByteArray::fromHex("ad9759db24c2c26d63c86c6a75d18370");
+            if (work_hashes[i] == nullptr) {
+                QFile work_map(work_path + "/" + i);
+                QCryptographicHash work_hash(QCryptographicHash::Md5);
+                work_map.open(QFile::OpenMode::fromInt(1));
+                work_hash.addData(&work_map);
+                work_hashes[i] = work_hash.result();
+            }
+            bool work_empty = work_hashes[i] == QByteArray::fromHex("ad9759db24c2c26d63c86c6a75d18370");
 
             if (orig_empty && !work_empty) {
                 addModelItem("Map", i, "+");
