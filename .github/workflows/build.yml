@@ -7,12 +7,12 @@ name: Build
 jobs:
   windows:
     name: 'Windows'
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
     - name: Install Qt 6
       uses: jurplel/install-qt-action@v4
       with:
-        version: '6.7.2'
+        version: '6.8.1'
         host: windows
 
     - uses: lukka/get-cmake@latest
@@ -28,7 +28,7 @@ jobs:
         # This specifies the location of vcpkg, where it is going to be restored from cache, or create from scratch.
         vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
         # The Git commit id of vcpkg to be checked out. This is only needed because we are not using a submodule.
-        vcpkgGitCommitId: 'a42af01b72c28a8e1d7b48107b33e4f286a55ef6'
+        vcpkgGitCommitId: '80d54ff62d528339c626a6fbc3489a7f25956ade'
         # The vcpkg.json file, which will be part of cache key computation.
         vcpkgJsonGlob: '**vcpkg.json'
 
@@ -55,7 +55,7 @@ jobs:
     name: 'Linux/Flatpak'
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-6.7
+      image: bilelmoussaoui/flatpak-github-actions:kde-6.8
       options: --privileged
     steps:
     - uses: actions/checkout@v4
