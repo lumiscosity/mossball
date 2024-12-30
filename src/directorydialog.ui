@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>423</width>
-    <height>223</height>
+    <height>264</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -128,6 +128,16 @@
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="nameLabel">
+       <property name="text">
+        <string>Developer name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="nameLineEdit"/>
+     </item>
      <item>
       <widget class="QLabel" name="encodingLabel">
        <property name="text">

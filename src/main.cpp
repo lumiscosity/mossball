@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
         p.gendiff(d.orig(), d.work(), d.encoding());
         if (p.exec()) {
             ChangelogWidget c(d.work());
-            c.set_text(p.genlog(d.orig(), d.work(), d.encoding()));
+            c.set_text(p.genlog(d.orig(), d.work(), d.encoding(), d.dev_name()));
             c.show();
             a.exec();
         }

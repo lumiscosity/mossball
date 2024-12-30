@@ -34,7 +34,7 @@ void DirectoryDialog::on_origPushButton_clicked() {
     QString path = QFileDialog::getExistingDirectory(this, "Select the original copy directory");
     if (!path.isEmpty()){
         ui->origLabel->setText(path);
-        ui->buttonBox->buttons()[0]->setEnabled(path != ui->workLabel->text() && ui->workLabel->text() != "...");
+        ui->buttonBox->buttons()[0]->setEnabled(path != ui->workLabel->text() && ui->workLabel->text() != "..." && !ui->nameLineEdit->text().isEmpty());
     }
 }
 
@@ -42,8 +42,12 @@ void DirectoryDialog::on_workPushButton_clicked() {
     QString path = QFileDialog::getExistingDirectory(this, "Select the work copy directory");
     if (!path.isEmpty()){
         ui->workLabel->setText(path);
-        ui->buttonBox->buttons()[0]->setEnabled(path != ui->origLabel->text() && ui->origLabel->text() != "...");
+        ui->buttonBox->buttons()[0]->setEnabled(path != ui->origLabel->text() && ui->origLabel->text() != "..." && !ui->nameLineEdit->text().isEmpty());
     }
+}
+
+void DirectoryDialog::on_nameLineEdit_textChanged(const QString &text) {
+    ui->buttonBox->buttons()[0]->setEnabled(ui->workLabel->text() != ui->origLabel->text() && ui->origLabel->text() != "..." && ui->workLabel->text() != "..." && !text.isEmpty());
 }
 
 QString DirectoryDialog::orig() {
@@ -85,4 +89,8 @@ std::string DirectoryDialog::encoding() {
     default:
         return "UTF-8";
     }
+}
+
+QString DirectoryDialog::dev_name() {
+    return ui->nameLineEdit->text();
 }

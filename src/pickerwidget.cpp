@@ -317,13 +317,13 @@ void PickerWidget::gendiff(QString orig_path, QString work_path, std::string enc
     }
 }
 
-QString PickerWidget::genlog(QString orig_path, QString work_path, std::string encoding) {
+QString PickerWidget::genlog(QString orig_path, QString work_path, std::string encoding, QString dev_name) {
     // create log header
     QStringList log;
     std::unique_ptr<lcf::rpg::TreeMap> maptree = lcf::LMT_Reader::Load(QString(work_path + "/RPG_RT.lmt").toUtf8().data(), encoding);
     log.append("|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|");
     log.append("");
-    log.append("Developer:");
+    log.append("Developer: " + dev_name);
     log.append("Date: " + QDate::currentDate().toString("dd/MMM/yyyy"));
     log.append("");
     log.append("---------------------------------------------------");

@@ -39,7 +39,7 @@ public:
 
     void addModelItem(QString folder, QString name, QString type, int id = 0);
     void gendiff(QString orig_path, QString work_path, std::string encoding);
-    QString genlog(QString orig_path, QString work_path, std::string encoding);
+    QString genlog(QString orig_path, QString work_path, std::string encoding, QString dev_name);
     void genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id, std::string encoding);
 private:
     Ui::PickerWidget *ui;
