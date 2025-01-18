@@ -45,6 +45,9 @@ bool PickerWidget::is_oneway(int from_id, int to_id, QString to_map, std::string
     } else {
         // find and cache the destination id of every transfer in the map
         std::unique_ptr<lcf::rpg::Map> map = lcf::LMU_Reader::Load(to_map.toUtf8().data(), encoding);
+        if (not map) {
+            return true;
+        }
         map_outgoing[to_id] = QList<int>();
         for (lcf::rpg::Event i : map->events) {
             for (lcf::rpg::EventPage j : i.pages) {
