@@ -171,11 +171,11 @@ void PickerWidget::gendiff(QString orig_path, QString work_path, std::string enc
     QDirIterator work_iter(work_path, QDirIterator::Subdirectories);
     QStringList orig;
     while (orig_iter.hasNext()) {
-        orig.push_back(orig_iter.next().remove(orig_path).removeFirst());
+        orig.push_back(orig_iter.next().remove(orig_path).remove(0, 1));
     }
     QStringList work;
     while (work_iter.hasNext()) {
-        work.push_back(work_iter.next().remove(work_path).removeFirst());
+        work.push_back(work_iter.next().remove(work_path).remove(0, 1));
     }
     // ...and use it to create a list of differences
     QStringList removals, additions, shared;
