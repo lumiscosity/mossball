@@ -25,23 +25,29 @@ else(USE_SYSTEM_LIBLCF)
 endif(USE_SYSTEM_LIBLCF)
 
 set(PROJECT_SOURCES
-        src/main.cpp
-        src/lcfops.h
-        src/pickerwidget.cpp
-        src/pickerwidget.h
-        src/pickerwidget.ui
-        src/directorydialog.cpp
-        src/directorydialog.h
-        src/directorydialog.ui
-        src/changelogwidget.h
-        src/changelogwidget.cpp
-        src/changelogwidget.ui
-        third_party/easyrpg_editor/dbstring.h
-        third_party/zip/3rdparty/miniz-3.0.2/miniz.h
-        third_party/zip/include/exceptions.hpp
-        third_party/zip/include/zip.hpp
-        third_party/zip/src/exceptions.cpp
-        third_party/zip/src/zip.cpp
+	src/main.cpp
+	src/lcfops.h
+	src/ui/pickerwidget.cpp
+	src/ui/pickerwidget.h
+	src/ui/pickerwidget.ui
+	src/ui/directorydialog.cpp
+	src/ui/directorydialog.h
+	src/ui/directorydialog.ui
+	src/ui/changelogwidget.h
+	src/ui/changelogwidget.cpp
+	src/ui/changelogwidget.ui
+	third_party/easyrpg_editor/dbstring.h
+	third_party/zip/3rdparty/miniz-3.0.2/miniz.h
+	third_party/zip/include/exceptions.hpp
+	third_party/zip/include/zip.hpp
+	third_party/zip/src/exceptions.cpp
+	third_party/zip/src/zip.cpp
+	src/mossball.cpp
+	src/mossball.h
+	src/chgen/chgen.cpp
+	src/chgen/chgen.h
+	src/submission/submission.cpp
+	src/submission/submission.h
 )
 
 qt_add_executable(mossball

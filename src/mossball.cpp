@@ -15,24 +15,13 @@
  * along with Mossball. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "mossball.h"
 
-#include <QWidget>
+#include "chgen/chgen.h"
 
-namespace Ui {
-class ChangelogWidget;
+namespace Mossball {
+    QString origin_directory;
+    QString work_directory;
+    std::string encoding = "UTF-8";
+    QString dev_name;
 }
-
-class ChangelogWidget : public QWidget {
-    Q_OBJECT
-
-public:
-    explicit ChangelogWidget(QString work_dir, QWidget *parent = nullptr);
-    ~ChangelogWidget();
-    void set_text(QString text);
-private slots:
-    void on_pushButton_clicked();
-private:
-    Ui::ChangelogWidget *ui;
-    QString work_dir;
-};
