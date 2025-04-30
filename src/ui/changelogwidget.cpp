@@ -19,11 +19,10 @@
 #include "ui_changelogwidget.h"
 
 #include "../../third_party/zip/include/exceptions.hpp"
-#include "../../third_party/zip/include/zip.hpp"
 
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QRegularExpression>
+#include <QFontDatabase>
 
 #include "../submission/submission.h"
 
@@ -42,28 +41,36 @@ QString ChangelogWidget::get_text() {
 }
 
 
-void ChangelogWidget::set_text(QString text) {
+void ChangelogWidget::set_changelog_text() {
+    if (!changelog) {
+        QMessageBox::critical(this, "Error", "No changelog scanned");
+        return;
+    }
+    QString text = changelog->stringify();
     ui->plainTextEdit->setPlainText(text);
 }
 
 void ChangelogWidget::on_pushButton_clicked() {
+    if (!changelog) {
+        QMessageBox::critical(this, "Error", "No changelog scanned");
+        return;
+    }
+
     QString out = QFileDialog::getSaveFileName(this, "Select save location", "", "Archive (*.zip)");
     if (!out.isEmpty()) {
         auto c = ui->plainTextEdit->toPlainText().toStdString();
-        // create an archive from all the files and the changelog
-        // i don't actually trust people to not remove stuff after the treeview step, so we treat the changelog as the file list instead
-        // this does pose some annoyances with filenames, which can contain spaces, but we have a fallback
 
         try {
-            submission::SubmissionBuilder::create_submission_archive();
+            submission::SubmissionBuilder::create_submission_archive(out, changelog);
+            changelog.reset();
             QMessageBox::information(this, "Success", "Patch compiled successfully.");
             this->close();
-
-        }
-        catch (const minidocx::exception& ex) {
-            QMessageBox::critical(this, "Error", QString("An error occured while compiling: %1 \nEnsure that you haven't broken the changelog formatting and the the files detected are present in the work copy, then try again. In case of continued failure, please report the issue in Mossball's repository.").arg(ex.what()));
+        } catch (const minidocx::exception &ex) {
+            QMessageBox::critical(this, "Error",
+                                  QString(
+                                      "An error occured while compiling: %1 \nEnsure that you haven't broken the changelog formatting and the the files detected are present in the work copy, then try again. In case of continued failure, please report the issue in Mossball's repository.")
+                                  .arg(ex.what()));
             return;
         }
     }
 }
-

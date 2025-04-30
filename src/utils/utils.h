@@ -14,16 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Mossball. If not, see <http://www.gnu.org/licenses/>.
  */
-
 #pragma once
-#include <QString>
+#include <filesystem>
 
-namespace Mossball {
-    extern QString origin_directory;
+namespace fs = std::filesystem;
 
-    extern QString work_directory;
-
-    extern std::string encoding;
-
-    extern QString dev_name;
+namespace utils {
+    /**
+     * @brief Compares two files. Returns true if they are the same, false otherwise.
+     * @return True if the files are the same, false otherwise.
+     */
+    bool compareFiles(const fs::path &path1, const fs::path &path2);
 }

@@ -19,7 +19,6 @@
 
 #include <string>
 #include <vector>
-#include <lcf/rpg/music.h>
 #include <qt6/QtCore/qdatetime.h>
 #include <qt6/QtCore/QString>
 
@@ -32,7 +31,6 @@
 #include "lcf/rpg/commonevent.h"
 #include "lcf/rpg/enemy.h"
 #include "lcf/rpg/item.h"
-#include "lcf/rpg/map.h"
 #include "lcf/rpg/mapinfo.h"
 #include "lcf/rpg/skill.h"
 #include "lcf/rpg/state.h"

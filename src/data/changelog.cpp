@@ -17,8 +17,6 @@
 
 #include "changelog.h"
 
-#include "reader_struct.h"
-
 namespace data {
     std::string Coordinates::stringify() {
         return "(" + std::to_string(x) + "," + std::to_string(y) + ")";
@@ -204,7 +202,8 @@ namespace data {
     }
 
     std::string BattlerAnimation::stringify() {
-        std::string s = status_string(status) + " BattlerAnimation[" + id_string(data.ID) + "] - " + ToString(data.name);
+        std::string s = status_string(status) + " BattlerAnimation[" + id_string(data.ID) + "] - " +
+                        ToString(data.name);
 
         if (!notes.empty()) {
             for (auto &note: notes) {
@@ -328,24 +327,32 @@ namespace data {
     }
 
     AssetCategory asset_folder_to_category(const QString &folder) {
-        switch (folder) {
-            case "System":
-                return MENU_THEME;
-            case "CharSet":
-                return CHARSET;
-            case "ChipSet":
-                return CHIPSET;
-            case "Music":
-                return MUSIC;
-            case "Sound":
-                return SOUND;
-            case "Panorama":
-                return PANORAMA;
-            case "Picture":
-                return PICTURE;
-            case "Battle":
-                return BATTLE_ANIMATION;
+        if (folder == "System") {
+            return MENU_THEME;
         }
+        if (folder == "CharSet") {
+            return CHARSET;
+        }
+        if (folder == "ChipSet") {
+            return CHIPSET;
+        }
+        if (folder == "Music") {
+            return MUSIC;
+        }
+        if (folder == "Sound") {
+            return SOUND;
+        }
+        if (folder == "Panorama") {
+            return PANORAMA;
+        }
+        if (folder == "Picture") {
+            return PICTURE;
+        }
+        if (folder == "Battle") {
+            return BATTLE_ANIMATION;
+        }
+
+        return BATTLE_ANIMATION;
     }
 
     std::string asset_category_string(const AssetCategory &category) {
@@ -445,25 +452,25 @@ namespace data {
     }
 
     QString Changelog::stringify() {
-        const QString big_separator = "|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|\n";
-        const QString separator = "---------------------------------------------------\n";
+        const std::string big_separator = "|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|\n";
+        const std::string separator = "---------------------------------------------------\n";
 
-        QString s = big_separator + "\nDeveloper: " + developer + "\nDate: " + date_string(date) + "\n\n";
+        std::string s = big_separator + "\nDeveloper: " + developer.toStdString() + "\nDate: " + date_string(date) + "\n\n";
 
         if (!map_policy.isEmpty() || !asset_policy.isEmpty()) {
             s += separator;
         }
 
         if (!map_policy.isEmpty()) {
-            s += "Map policy: " + map_policy + "\n";
+            s += "Map policy: " + map_policy.toStdString() + "\n";
         }
 
         if (!asset_policy.isEmpty()) {
-            s += "Asset policy: " + asset_policy + "\n";
+            s += "Asset policy: " + asset_policy.toStdString() + "\n";
         }
 
         if (!summary.isEmpty()) {
-            s += "Comments: " + summary + "\n";
+            s += "Comments: " + summary.toStdString() + "\n";
         }
 
         // Maps
@@ -693,6 +700,6 @@ namespace data {
 
         s += "\n" + big_separator;
 
-        return s;
+        return QString::fromStdString(s);
     }
-} // data
+}

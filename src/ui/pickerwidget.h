@@ -17,17 +17,18 @@
 
 #pragma once
 
-#include "../lcfops.h"
-#include "../../third_party/easyrpg_editor/dbstring.h"
+#include "../data/changelog.h"
 #include <QDialog>
 #include <QStandardItemModel>
 #include <QTreeWidget>
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
+
 namespace Ui {
-class PickerWidget;
+    class PickerWidget;
 }
+
 QT_END_NAMESPACE
 
 class PickerWidget : public QDialog {
@@ -35,24 +36,25 @@ class PickerWidget : public QDialog {
 
 public:
     PickerWidget(QWidget *parent = nullptr);
+
     ~PickerWidget();
 
     void sendWarning(const QString &message);
 
-    void addModelItem(const QString& folder, QString name, QString type, int id = 0);
+    void addModelItem(const QString &folder, QString name, data::Status status, int id = 0);
+
+    void removeUncheckedItems();
 
     void gendiff();
+
     QString genlog();
-    void genmapmeta(QStringList &bgm, QStringList &connections, QString path, int id, const std::string& encoding);
-private:
-    Ui::PickerWidget *ui;
-    QMap<int, QList<int>> map_outgoing;
 
     std::shared_ptr<data::Changelog> changelog;
-    
-    bool is_oneway(int from_id, int to_id, QString to_map, std::string encoding);
 
-    QBrush addition_brush = QBrush(QColor(176, 237, 125, 50));
-    QBrush removal_brush = QBrush(QColor(237, 127, 125, 50));
-    QBrush modified_brush = QBrush(QColor(237, 208, 125, 50));
+private:
+    Ui::PickerWidget *ui;
+
+    QBrush addition_brush = QBrush(QColor(119, 227, 30, 50));
+    QBrush removal_brush = QBrush(QColor(227, 84, 82, 50));
+    QBrush modified_brush = QBrush(QColor(242, 186, 53, 50));
 };

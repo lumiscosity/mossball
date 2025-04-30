@@ -26,8 +26,7 @@ endif(USE_SYSTEM_LIBLCF)
 
 set(PROJECT_SOURCES
 	src/main.cpp
-	src/lcfops.h
-	src/ui/pickerwidget.cpp
+    src/ui/pickerwidget.cpp
 	src/ui/pickerwidget.h
 	src/ui/pickerwidget.ui
 	src/ui/directorydialog.cpp
@@ -48,6 +47,10 @@ set(PROJECT_SOURCES
 	src/chgen/chgen.h
 	src/submission/submission.cpp
 	src/submission/submission.h
+	src/data/changelog.cpp
+	src/data/changelog.h
+	src/utils/utils.cpp
+	src/utils/utils.h
 )
 
 qt_add_executable(mossball

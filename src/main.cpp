@@ -23,12 +23,11 @@
 
 #include "mossball.h"
 #include "chgen/chgen.h"
-#include "submission/submission.h"
 
 int main(int argc, char *argv[]) {
-    #ifdef _WIN32
+#ifdef _WIN32
     setlocale(LC_ALL, ".UTF8");
-    #endif
+#endif
     QApplication a(argc, argv);
     DirectoryDialog d;
     if (d.exec()) {
@@ -41,9 +40,10 @@ int main(int argc, char *argv[]) {
         p.gendiff();
 
         if (p.exec()) {
+            p.removeUncheckedItems();
             ChangelogWidget c;
-            submission::SubmissionBuilder::ui = std::make_unique<ChangelogWidget>(&c);
-            c.set_text(p.genlog());
+            c.changelog = p.changelog;
+            c.set_changelog_text();
             c.show();
             a.exec();
         }

@@ -17,45 +17,43 @@
 
 #include "chgen.h"
 
-#include <QCryptographicHash>
+#include <QDebug>
 #include <QDirIterator>
+#include <QMessageBox>
 
 #include "../mossball.h"
-#include "lcf/ldb/chunks.h"
+#include  "../utils/utils.h"
 #include "lcf/ldb/reader.h"
+#include "lcf/lmu/reader.h"
+#include "lcf/rpg/map.h"
 
 using Commands = lcf::rpg::EventCommand::Code;
 
 namespace chgen {
-
     /**
      * @brief Lists the content of a directory
      * @param path the path of the directory
      * @return a vector containing the names of the files in the directory
      */
-    QStringList list_directory_content(QString path) {
-        QStringList content;
+    std::vector<std::string> list_directory_content(std::string path) {
+        std::vector<std::string> content;
 
         try {
-            if (!fs::exists(path.toStdString())) {
-                error("The specified path does not exist.");
+            if (!fs::exists(path)) {
+                QMessageBox::critical(nullptr, "Error", "The specified path does not exist.");
                 return content;
             }
 
-            if (!fs::is_directory(path.toStdString())) {
-                error("The specified path is not a directory.");
+            if (!fs::is_directory(path)) {
+                QMessageBox::critical(nullptr, "Error", "The specified path is not a directory.");
                 return content;
             }
 
-            // list only child files
-            QDirIterator file_it(path, QDirIterator::NoIteratorFlags);
-            while (file_it.hasNext()) {
-                const QString file = file_it.next();
-                content.push_back(file);
+            for (const auto &file: fs::directory_iterator(path)) {
+                content.push_back(file.path().filename().string());
             }
-
         } catch (const std::exception &e) {
-            error(std::string(e.what()));
+            QMessageBox::critical(nullptr, "Error", e.what());
         }
 
         return content;
@@ -101,8 +99,8 @@ namespace chgen {
 
         std::string folder = data::asset_category_string(category);
 
-        auto base_asset_content = list_directory_content(std::string(base_path / fs::path(folder)));
-        auto modified_asset_content = list_directory_content(std::string(modified_path / fs::path(folder)));
+        auto base_asset_content = list_directory_content(base_path / fs::path(folder));
+        auto modified_asset_content = list_directory_content(modified_path / fs::path(folder));
 
         for (const auto &asset: base_asset_content) {
             const auto asset_name = asset.substr(0, asset.find_first_of('.'));
@@ -111,8 +109,8 @@ namespace chgen {
                 continue;
             }*/
 
-            if (std::find(begin(modified_asset_content), end(modified_asset_content), asset) ==
-                end(modified_asset_content)) {
+            if (std::find(std::begin(modified_asset_content), std::end(modified_asset_content), asset) ==
+                std::end(modified_asset_content)) {
                 // asset removed
                 data::Asset changelog_asset;
                 changelog_asset.category = category;
@@ -130,8 +128,8 @@ namespace chgen {
                 continue;
             }*/
 
-            if (std::find(begin(base_asset_content), end(base_asset_content), asset) ==
-                end(base_asset_content)) {
+            if (std::find(std::begin(base_asset_content), std::end(base_asset_content), asset) ==
+                std::end(base_asset_content)) {
                 // asset added
                 data::Asset changelog_asset;
                 changelog_asset.category = category;
@@ -163,7 +161,7 @@ namespace chgen {
                         assets.push_back(changelog_asset);
                     }
                 } catch (const std::exception &e) {
-                    error(std::string(e.what()));
+                    QMessageBox::critical(nullptr, "Error", e.what());
                 }
             }
         }
@@ -171,42 +169,44 @@ namespace chgen {
         return assets;
     }
 
-    std::vector<data::CommonEvent>
-    add_ce(std::vector<lcf::rpg::CommonEvent> base_ce_list, std::vector<lcf::rpg::CommonEvent> modified_ce_list) {
-        std::vector<data::CommonEvent> commonEvents;
+    template<typename T, typename U>
+    std::vector<T>
+    add_db_entries(std::vector<U> base_list,
+                   std::vector<U> modified_list) {
+        std::vector<T> db_entries;
 
-        for (size_t i = 0; i < std::min(base_ce_list.size(), modified_ce_list.size()); i++) {
-            const auto &base_ce = base_ce_list[i];
-            const auto &modified_ce = modified_ce_list[i];
+        for (size_t i = 0; i < std::min(base_list.size(), modified_list.size()); i++) {
+            const auto &base = base_list[i];
+            const auto &modified = modified_list[i];
 
-            if (base_ce == modified_ce) {
+            if (base == modified) {
                 // no modification
                 continue;
             }
 
-            data::CommonEvent changelog_ce;
-            changelog_ce.data.ID = modified_ce.ID;
-            changelog_ce.data.name = modified_ce.name;
+            T changelog_entry;
+            changelog_entry.data.ID = modified.ID;
+            changelog_entry.data.name = modified.name;
 
-
-            if (base_ce.name.empty()) {
+            if (base.name.empty()) {
                 // added
-                changelog_ce.status = data::Status::ADDED;
-            } else if (modified_ce.name.empty()) {
+                changelog_entry.status = data::Status::ADDED;
+            } else if (modified.name.empty()) {
                 // removed
-                changelog_ce.status = data::Status::REMOVED;
-                changelog_ce.data.name = base_ce.name;
+                changelog_entry.status = data::Status::REMOVED;
+                changelog_entry.data.name = base.name;
             } else {
                 // modified
-                changelog_ce.status = data::Status::MODIFIED;
+                changelog_entry.status = data::Status::MODIFIED;
             }
 
-            commonEvents.push_back(changelog_ce);
+            db_entries.push_back(changelog_entry);
         }
 
-        return commonEvents;
+        return db_entries;
     }
 
+    // different functio because we have another field to fill
     std::vector<data::TilesetInfo>
     add_tilesets(std::vector<lcf::rpg::Chipset> base_tileset_list,
                  std::vector<lcf::rpg::Chipset> modified_tileset_list) {
@@ -243,113 +243,6 @@ namespace chgen {
         }
 
         return tilesets;
-    }
-
-    std::vector<data::Switch>
-    add_switches(std::vector<lcf::rpg::Switch> base_switch_list, std::vector<lcf::rpg::Switch> modified_variable_list) {
-        std::vector<data::Switch> switches;
-
-        for (size_t i = 0; i < std::min(base_switch_list.size(), modified_variable_list.size()); i++) {
-            const auto &base_switch = base_switch_list[i];
-            const auto &modified_switch = modified_variable_list[i];
-
-            if (base_switch == modified_switch) {
-                // no modification
-                continue;
-            }
-
-            data::Switch changelog_switch;
-            changelog_switch.data.ID = modified_switch.ID;
-            changelog_switch.data.name = modified_switch.name;
-
-            if (base_switch.name.empty()) {
-                // added
-                changelog_switch.status = data::Status::ADDED;
-            } else if (modified_switch.name.empty()) {
-                // removed
-                changelog_switch.status = data::Status::REMOVED;
-                changelog_switch.data.name = base_switch.name;
-            } else {
-                // modified
-                changelog_switch.status = data::Status::MODIFIED;
-            }
-
-            switches.push_back(changelog_switch);
-        }
-
-        return switches;
-    }
-
-    std::vector<data::Variable>
-    add_variables(std::vector<lcf::rpg::Variable> base_var_list, std::vector<lcf::rpg::Variable> modified_var_list) {
-        std::vector<data::Variable> variables;
-
-        for (size_t i = 0; i < std::min(base_var_list.size(), modified_var_list.size()); i++) {
-            const auto &base_var = base_var_list[i];
-            const auto &modified_var = modified_var_list[i];
-
-            if (base_var == modified_var) {
-                // no modification
-                continue;
-            }
-
-            data::Variable changelog_var;
-            changelog_var.data.ID = modified_var.ID;
-            changelog_var.data.name = modified_var.name;
-
-
-            if (base_var.name.empty()) {
-                // added
-                changelog_var.status = data::Status::ADDED;
-            } else if (modified_var.name.empty()) {
-                // removed
-                changelog_var.status = data::Status::REMOVED;
-                changelog_var.data.name = base_var.name;
-            } else {
-                // modified
-                changelog_var.status = data::Status::MODIFIED;
-            }
-
-            variables.push_back(changelog_var);
-        }
-
-        return variables;
-    }
-
-    std::vector<data::Animation>
-    add_animations(std::vector<lcf::rpg::Animation> base_anim_list,
-                   std::vector<lcf::rpg::Animation> modified_anim_list) {
-        std::vector<data::Animation> animations;
-
-        for (size_t i = 0; i < std::min(base_anim_list.size(), modified_anim_list.size()); i++) {
-            const auto &base_anim = base_anim_list[i];
-            const auto &modified_anim = modified_anim_list[i];
-
-            if (base_anim == modified_anim) {
-                // no modification
-                continue;
-            }
-
-            data::Animation changelog_anim;
-            changelog_anim.data.ID = modified_anim.ID;
-            changelog_anim.data.name = modified_anim.name;
-
-            if (base_anim.name.empty()) {
-                // added
-                changelog_anim.status = data::Status::ADDED;
-            } else if (modified_anim.name.empty()) {
-                // removed
-                changelog_anim.status = data::Status::REMOVED;
-                changelog_anim.data.name = base_anim.name;
-            } else {
-                // modified
-                changelog_anim.status = data::Status::MODIFIED;
-            }
-
-            animations.push_back(changelog_anim);
-        }
-
-        return animations;
     }
 
     /**
@@ -403,14 +296,14 @@ namespace chgen {
     ChangelogGenerator::scan() {
         const std::string base_path = Mossball::origin_directory.toStdString();
         const std::string modified_path = Mossball::work_directory.toStdString();
-        log("Scanning changes between " + base_path + " and " + modified_path + "...");
+        //log("Scanning changes between " + base_path + " and " + modified_path + "...");
 
-        auto base_content = list_directory_content(base_path);
+        auto base_content = list_directory_content(Mossball::origin_directory.toStdString());
         if (base_content.empty()) {
             return nullptr;
         }
 
-        auto modified_content = list_directory_content(modified_path);
+        auto modified_content = list_directory_content(Mossball::work_directory.toStdString());
         if (modified_content.empty()) {
             return nullptr;
         }
@@ -422,37 +315,37 @@ namespace chgen {
         changelog->date = QDate::currentDate();
 
         // TODO: get summary name
-        changelog->summary = "";
+        changelog->summary = "...";
 
         // TODO: get policies
-        changelog->map_policy = "";
-        changelog->asset_policy = "";
+        changelog->map_policy = "...";
+        changelog->asset_policy = "...";
 
         // maps
         std::vector<std::string> base_maps;
-        std::remove_copy_if(begin(base_content), end(base_content), std::back_inserter(base_maps),
+        std::remove_copy_if(base_content.begin(), base_content.end(), std::back_inserter(base_maps),
                             [](const std::string &s) {
-                                return s.substr(s.find_last_of('.') + 1) != "lmu";
+                                return QFileInfo(QString::fromStdString(s)).completeSuffix() != "lmu";
                             });
 
-        std::sort(begin(base_maps), end(base_maps), [](const std::string &a, const std::string &b) {
+        std::sort(base_maps.begin(), base_maps.end(), [](const std::string &a, const std::string &b) {
             return std::stoi(a.substr(3, a.find_first_of('.'))) < std::stoi(b.substr(3, b.find_first_of('.')));
         });
 
         std::vector<std::string> modified_maps;
-        std::remove_copy_if(begin(modified_content), end(modified_content), std::back_inserter(modified_maps),
+        std::remove_copy_if(modified_content.begin(), modified_content.end(), std::back_inserter(modified_maps),
                             [](const std::string &s) {
-                                return s.substr(s.find_last_of('.') + 1) != "lmu";
+                                return QFileInfo(QString::fromStdString(s)).completeSuffix() != "lmu";
                             });
 
-        std::sort(begin(modified_maps), end(modified_maps), [](const std::string &a, const std::string &b) {
+        std::sort(modified_maps.begin(), modified_maps.end(), [](const std::string &a, const std::string &b) {
             return std::stoi(a.substr(3, a.find_first_of('.'))) < std::stoi(b.substr(3, b.find_first_of('.')));
         });
 
         // map tree
         fs::path base_lmt_path = base_path / fs::path("RPG_RT.lmt");
         if (!fs::exists(base_lmt_path)) {
-            error("Missing file: " + std::string(base_lmt_path));
+            QMessageBox::critical(nullptr, "Error", "Missing file: " + QString::fromStdString(base_lmt_path.string()));
             return nullptr;
         }
 
@@ -460,7 +353,8 @@ namespace chgen {
 
         fs::path modified_lmt_path = modified_path / fs::path("RPG_RT.lmt");
         if (!fs::exists(modified_lmt_path)) {
-            error("Missing file: " + std::string(modified_lmt_path));
+            QMessageBox::critical(nullptr, "Error",
+                                  QString::fromStdString("Missing file: " + modified_lmt_path.string()));
             return nullptr;
         }
 
@@ -468,8 +362,7 @@ namespace chgen {
 
         // maps scan
         for (const auto &map: modified_maps) {
-
-            if (std::find(begin(base_maps), end(base_maps), map) == end(base_maps)) {
+            if (std::find(base_maps.begin(), base_maps.end(), map) == base_maps.end()) {
                 // empty map file added
                 continue;
             }
@@ -529,32 +422,31 @@ namespace chgen {
             changelog->maps.push_back(changelog_map);
 
             // connections
-            // TODO: put a warning to tell the user that all connections to a different map ID will be noted
             auto base_warps = list_warp_events(std::move(base_lmu), map_id);
             auto modified_warps = list_warp_events(std::move(modified_lmu_copy), map_id);
 
             std::vector<data::Connection> warps;
 
             for (const auto &warp: modified_warps) {
-                if (std::find(begin(base_warps), end(base_warps), warp) == end(base_warps)) {
+                if (std::find(base_warps.begin(), base_warps.end(), warp) == base_warps.end()) {
                     // warp added
                     warps.push_back(warp);
                 }
             }
 
             for (const auto &warp: base_warps) {
-                if (std::find(begin(modified_warps), end(modified_warps), warp) == end(modified_warps)) {
+                if (std::find(modified_warps.begin(), modified_warps.end(), warp) == modified_warps.end()) {
                     // warp removed
                     auto removed_warp = warp;
                     removed_warp.status = data::Status::REMOVED;
                     warps.push_back(removed_warp);
                 } else {
                     // warp modified
-                    auto modified_warp = std::find(begin(modified_warps), end(modified_warps), warp);
+                    auto modified_warp = std::find(modified_warps.begin(), modified_warps.end(), warp);
                     if (warp != *modified_warp) {
-                        auto modified_warp = warp;
-                        modified_warp.status = data::Status::MODIFIED;
-                        warps.push_back(modified_warp);
+                        auto modified_warp_ = warp;
+                        modified_warp_.status = data::Status::MODIFIED;
+                        warps.push_back(modified_warp_);
                     }
                 }
             }
@@ -569,12 +461,25 @@ namespace chgen {
         auto base_db = lcf::LDB_Reader::Load(std::string(base_path / fs::path("RPG_RT.ldb")));
         auto modified_db = lcf::LDB_Reader::Load(std::string(modified_path / fs::path("RPG_RT.ldb")));
 
-        changelog->common_events = add_ce(base_db->commonevents, modified_db->commonevents);
+        changelog->common_events = add_db_entries<data::CommonEvent, lcf::rpg::CommonEvent>(
+            base_db->commonevents, modified_db->commonevents);
         changelog->tilesets = add_tilesets(base_db->chipsets, modified_db->chipsets);
-        changelog->switches = add_switches(base_db->switches, modified_db->switches);
-        changelog->variables = add_variables(base_db->variables, modified_db->variables);
-        changelog->animations = add_animations(base_db->animations, modified_db->animations);
-        // TODO for missing database stuff (troops, etc)
+        changelog->switches = add_db_entries<data::Switch, lcf::rpg::Switch>(base_db->switches, modified_db->switches);
+        changelog->variables = add_db_entries<data::Variable, lcf::rpg::Variable>(
+            base_db->variables, modified_db->variables);
+        changelog->animations = add_db_entries<data::Animation, lcf::rpg::Animation>(
+            base_db->animations, modified_db->animations);
+        changelog->troops = add_db_entries<data::Troop, lcf::rpg::Troop>(base_db->troops, modified_db->troops);
+        changelog->terrains = add_db_entries<data::Terrain,
+            lcf::rpg::Terrain>(base_db->terrains, modified_db->terrains);
+        changelog->states = add_db_entries<data::State, lcf::rpg::State>(base_db->states, modified_db->states);
+        changelog->skills = add_db_entries<data::Skill, lcf::rpg::Skill>(base_db->skills, modified_db->skills);
+        changelog->items = add_db_entries<data::Item, lcf::rpg::Item>(base_db->items, modified_db->items);
+        changelog->enemies = add_db_entries<data::Enemy, lcf::rpg::Enemy>(base_db->enemies, modified_db->enemies);
+        changelog->elements = add_db_entries<data::Element, lcf::rpg::Attribute>(
+            base_db->attributes, modified_db->attributes);
+        changelog->classes = add_db_entries<data::Class, lcf::rpg::Class>(base_db->classes, modified_db->classes);
+        changelog->actors = add_db_entries<data::Actor, lcf::rpg::Actor>(base_db->actors, modified_db->actors);
 
         // assets
         changelog->menu_themes = add_assets(data::AssetCategory::MENU_THEME);
@@ -588,35 +493,4 @@ namespace chgen {
 
         return changelog;
     }
-
-    /**
-     * @brief Generates a plain text changelog file from a Changelog object. The name of the file will be <developer name>_<date>_changelog.txt
-     * @param changelog The changelog we want to save in a file
-     * @param at The path where we want to save the file. If empty, the file will be saved in the current directory.
-     */
-    void ChangelogGenerator::generate_changelog_file(const std::shared_ptr<data::Changelog> &changelog, const std::string& at) {
-        std::string date = data::date_string(changelog->date);
-        std::string date_formatted = date.substr(0, 2) + date.substr(3, 3) + date.substr(7, date.length());
-
-        std::string filename = at / fs::path(changelog->developer + "_" + date_formatted + "_changelog.txt");
-
-        // this ensures that we don't overwrite any existing file
-        for (int i = 2; fs::exists(filename); i++) {
-            filename = at / fs::path(changelog->developer.toStdString() + "_" + date_formatted + "_changelog_" +
-                       std::to_string(i) + ".txt");
-        }
-
-        std::ofstream file;
-        file.open(filename);
-
-        file << changelog->stringify() << '\n';
-
-        if (!fs::exists(filename)) {
-            error("Could not generate file " + filename);
-        } else {
-            log("File generated: " + filename);
-        }
-
-        file.close();
-    }
-
+}

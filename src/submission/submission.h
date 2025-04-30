@@ -17,15 +17,15 @@
 
 #pragma once
 #include <memory>
+
+#include "../data/changelog.h"
 #include "../ui/changelogwidget.h"
 
 namespace submission {
+    class SubmissionBuilder {
+    public:
+        static void create_submission_archive(const QString &out, std::shared_ptr<data::Changelog> changelog);
 
-class SubmissionBuilder {
-public:
-    static void create_submission_archive();
-
-    static std::unique_ptr<ChangelogWidget> ui;
-};
-
+        static std::unique_ptr<ChangelogWidget> ui;
+    };
 }

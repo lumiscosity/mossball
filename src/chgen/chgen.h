@@ -16,14 +16,13 @@
  */
 
 #pragma once
+
 #include "../data/changelog.h"
-#include "../ui/pickerwidget.h"
 #include <lcf/lmt/reader.h>
 
 namespace fs = std::filesystem;
 
 namespace chgen {
-
     class ChangelogGenerator {
     public:
         /**
@@ -31,12 +30,5 @@ namespace chgen {
          * @return A changelog object.
          */
         static std::shared_ptr<data::Changelog> scan();
-
-        /**
-         * @brief Generates a changelog file.
-         * @param changelog
-         */
-        static void generate_changelog_file(const std::shared_ptr<data::Changelog> &changelog, const std::string &at = "");
     };
-
 }

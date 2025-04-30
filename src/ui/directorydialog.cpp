@@ -23,7 +23,11 @@
 DirectoryDialog::DirectoryDialog(QWidget *parent) : QDialog(parent), ui(new Ui::DirectoryDialog) {
     ui->setupUi(this);
     ui->buttonBox->buttons()[0]->setDisabled(true);
-    ui->encodingComboBox->addItems({"UTF-8", "932 (Japanese)", "949 (Korean)", "1250 (Central Europe)", "1251 (Cyryllic)", "1252 (Occidental)", "1253 (Greek)", "1255 (Hebrew)", "1256 (Arabic)", "874 (Thai)", "936 (Chinese Simplified)", "950 (Chinese Traditional)", "1254 (Turkish)", "1257 (Baltic)"});
+    ui->encodingComboBox->addItems({
+        "UTF-8", "932 (Japanese)", "949 (Korean)", "1250 (Central Europe)", "1251 (Cyryllic)", "1252 (Occidental)",
+        "1253 (Greek)", "1255 (Hebrew)", "1256 (Arabic)", "874 (Thai)", "936 (Chinese Simplified)",
+        "950 (Chinese Traditional)", "1254 (Turkish)", "1257 (Baltic)"
+    });
 }
 
 DirectoryDialog::~DirectoryDialog() {
@@ -32,22 +36,28 @@ DirectoryDialog::~DirectoryDialog() {
 
 void DirectoryDialog::on_origPushButton_clicked() {
     QString path = QFileDialog::getExistingDirectory(this, "Select the original copy directory");
-    if (!path.isEmpty()){
+    qDebug() << "Selected origin path: " + path;
+    if (!path.isEmpty()) {
         ui->origLabel->setText(path);
-        ui->buttonBox->buttons()[0]->setEnabled(path != ui->workLabel->text() && ui->workLabel->text() != "..." && !ui->nameLineEdit->text().isEmpty());
+        ui->buttonBox->buttons()[0]->setEnabled(
+            path != ui->workLabel->text() && ui->workLabel->text() != "..." && !ui->nameLineEdit->text().isEmpty());
     }
 }
 
 void DirectoryDialog::on_workPushButton_clicked() {
     QString path = QFileDialog::getExistingDirectory(this, "Select the work copy directory");
-    if (!path.isEmpty()){
+    qDebug() << "Selected work path: " + path;
+    if (!path.isEmpty()) {
         ui->workLabel->setText(path);
-        ui->buttonBox->buttons()[0]->setEnabled(path != ui->origLabel->text() && ui->origLabel->text() != "..." && !ui->nameLineEdit->text().isEmpty());
+        ui->buttonBox->buttons()[0]->setEnabled(
+            path != ui->origLabel->text() && ui->origLabel->text() != "..." && !ui->nameLineEdit->text().isEmpty());
     }
 }
 
 void DirectoryDialog::on_nameLineEdit_textChanged(const QString &text) {
-    ui->buttonBox->buttons()[0]->setEnabled(ui->workLabel->text() != ui->origLabel->text() && ui->origLabel->text() != "..." && ui->workLabel->text() != "..." && !text.isEmpty());
+    ui->buttonBox->buttons()[0]->setEnabled(
+        ui->workLabel->text() != ui->origLabel->text() && ui->origLabel->text() != "..." && ui->workLabel->text() !=
+        "..." && !text.isEmpty());
 }
 
 QString DirectoryDialog::orig() {
@@ -60,34 +70,34 @@ QString DirectoryDialog::work() {
 
 std::string DirectoryDialog::encoding() {
     switch (ui->encodingComboBox->currentIndex()) {
-    case (1):
-        return "932";
-    case (2):
-        return "949";
-    case (3):
-        return "1250";
-    case (4):
-        return "1251";
-    case (5):
-        return "1252";
-    case (6):
-        return "1253";
-    case (7):
-        return "1255";
-    case (8):
-        return "1256";
-    case (9):
-        return "874";
-    case (10):
-        return "936";
-    case (11):
-        return "950";
-    case (12):
-        return "1254";
-    case (13):
-        return "1257";
-    default:
-        return "UTF-8";
+        case (1):
+            return "932";
+        case (2):
+            return "949";
+        case (3):
+            return "1250";
+        case (4):
+            return "1251";
+        case (5):
+            return "1252";
+        case (6):
+            return "1253";
+        case (7):
+            return "1255";
+        case (8):
+            return "1256";
+        case (9):
+            return "874";
+        case (10):
+            return "936";
+        case (11):
+            return "950";
+        case (12):
+            return "1254";
+        case (13):
+            return "1257";
+        default:
+            return "UTF-8";
     }
 }
 

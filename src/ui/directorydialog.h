@@ -20,7 +20,7 @@
 #include <QDialog>
 
 namespace Ui {
-class DirectoryDialog;
+    class DirectoryDialog;
 }
 
 class DirectoryDialog : public QDialog {
@@ -28,15 +28,22 @@ class DirectoryDialog : public QDialog {
 
 public:
     explicit DirectoryDialog(QWidget *parent = nullptr);
+
     ~DirectoryDialog();
 
     QString orig();
+
     QString work();
+
     std::string encoding();
+
     QString dev_name();
+
 private slots:
     void on_origPushButton_clicked();
+
     void on_workPushButton_clicked();
+
     void on_nameLineEdit_textChanged(const QString &text);
 
 private:
