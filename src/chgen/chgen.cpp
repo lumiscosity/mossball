@@ -418,10 +418,10 @@ namespace chgen {
             changelog_map.data.name = modified_map.name;
             changelog_map.data.music = modified_map.music;
 
-            auto modified_lmu = lcf::LMU_Reader::Load(std::string(fs::path(modified_path) / fs::path(map)));
+            auto modified_lmu = lcf::LMU_Reader::Load((fs::path(modified_path) / fs::path(map)).string());
             auto modified_lmu_copy = std::make_unique<lcf::rpg::Map>(*modified_lmu);
 
-            auto base_lmu = lcf::LMU_Reader::Load(std::string(fs::path(base_path) / fs::path(map)));
+            auto base_lmu = lcf::LMU_Reader::Load((fs::path(base_path) / fs::path(map)).string());
 
             if (map_id != 7) {
                 // ignore bgm events for record player
@@ -467,8 +467,8 @@ namespace chgen {
 
 
         // database stuff
-        auto base_db = lcf::LDB_Reader::Load(std::string(fs::path(base_path) / fs::path("RPG_RT.ldb")));
-        auto modified_db = lcf::LDB_Reader::Load(std::string(fs::path(modified_path) / fs::path("RPG_RT.ldb")));
+        auto base_db = lcf::LDB_Reader::Load((fs::path(base_path) / fs::path("RPG_RT.ldb")).string());
+        auto modified_db = lcf::LDB_Reader::Load((fs::path(modified_path) / fs::path("RPG_RT.ldb")).string());
 
         changelog->common_events = add_db_entries<data::CommonEvent, lcf::rpg::CommonEvent>(
             base_db->commonevents, modified_db->commonevents);
