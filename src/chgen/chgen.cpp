@@ -35,6 +35,15 @@ namespace chgen {
      * @param path the path of the directory
      * @return a vector containing the names of the files in the directory
      */
+    std::vector<std::string> list_directory_content(std::filesystem::path path) {
+        return list_directory_content(path.string());
+    }
+
+    /**
+     * @brief Lists the content of a directory
+     * @param path the path of the directory
+     * @return a vector containing the names of the files in the directory
+     */
     std::vector<std::string> list_directory_content(std::string path) {
         std::vector<std::string> content;
 
@@ -458,8 +467,8 @@ namespace chgen {
 
 
         // database stuff
-        auto base_db = lcf::LDB_Reader::Load(std::string(base_path / fs::path("RPG_RT.ldb")));
-        auto modified_db = lcf::LDB_Reader::Load(std::string(modified_path / fs::path("RPG_RT.ldb")));
+        auto base_db = lcf::LDB_Reader::Load(std::string(base_path / fs::path("RPG_RT.ldb").string()));
+        auto modified_db = lcf::LDB_Reader::Load(std::string(modified_path / fs::path("RPG_RT.ldb").string()));
 
         changelog->common_events = add_db_entries<data::CommonEvent, lcf::rpg::CommonEvent>(
             base_db->commonevents, modified_db->commonevents);
