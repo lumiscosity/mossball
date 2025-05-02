@@ -246,9 +246,9 @@ namespace chgen {
     }
 
     /**
-     * @brief Lists all events containing a transfer player event to another map  in a map
+     * @brief Lists all events containing a transfer player event to another map in a map
      * @param map The map we want to analyze
-     * @param map_id The ID of the map in argument map; We don't want to list inter-map warps
+     * @param map_id The ID of the other map; We don't want to list warps within the same map
      * @return A list of the Connection objects
      */
     std::vector<data::Connection> list_warp_events(std::unique_ptr<lcf::rpg::Map> map, int map_id) {
@@ -287,7 +287,7 @@ namespace chgen {
 
 
     /**
-     * @brief Scans two RPG Maker game files for changes that are relevant in Collective Unconscious.
+     * @brief Scans two RPG Maker game directories for changes.
      * @param base_path The base path, usually the newest devbuild
      * @param modified_path The path of the build we made changes on
      * @return A changelog object containing the changes between the two builds

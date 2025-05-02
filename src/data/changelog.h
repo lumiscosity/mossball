@@ -42,7 +42,7 @@
 
 namespace data {
     /**
-     * @brief Data structure used to represent wether an entry was added, removed or modified.
+     * @brief Data structure used to represent whether an entry was added, removed or modified.
      */
     enum Status {
         ADDED,
@@ -129,7 +129,7 @@ namespace data {
     }
 
     /**
-     * Converts an int in a string of a 4 digit number
+     * Converts an int to a string of a 4 digit number
      * @param id The number to turn into a string
      * @returns The 4 digit stringized version of the number
      */
