@@ -358,7 +358,7 @@ namespace chgen {
             return nullptr;
         }
 
-        auto base_map_tree = lcf::LMT_Reader::Load(std::string(base_lmt_path));
+        auto base_map_tree = lcf::LMT_Reader::Load(base_lmt_path.string());
 
         fs::path modified_lmt_path = modified_path / fs::path("RPG_RT.lmt");
         if (!fs::exists(modified_lmt_path)) {
@@ -367,7 +367,7 @@ namespace chgen {
             return nullptr;
         }
 
-        auto modified_map_tree = lcf::LMT_Reader::Load(std::string(modified_lmt_path));
+        auto modified_map_tree = lcf::LMT_Reader::Load(modified_lmt_path.string());
 
         // maps scan
         for (const auto &map: modified_maps) {
@@ -376,8 +376,8 @@ namespace chgen {
                 continue;
             }
 
-            const auto base_lastwritetime = fs::last_write_time(base_path / fs::path(map));
-            const auto modified_lastwritetime = fs::last_write_time(modified_path / fs::path(map));
+            const auto base_lastwritetime = fs::last_write_time(fs::path(base_path) / fs::path(map));
+            const auto modified_lastwritetime = fs::last_write_time(fs::path(base_path) / fs::path(map));
 
             if (base_lastwritetime == modified_lastwritetime) {
                 // map file unchanged
@@ -418,10 +418,10 @@ namespace chgen {
             changelog_map.data.name = modified_map.name;
             changelog_map.data.music = modified_map.music;
 
-            auto modified_lmu = lcf::LMU_Reader::Load(std::string(modified_path / fs::path(map)));
+            auto modified_lmu = lcf::LMU_Reader::Load(std::string(fs::path(modified_path) / fs::path(map)));
             auto modified_lmu_copy = std::make_unique<lcf::rpg::Map>(*modified_lmu);
 
-            auto base_lmu = lcf::LMU_Reader::Load(std::string(base_path / fs::path(map)));
+            auto base_lmu = lcf::LMU_Reader::Load(std::string(fs::path(base_path) / fs::path(map)));
 
             if (map_id != 7) {
                 // ignore bgm events for record player
