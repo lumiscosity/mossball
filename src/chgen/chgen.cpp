@@ -467,8 +467,8 @@ namespace chgen {
 
 
         // database stuff
-        auto base_db = lcf::LDB_Reader::Load(std::string(base_path / fs::path("RPG_RT.ldb").string()));
-        auto modified_db = lcf::LDB_Reader::Load(std::string(modified_path / fs::path("RPG_RT.ldb").string()));
+        auto base_db = lcf::LDB_Reader::Load(std::string(fs::path(base_path) / fs::path("RPG_RT.ldb")));
+        auto modified_db = lcf::LDB_Reader::Load(std::string(fs::path(modified_path) / fs::path("RPG_RT.ldb")));
 
         changelog->common_events = add_db_entries<data::CommonEvent, lcf::rpg::CommonEvent>(
             base_db->commonevents, modified_db->commonevents);
