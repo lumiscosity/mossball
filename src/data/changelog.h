@@ -19,8 +19,8 @@
 
 #include <string>
 #include <vector>
-#include <qt6/QtCore/qdatetime.h>
-#include <qt6/QtCore/QString>
+#include <QDateTime>
+#include <QString>
 
 #include "lcf/rpg/actor.h"
 #include "lcf/rpg/animation.h"

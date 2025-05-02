@@ -23,7 +23,7 @@
 #include <QDirIterator>
 #include <QTreeWidgetItem>
 #include <utility>
-#include <qmessagebox.h>
+#include <QMessageBox>
 
 #include "../chgen/chgen.h"
 
