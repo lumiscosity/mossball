@@ -36,15 +36,6 @@ namespace chgen {
      * @return a vector containing the names of the files in the directory
      */
     std::vector<std::string> list_directory_content(std::filesystem::path path) {
-        return list_directory_content(path.string());
-    }
-
-    /**
-     * @brief Lists the content of a directory
-     * @param path the path of the directory
-     * @return a vector containing the names of the files in the directory
-     */
-    std::vector<std::string> list_directory_content(std::string path) {
         std::vector<std::string> content;
 
         try {
