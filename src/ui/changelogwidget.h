@@ -18,21 +18,37 @@
 #pragma once
 
 #include <QWidget>
+#include "../data/changelog.h"
 
 namespace Ui {
-class ChangelogWidget;
+    class ChangelogWidget;
 }
 
 class ChangelogWidget : public QWidget {
     Q_OBJECT
 
 public:
-    explicit ChangelogWidget(QString work_dir, QWidget *parent = nullptr);
+    explicit ChangelogWidget(QWidget *parent = nullptr);
+
     ~ChangelogWidget();
-    void set_text(QString text);
+
+    QString get_text();
+
+    /**
+     * @brief Prints the changelog in the UI
+     * @attention A changelog needs to be scanned and set as the ChangelogWidget::changelog variable beforehand
+     */
+    void set_changelog_text();
+
+    std::shared_ptr<data::Changelog> changelog;
+
 private slots:
+    /**
+     * @brief Creates an archive from all the files and the changelog
+     * @attention A changelog needs to be scanned and set as the ChangelogWidget::changelog variable beforehand
+     */
     void on_pushButton_clicked();
+
 private:
     Ui::ChangelogWidget *ui;
-    QString work_dir;
 };

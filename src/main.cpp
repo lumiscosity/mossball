@@ -15,24 +15,35 @@
  * along with Mossball. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "pickerwidget.h"
-#include "directorydialog.h"
-#include "changelogwidget.h"
+#include "ui/pickerwidget.h"
+#include "ui/directorydialog.h"
+#include "ui/changelogwidget.h"
 
 #include <QApplication>
 
+#include "mossball.h"
+#include "chgen/chgen.h"
+
 int main(int argc, char *argv[]) {
-    #ifdef _WIN32
+#ifdef _WIN32
     setlocale(LC_ALL, ".UTF8");
-    #endif
+#endif
     QApplication a(argc, argv);
     DirectoryDialog d;
     if (d.exec()) {
+        Mossball::origin_directory = d.orig();
+        Mossball::work_directory = d.work();
+        Mossball::encoding = d.encoding();
+        Mossball::dev_name = d.dev_name();
+
         PickerWidget p;
-        p.gendiff(d.orig(), d.work(), d.encoding());
+        p.gendiff();
+
         if (p.exec()) {
-            ChangelogWidget c(d.work());
-            c.set_text(p.genlog(d.orig(), d.work(), d.encoding(), d.dev_name()));
+            p.removeUncheckedItems();
+            ChangelogWidget c;
+            c.changelog = p.changelog;
+            c.set_changelog_text();
             c.show();
             a.exec();
         }

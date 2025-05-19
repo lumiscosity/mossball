@@ -16,29 +16,14 @@
  */
 
 #pragma once
+#include <QString>
 
-#include <QDialog>
+namespace Mossball {
+    extern QString origin_directory;
 
-namespace Ui {
-class DirectoryDialog;
+    extern QString work_directory;
+
+    extern std::string encoding;
+
+    extern QString dev_name;
 }
-
-class DirectoryDialog : public QDialog {
-    Q_OBJECT
-
-public:
-    explicit DirectoryDialog(QWidget *parent = nullptr);
-    ~DirectoryDialog();
-
-    QString orig();
-    QString work();
-    std::string encoding();
-    QString dev_name();
-private slots:
-    void on_origPushButton_clicked();
-    void on_workPushButton_clicked();
-    void on_nameLineEdit_textChanged(const QString &text);
-
-private:
-    Ui::DirectoryDialog *ui;
-};
