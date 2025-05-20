@@ -61,31 +61,31 @@ QString DirectoryDialog::work() {
 std::string DirectoryDialog::encoding() {
     switch (ui->encodingComboBox->currentIndex()) {
     case (1):
-        return "932";
+        return "ibm-943_P15A-2003";
     case (2):
-        return "949";
+        return "windows-949-2000";
     case (3):
-        return "1250";
+        return "ibm-5346_P100-1998";
     case (4):
-        return "1251";
+        return "ibm-5347_P100-1998";
     case (5):
-        return "1252";
+        return "ibm-5348_P100-1997";
     case (6):
-        return "1253";
+        return "ibm-5349_P100-1998";
     case (7):
-        return "1255";
+        return "ibm-9447_P100-2002";
     case (8):
-        return "1256";
+        return "ibm-9448_X100-2005";
     case (9):
-        return "874";
+        return "windows-874-2000";
     case (10):
-        return "936";
+        return "windows-936-2000";
     case (11):
-        return "950";
+        return "windows-950-2000";
     case (12):
-        return "1254";
+        return "ibm-5350_P100-1998";
     case (13):
-        return "1257";
+        return "ibm-9449_P100-2002";
     default:
         return "UTF-8";
     }
