@@ -19,6 +19,7 @@
 #include "ui_directorydialog.h"
 
 #include <QFileDialog>
+#include <QMessageBox>
 
 DirectoryDialog::DirectoryDialog(QWidget *parent) : QDialog(parent), ui(new Ui::DirectoryDialog) {
     ui->setupUi(this);
@@ -36,8 +37,19 @@ DirectoryDialog::~DirectoryDialog() {
 
 void DirectoryDialog::on_origPushButton_clicked() {
     QString path = QFileDialog::getExistingDirectory(this, "Select the original copy directory");
-    qDebug() << "Selected origin path: " + path;
     if (!path.isEmpty()) {
+        if (!QFile(path + "/RPG_RT.ldb").exists()) {
+            if (
+            !(QMessageBox::warning(
+                this,
+                "Error",
+                "This directory doesn't have a database file! You may have meant to select the folder inside this one. Continue anyways?",
+                QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
+                QMessageBox::StandardButton::No)
+             == QMessageBox::StandardButton::Yes)) {
+                return;
+            }
+        }
         ui->origLabel->setText(path);
         ui->buttonBox->buttons()[0]->setEnabled(
             path != ui->workLabel->text() && ui->workLabel->text() != "..." && !ui->nameLineEdit->text().isEmpty());
@@ -48,6 +60,18 @@ void DirectoryDialog::on_workPushButton_clicked() {
     QString path = QFileDialog::getExistingDirectory(this, "Select the work copy directory");
     qDebug() << "Selected work path: " + path;
     if (!path.isEmpty()) {
+        if (!QFile(path + "/RPG_RT.ldb").exists()) {
+            if (
+            !(QMessageBox::warning(
+                this,
+                "Error",
+                "This directory doesn't have a database file! You may have meant to select the folder inside this one. Continue anyways?",
+                QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
+                QMessageBox::StandardButton::No)
+             == QMessageBox::StandardButton::Yes)) {
+                return;
+            }
+        }
         ui->workLabel->setText(path);
         ui->buttonBox->buttons()[0]->setEnabled(
             path != ui->origLabel->text() && ui->origLabel->text() != "..." && !ui->nameLineEdit->text().isEmpty());
