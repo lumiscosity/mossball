@@ -61,7 +61,7 @@ void ChangelogWidget::on_pushButton_clicked() {
         auto c = ui->plainTextEdit->toPlainText().toStdString();
 
         try {
-            submission::SubmissionBuilder::create_submission_archive(out, changelog);
+            submission::SubmissionBuilder::create_submission_archive(out, changelog, c);
             changelog.reset();
             QMessageBox::information(this, "Success", "Patch compiled successfully.");
             this->close();

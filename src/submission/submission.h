@@ -24,7 +24,7 @@
 namespace submission {
     class SubmissionBuilder {
     public:
-        static void create_submission_archive(const QString &out, std::shared_ptr<data::Changelog> changelog);
+        static void create_submission_archive(const QString &out, std::shared_ptr<data::Changelog> changelog, std::string customized_changelog);
 
         static std::unique_ptr<ChangelogWidget> ui;
     };

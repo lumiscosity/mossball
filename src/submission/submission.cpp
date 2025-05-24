@@ -46,7 +46,7 @@ namespace submission {
         }
     }
 
-    void SubmissionBuilder::create_submission_archive(const QString &out, std::shared_ptr<data::Changelog> changelog) {
+    void SubmissionBuilder::create_submission_archive(const QString &out, std::shared_ptr<data::Changelog> changelog, std::string customized_changelog) {
         minidocx::Zip z;
         const QString out_extension = QString("%1.zip").arg(out.toUtf8().data());
 
@@ -71,7 +71,9 @@ namespace submission {
         add_file("/RPG_RT.lmt", z);
         add_file("/RPG_RT.ldb", z);
 
-        z.addFileFromString("/changelog.txt", changelog->stringify().toUtf8().data());
+        z.addFileFromString("/changelog_raw.txt", changelog->stringify().toUtf8().data());
+        z.addFileFromString("/changelog.txt", customized_changelog);
+
 
         z.close();
     }
