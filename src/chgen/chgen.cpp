@@ -368,7 +368,7 @@ namespace chgen {
             }
 
             const auto base_lastwritetime = fs::last_write_time(fs::path(base_path) / fs::path(map));
-            const auto modified_lastwritetime = fs::last_write_time(fs::path(base_path) / fs::path(map));
+            const auto modified_lastwritetime = fs::last_write_time(fs::path(modified_path) / fs::path(map));
 
             if (base_lastwritetime == modified_lastwritetime) {
                 // map file unchanged
@@ -377,21 +377,19 @@ namespace chgen {
 
             const int map_id = std::stoi(map.substr(3, map.find_first_of('.')));
 
-            if (map_id == 7) {
-                // ignore record player
+            auto base_map_info = base_map_tree->maps[map_id];
+            auto modified_map_info = modified_map_tree->maps[map_id];
+            auto modified_lmu = lcf::LMU_Reader::Load((fs::path(modified_path) / fs::path(map)).string());
+            auto modified_lmu_copy = std::make_unique<lcf::rpg::Map>(*modified_lmu);
+            auto base_lmu = lcf::LMU_Reader::Load((fs::path(base_path) / fs::path(map)).string());
+
+            // map info and contents unchnged
+            if ((base_map_info == modified_map_info) && (base_lmu == modified_lmu)) {
                 continue;
             }
 
-            auto base_map = base_map_tree->maps[map_id];
-            auto modified_map = modified_map_tree->maps[map_id];
-
-            if (base_map == modified_map) {
-                // map unchanged
-                continue;
-            }
-
-            const std::string modified_map_name = modified_map.name.data();
-            const std::string base_map_name = base_map.name.data();
+            const std::string modified_map_name = modified_map_info.name.data();
+            const std::string base_map_name = base_map_info.name.data();
             if (modified_map_name.length() < 5) {
                 // empty map (just the id in the name)
                 continue;
@@ -406,18 +404,10 @@ namespace chgen {
             }
 
             changelog_map.data.ID = map_id;
-            changelog_map.data.name = modified_map.name;
-            changelog_map.data.music = modified_map.music;
+            changelog_map.data.name = modified_map_info.name;
+            changelog_map.data.music = modified_map_info.music;
 
-            auto modified_lmu = lcf::LMU_Reader::Load((fs::path(modified_path) / fs::path(map)).string());
-            auto modified_lmu_copy = std::make_unique<lcf::rpg::Map>(*modified_lmu);
 
-            auto base_lmu = lcf::LMU_Reader::Load((fs::path(base_path) / fs::path(map)).string());
-
-            if (map_id != 7) {
-                // ignore bgm events for record player
-                changelog_map.bgm_events = list_bgm_events(std::move(modified_lmu), modified_map.music.name);
-            }
 
             changelog->maps.push_back(changelog_map);
 
