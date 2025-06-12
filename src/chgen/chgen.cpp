@@ -377,23 +377,23 @@ namespace chgen {
 
             const int map_id = std::stoi(map.substr(3, map.find_first_of('.')));
 
-            auto base_map_info = base_map_tree->maps[map_id];
-            auto modified_map_info = modified_map_tree->maps[map_id];
-            auto modified_lmu = lcf::LMU_Reader::Load((fs::path(modified_path) / fs::path(map)).string());
-            auto modified_lmu_copy = std::make_unique<lcf::rpg::Map>(*modified_lmu);
-            auto base_lmu = lcf::LMU_Reader::Load((fs::path(base_path) / fs::path(map)).string());
+            lcf::rpg::MapInfo base_map_info = base_map_tree->maps[map_id];
+            lcf::rpg::MapInfo modified_map_info = modified_map_tree->maps[map_id];
+            std::unique_ptr<lcf::rpg::Map> modified_lmu = lcf::LMU_Reader::Load((fs::path(modified_path) / fs::path(map)).string());
+            std::unique_ptr<lcf::rpg::Map> modified_lmu_copy = std::make_unique<lcf::rpg::Map>(*modified_lmu);
+            std::unique_ptr<lcf::rpg::Map> base_lmu = lcf::LMU_Reader::Load((fs::path(base_path) / fs::path(map)).string());
 
-            // map info and contents unchnged
-            if ((base_map_info == modified_map_info) && (base_lmu == modified_lmu)) {
+            // map info and contents unchanged
+            if ((base_map_info == modified_map_info) && (*base_lmu == *modified_lmu)) {
                 continue;
             }
 
             const std::string modified_map_name = modified_map_info.name.data();
             const std::string base_map_name = base_map_info.name.data();
-            if (modified_map_name.length() < 5) {
-                // empty map (just the id in the name)
-                continue;
-            }
+            //if (modified_map_name.length() < 5) {
+            //    // empty map (just the id in the name)
+            //    continue;
+            //}
 
             data::Map changelog_map;
 
