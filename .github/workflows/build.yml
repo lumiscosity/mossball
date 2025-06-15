@@ -41,14 +41,14 @@ jobs:
 
     - name: Copy Qt DLLs to the release dir
       run: |
-        windeployqt6 D:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release\mossball.exe --release --no-svg --no-network --no-translations --no-opengl-sw --no-system-d3d-compiler
+        windeployqt6 C:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release\mossball.exe --release --no-svg --no-network --no-translations --no-opengl-sw --no-system-d3d-compiler
 
     - name: Push build artifacts
       uses: actions/upload-artifact@v4
       with:
         name: mossball-windows-x86_64
         path: |
-          D:/a/mossball/mossball/builds/ninja-multi-vcpkg/Release
+          C:/a/mossball/mossball/builds/ninja-multi-vcpkg/Release
 
   flatpak:
     name: 'Linux/Flatpak'
