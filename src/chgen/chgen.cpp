@@ -49,9 +49,15 @@ namespace chgen {
                 return content;
             }
 
-            for (const auto &file: fs::directory_iterator(path)) {
-                content.push_back(file.path().filename().string());
+            for (const auto &file : fs::recursive_directory_iterator(path)) {
+            if (!file.is_regular_file()) {
+                continue;
             }
+
+            content.push_back(
+                file.path().lexically_relative(path).generic_string()
+            );
+        }
         } catch (const std::exception &e) {
             QMessageBox::critical(nullptr, "Error", e.what());
         }
