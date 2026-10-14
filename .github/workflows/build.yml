@@ -11,7 +11,7 @@ jobs:
     - name: Install Qt 6
       uses: jurplel/install-qt-action@v4
       with:
-        version: '6.8.1'
+        version: '6.8.3'
         host: windows
 
     - uses: lukka/get-cmake@latest
@@ -41,14 +41,14 @@ jobs:
 
     - name: Copy Qt DLLs to the release dir
       run: |
-        windeployqt6 C:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release\mossball.exe --release --no-svg --no-network --no-translations --no-opengl-sw --no-system-d3d-compiler
+        windeployqt6 D:\a\mossball\mossball\builds\ninja-multi-vcpkg\Release\mossball.exe --release --no-svg --no-network --no-translations --no-opengl-sw --no-system-d3d-compiler
 
     - name: Push build artifacts
       uses: actions/upload-artifact@v4
       with:
         name: mossball-windows-x86_64
         path: |
-          C:/a/mossball/mossball/builds/ninja-multi-vcpkg/Release
+          D:/a/mossball/mossball/builds/ninja-multi-vcpkg/Release
 
   flatpak:
     name: 'Linux/Flatpak'
@@ -57,7 +57,7 @@ jobs:
       image: bilelmoussaoui/flatpak-github-actions:kde-6.7
       options: --privileged
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
